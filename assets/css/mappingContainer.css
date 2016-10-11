@@ -1,0 +1,45 @@
+.mappingContainer {
+  position: relative;
+  height: 100%; }
+  .mappingContainer .mappingWrapper {
+    height: 100%;
+    position: relative;
+    padding-left: 250px;
+    background: #fff; }
+    .mappingContainer .mappingWrapper .typesContainer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 15px;
+      width: 250px;
+      height: 100%;
+      overflow: auto;
+      border-right: 1px solid #eaeaea;
+      background: #f7f7f7; }
+      .mappingContainer .mappingWrapper .typesContainer .title {
+        margin: 0;
+        padding-bottom: 10px; }
+      .mappingContainer .mappingWrapper .typesContainer ul {
+        list-style: none;
+        padding: 0; }
+        .mappingContainer .mappingWrapper .typesContainer ul li {
+          display: block; }
+    .mappingContainer .mappingWrapper .FieldContainer {
+      padding: 15px;
+      position: relative; }
+      .mappingContainer .mappingWrapper .FieldContainer .singleProperty {
+        margin-bottom: 15px;
+        border: 1px solid #eaeaea;
+        padding: 0; }
+        .mappingContainer .mappingWrapper .FieldContainer .singleProperty .title {
+          background: #f7f7f7;
+          border-bottom: 1px solid #eaeaea;
+          font-size: 16px;
+          margin: 0;
+          padding: 15px; }
+        .mappingContainer .mappingWrapper .FieldContainer .singleProperty .datatype {
+          color: #828282;
+          float: right; }
+        .mappingContainer .mappingWrapper .FieldContainer .singleProperty .fieldContent .internalField {
+          padding-top: 10px;
+          padding-bottom: 10px; }

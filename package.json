@@ -1,0 +1,34 @@
+{
+  "name": "gem",
+  "version": "0.0.1",
+  "description": "gem",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack-server": "webpack-dev-server --hot --progress --colors --port 8000",
+    "web-server": "http-server -p 3000 .",
+    "start": "concurrently \"npm run webpack-server\" \"gulp watch\"",
+    "build": "set NODE_ENV=production&& webpack -p && gulp"
+  },
+  "author": "Farhan Chauhan",
+  "dependencies": {
+    "babel-preset-stage-0": "^6.5.0",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "react-tooltip": "^3.2.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.9.1",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "webpack": "^1.13.1",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.3",
+    "gulp-sass": "^2.3.1"
+  }
+}

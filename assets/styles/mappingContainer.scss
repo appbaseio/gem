@@ -1,0 +1,68 @@
+@import "variables.scss";
+.mappingContainer {
+	position: relative;
+	height: 100%;
+	.mappingWrapper {
+		height: 100%;
+		position: relative;
+		padding-left: 250px;
+		background: #fff;
+		.typesContainer {
+			position: absolute;
+			top: 0;
+			left: 0;
+			padding: 15px;
+			width: 250px;
+			height: 100%;
+			overflow: auto;
+			border-right: 1px solid darken($bg, 5%);
+			background: $bg;
+			.title {
+				margin: 0;
+				padding-bottom: 10px;
+			}
+			ul {
+				list-style: none;
+				padding: 0;
+				li {
+					display: block;
+				}
+			}
+		}
+		.FieldContainer {
+			padding: 15px;
+			position: relative;
+			.singleProperty {
+				margin-bottom: 15px;
+				border: 1px solid darken($bg, 5%);
+				padding: 0;
+				.title {
+					background: $bg;
+					border-bottom: 1px solid darken($bg, 5%);
+					font-size: 16px;
+					margin: 0;
+					padding: 15px;
+				}
+				.datatype {
+					color: $grey-font;
+					float: right;
+				}
+				.fieldContent {
+					.internalField {
+						padding-top: 10px;
+						padding-bottom: 10px;
+						.fieldName {
+							
+						}
+						.datatype {
+
+						}
+						.fieldIndex {
+
+						}
+					}
+				}
+			}
+		}
+	}
+}

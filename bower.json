@@ -1,0 +1,16 @@
+{
+  "name": "Gem",
+  "description": "",
+  "main": "main.js",
+  "authors": [
+    "Farhan Chauhan <farhan687@gmail.com>"
+  ],
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.3.1",
+    "font-awesome": "~4.2.0",
+    "lodash": "^4.15.0",
+    "lzma": "^2.3.0",
+    "urlsafe-base64": "https://github.com/farhan687/urlsafe-base64.git"
+  }
+}

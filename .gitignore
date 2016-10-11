@@ -1,7 +1,6 @@
 node_modules
 bower_components
 app/sampleMapping.json
-dist
 _site
 site
 *.log

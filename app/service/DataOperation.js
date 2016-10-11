@@ -89,6 +89,24 @@ class DataOperation {
       }
     });
   }
+  // update mapping
+  updateMapping(request, type) {
+    let requestConfig  = this.filterurl(this.inputState.url);
+    let url = this.requestConfig.url + '/' + this.inputState.appname+ '/_mapping/'+type;
+    return $.ajax({
+      type: 'PUT',
+      beforeSend: function(request) {
+        request.setRequestHeader('Authorization', 'Basic ' + btoa(requestConfig.username + ':' + requestConfig.password));
+      },
+      url: url,
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      data: JSON.stringify(request),
+      xhrFields: {
+        withCredentials: true
+      }
+    });
+  }
   filterurl(url) {
       if (url) {
           var obj = {

@@ -1,0 +1,10 @@
+.editableContainer {
+  padding: 0; }
+  .editableContainer .frontEditable {
+    display: block; }
+  .editableContainer .backEditable {
+    display: none; }
+  .editableContainer.on .frontEditable {
+    display: none; }
+  .editableContainer.on .backEditable {
+    display: block; }

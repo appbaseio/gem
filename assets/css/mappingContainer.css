@@ -37,9 +37,17 @@
           font-size: 16px;
           margin: 0;
           padding: 15px; }
-        .mappingContainer .mappingWrapper .FieldContainer .singleProperty .datatype {
-          color: #828282;
-          float: right; }
-        .mappingContainer .mappingWrapper .FieldContainer .singleProperty .fieldContent .internalField {
-          padding-top: 10px;
-          padding-bottom: 10px; }
+          .mappingContainer .mappingWrapper .FieldContainer .singleProperty .title .datatype {
+            color: #828282;
+            margin-left: 15px;
+            padding: 5px;
+            border: 1px solid #dedede; }
+        .mappingContainer .mappingWrapper .FieldContainer .singleProperty .fieldContent {
+          margin: 0; }
+          .mappingContainer .mappingWrapper .FieldContainer .singleProperty .fieldContent .internalField {
+            padding: 10px 105px 10px 0; }
+            .mappingContainer .mappingWrapper .FieldContainer .singleProperty .fieldContent .internalField .operationalBtns {
+              position: absolute;
+              right: 0; }
+              .mappingContainer .mappingWrapper .FieldContainer .singleProperty .fieldContent .internalField .operationalBtns a {
+                margin-right: 5px; }

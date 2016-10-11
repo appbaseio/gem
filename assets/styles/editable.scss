@@ -1,0 +1,18 @@
+@import "variables.scss";
+.editableContainer {
+	padding: 0;
+	.frontEditable {
+		display: block;
+	}
+	.backEditable {
+		display: none;
+	}
+	&.on {
+		.frontEditable {
+			display: none;
+		}
+		.backEditable {
+			display: block;
+		}	
+	}
+}

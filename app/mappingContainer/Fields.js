@@ -1,6 +1,7 @@
 import { default as React, Component } from 'react';
 import { render } from 'react-dom';
 import { dataOperation } from '../service/DataOperation';
+import { Field } from './Field';
 
 export class Fields extends Component {
   constructor(props) {
@@ -18,45 +19,17 @@ export class Fields extends Component {
           let fields = this.props.mappings[singleType].properties;
           for(let field in fields) {
             index++;
-            let markup = (<div className="singleProperty col-xs-12" key = {index}>
-              <h3 className='title row'>
-                <span>
-                  {field} ({singleType})
-                </span>
-                <span className='datatype'>
-                  {fields[field].type}
-                </span>
-              </h3>
-              <div className="fieldContent row">
-                {this.fieldContent(fields[field].fields)}
-              </div>
-            </div>);
+            let markup = (<Field 
+              mappings = {this.props.mappings}
+              field = {field}
+              singleType = {singleType}
+              className="singleProperty col-xs-12" key = {index}></Field>);
             fieldList.push(markup);
           }
         }
       }  
     }
     return fieldList;
-  }
-  fieldContent(fields) {
-    let generateFields = [];
-    let index = 0;
-    for(let singleField in fields) {
-      index++;
-      let fieldMarkup = (<div className="internalField col-xs-12" key={index}>
-        <span className="fieldName col-xs-12 col-sm-4">
-          {singleField}
-        </span>
-        <span className="datatype col-xs-12 col-sm-4">
-          {fields[singleField].type}
-        </span>
-        <span className="fieldIndex col-xs-12 col-sm-4">
-          {fields[singleField].index}
-        </span>
-      </div>);
-      generateFields.push(fieldMarkup);
-    }
-    return generateFields;
   }
   render() {
     let fieldList = this.generateFieldList();

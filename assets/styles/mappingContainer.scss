@@ -42,15 +42,17 @@
 					font-size: 16px;
 					margin: 0;
 					padding: 15px;
-				}
-				.datatype {
-					color: $grey-font;
-					float: right;
+					.datatype {
+						color: $grey-font;
+						margin-left: 15px;
+						padding: 5px;
+						border: 1px solid darken($bg, 10%);
+					}
 				}
 				.fieldContent {
+					margin: 0;
 					.internalField {
-						padding-top: 10px;
-						padding-bottom: 10px;
+						padding: 10px 105px 10px 0;
 						.fieldName {
 							
 						}
@@ -59,6 +61,13 @@
 						}
 						.fieldIndex {
 
+						}
+						.operationalBtns {
+							position: absolute;
+							right: 0;
+							a {
+								margin-right: 5px
+							}
 						}
 					}
 				}

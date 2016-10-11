@@ -32,6 +32,8 @@
 		.FieldContainer {
 			padding: 15px;
 			position: relative;
+			overflow: auto;
+    		max-height: 100%;
 			.singleProperty {
 				margin-bottom: 15px;
 				border: 1px solid darken($bg, 5%);
@@ -69,6 +71,10 @@
 								margin-right: 5px
 							}
 						}
+					}
+					.nestedField {
+						padding: 0;
+						padding-left: 15px;
 					}
 				}
 			}

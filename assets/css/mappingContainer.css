@@ -26,7 +26,9 @@
           display: block; }
     .mappingContainer .mappingWrapper .FieldContainer {
       padding: 15px;
-      position: relative; }
+      position: relative;
+      overflow: auto;
+      max-height: 100%; }
       .mappingContainer .mappingWrapper .FieldContainer .singleProperty {
         margin-bottom: 15px;
         border: 1px solid #eaeaea;
@@ -51,3 +53,6 @@
               right: 0; }
               .mappingContainer .mappingWrapper .FieldContainer .singleProperty .fieldContent .internalField .operationalBtns a {
                 margin-right: 5px; }
+          .mappingContainer .mappingWrapper .FieldContainer .singleProperty .fieldContent .nestedField {
+            padding: 0;
+            padding-left: 15px; }

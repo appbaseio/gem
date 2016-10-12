@@ -14,6 +14,7 @@
   "dependencies": {
     "babel-preset-stage-0": "^6.5.0",
     "react": "^15.1.0",
+    "react-bootstrap": "^0.30.5",
     "react-dom": "^15.1.0",
     "react-tooltip": "^3.2.1"
   },

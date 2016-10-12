@@ -7,6 +7,14 @@
 		position: relative;
 		padding-left: 250px;
 		background: #fff;
+		.btn-add-field-container {
+			position: absolute;
+		    left: 265px;
+		    border: 15px;
+		    bottom: 15px;
+			.btn-add-field {
+			}
+		}
 		.typesContainer {
 			position: absolute;
 			top: 0;

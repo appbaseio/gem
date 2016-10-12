@@ -77,7 +77,6 @@ export class Fields extends Component {
   }
   render() {
     let fieldList = this.arrangeFields();
-    console.log(fieldList);
     return (
       <div className="FieldContainer">
         {fieldList}

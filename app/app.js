@@ -13,6 +13,7 @@ class Main extends Component {
       	mapping: null
       };
       this.getMapping = this.getMapping.bind(this);
+      this.setField = this.setField.bind(this);
   }
   componentWillMount() {
   	this.getInputState();
@@ -63,12 +64,17 @@ class Main extends Component {
     storageService.set('gem-appsList', JSON.stringify(appsList));
     return appsList;
   }
+  setField(mappings) {
+    this.setState({
+      mappings: mappings
+    });
+  }
   render() {
   	let appContainer, mappingMarkup;
   	if(this.state.inputState) {
   		appContainer = (<div className="container-fluid app-container">
 	      <Header appsList = {this.state.appsList} inputState = {this.state.inputState} getMapping = {this.getMapping} />
-	      <MappingContainer mappings = {this.state.mappings} />
+	      <MappingContainer setField= {this.setField} mappings = {this.state.mappings} />
 	    </div>);
   	}
     return (<div className="appContainer">

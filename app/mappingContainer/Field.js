@@ -107,8 +107,10 @@ export class Field extends Component {
         [this.props.field]: this.state.fieldRecord
       }
     };
-    dataOperation.updateMapping(request, this.props.singleType).then((res) => {
+    dataOperation.updateMapping(request, this.props.singleType).done((res) => {
       alert(JSON.stringify(res));
+    }).fail((res) => {
+      alert(res.responseText)
     });
   }
   multipleField() {

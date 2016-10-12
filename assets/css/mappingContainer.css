@@ -6,6 +6,11 @@
     position: relative;
     padding-left: 250px;
     background: #fff; }
+    .mappingContainer .mappingWrapper .btn-add-field-container {
+      position: absolute;
+      left: 265px;
+      border: 15px;
+      bottom: 15px; }
     .mappingContainer .mappingWrapper .typesContainer {
       position: absolute;
       top: 0;

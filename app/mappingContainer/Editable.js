@@ -8,6 +8,19 @@ export class Editable extends Component {
     this.state = {
       editValue: ''
     };
+    this.types = [
+      'string', 
+      'long',
+      'integer',
+      'short',
+      'byte',
+      'double',
+      'float'
+    ];
+    this.indexes = [
+      'analyzed',
+      'not_analyzed'
+    ];
   }
   componentWillMount() {
     this.setState({
@@ -22,6 +35,35 @@ export class Editable extends Component {
     });
     this.props.editCb(this.props.editKey, editValue);
   }
+  gettypes() {
+    return this.types.map((type, i) => {
+      return (<option key={i} value={type}>{type}</option>)
+    });
+  }
+  getindexes() {
+    return this.indexes.map((index, i) => {
+      return (<option key={i} value={index}>{index}</option>)
+    });
+  }
+  inputOptions() {
+    let inputSample;
+    switch(this.props.editKey) {
+      case 'fieldName':
+        inputSample =(<input className="form-control" type="text" value={this.state.editValue} ref="editInput" onChange={()=> this.inputHandle()} placeholder={this.props.placeholder} ></input>);
+      break;
+      case 'type':
+        inputSample =(<select className="form-control" value={this.state.editValue} ref="editInput" onChange={()=> this.inputHandle()} >
+            {this.gettypes()}
+          </select>);
+      break;
+      case 'index':
+        inputSample =(<select className="form-control" value={this.state.editValue} ref="editInput" onChange={()=> this.inputHandle()} >
+            {this.getindexes()}
+          </select>);
+      break;
+    }
+    return inputSample;
+  }
   render() {
     return (
       <div className={"editableContainer col-xs-12" + (this.props.defaultEdit ? ' on ' : ' off ')}>
@@ -30,7 +72,7 @@ export class Editable extends Component {
         </div>
         <div className="backEditable">
           <div className="form-group">
-            <input className="form-control" type="text" value={this.state.editValue} ref="editInput" onChange={()=> this.inputHandle()} placeholder={this.props.placeholder} />
+            {this.inputOptions()}
           </div>
         </div>
       </div>

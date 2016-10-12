@@ -1,6 +1,7 @@
 import { default as React, Component } from 'react';
 import { render } from 'react-dom';
 import { dataOperation } from '../service/DataOperation';
+import { defaultTypes, defaultIndexType } from '../service/default';
 
 export class Editable extends Component {
   constructor(props) {
@@ -8,19 +9,8 @@ export class Editable extends Component {
     this.state = {
       editValue: ''
     };
-    this.types = [
-      'string', 
-      'long',
-      'integer',
-      'short',
-      'byte',
-      'double',
-      'float'
-    ];
-    this.indexes = [
-      'analyzed',
-      'not_analyzed'
-    ];
+    this.types = defaultTypes;
+    this.indexes = defaultIndexType;
   }
   componentWillMount() {
     this.setState({

@@ -2,6 +2,7 @@ import { default as React, Component } from 'react';
 import { render } from 'react-dom';
 import { dataOperation } from '../service/DataOperation';
 import { Modal } from 'react-bootstrap';
+import { defaultTypes, defaultIndexType } from '../service/default';
 
 export class AddField extends Component {
   constructor(props) {
@@ -24,19 +25,8 @@ export class AddField extends Component {
         }
       }
     };
-    this.types = [
-      'string', 
-      'long',
-      'integer',
-      'short',
-      'byte',
-      'double',
-      'float'
-    ];
-    this.indexes = [
-      'analyzed',
-      'not_analyzed'
-    ];
+    this.types = defaultTypes;
+    this.indexes = defaultIndexType;
   }
   close() {
     this.setState({ showModal: false });
@@ -125,9 +115,9 @@ export class AddField extends Component {
               </select>
             </div>
             <div className={"form-group "+ (formObj.validate.start ? (formObj.validate.index ? '' : 'has-error') : '')}>
-              <label className="control-label" htmlFor="index">Index</label>
+              <label className="control-label" htmlFor="index">Index Type</label>
               <select ref='index' className="form-control" id="index"  value={formObj.values.index} onChange={()=> this.inputHandle('index')}>
-                <option value="">Choose Index</option>
+                <option value="">Choose Index Type</option>
                 {this.getIndexes()} 
               </select>
             </div>

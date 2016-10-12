@@ -36,19 +36,15 @@ export class SingleField extends Component {
   }
   saveEdit() {
     this.props.setModifiedField(this.props.fieldName, this.modified);
-    this.quitEditable();
-  }
-  quitEditable() {
     this.setState({
       defaultEdit: false
     });
   }
+  quitEditable() {
+    this.props.removeField(this.props.fieldName);
+  }
   operationalBtn() {
-    let operationalBtn = (<span className="operationalBtns">
-      <a onClick={() => this.allowEdit()} className="btn btn-xs btn-info">
-        <i className="fa fa-pencil"></i>
-      </a>
-    </span>);
+    let operationalBtn;
     if(this.state.defaultEdit) {
       operationalBtn = (<span className="operationalBtns">
         <a onClick={() => this.saveEdit()} className="btn btn-xs btn-success">

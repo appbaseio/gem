@@ -17,6 +17,7 @@ export class Field extends Component {
       index: 'not_analyzed'
     };
     this.setModifiedField = this.setModifiedField.bind(this);
+    this.removeField = this.removeField.bind(this);
   }
   componentWillMount() {
     if(this.props.fieldRecord) {
@@ -48,7 +49,7 @@ export class Field extends Component {
       modifiedField: modifiedField,
       fieldRecord: fieldRecord,
       rows: rows
-    });
+    }, this.submit.call(this));
   }
   addField(field, type) {
     let rows = this.state.rows;
@@ -69,6 +70,7 @@ export class Field extends Component {
         field={this.props.field}
         singleType={this.props.singleType} 
         setModifiedField = {this.setModifiedField}
+        removeField = {this.removeField}
         key={index} ></SingleField>);
       generateFields.push(fieldMarkup);
     }
@@ -89,9 +91,15 @@ export class Field extends Component {
         field={field}
         singleType={this.props.singleType}
         setModifiedField = {this.setModifiedField}
+        removeField = {this.removeField}
         key={index} ></SingleField>);
     });
     return generateFields;
+  }
+  removeField() {
+    this.setState({
+      rows: []
+    });
   }
   submit() {
     let request = {
@@ -122,12 +130,11 @@ export class Field extends Component {
   render() {
     let fieldRecord = this.state.fieldRecord;
     let fields = fieldRecord.fields;
-    let submit, addRow;
-    if(this.state.modifiedField.length) {
-      submit = (<a className="btn btn-success pull-right" onClick={() => this.submit() }>Submit</a>);
-    }
-    if(fieldRecord.type) {
-      addRow = (<a className="btn btn-primary pull-right" onClick={() => this.addField() }>Add Field</a>);
+    let addRow;
+    if(fieldRecord.type && !this.state.rows.length) {
+      addRow = (<a className="btn btn-primary pull-right" onClick={() => this.addField()} >
+        <i className="fa fa-pencil"></i> 
+      </a>);
     }
     return (<div className="singleProperty col-xs-12">
       <h3 className='title row'>
@@ -138,7 +145,6 @@ export class Field extends Component {
           {fieldRecord.type}
         </span>
         {addRow}
-        {submit}
       </h3>
       <div className="fieldContent row">
         {this.addRows()}

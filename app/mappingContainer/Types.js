@@ -10,8 +10,10 @@ export class Types extends Component {
     };
   }
   componentWillMount() {
-    this.selectedType = dataOperation.inputState.selectedType;
-    this.applyTypeSelection(this.selectedType);
+    if(dataOperation.inputState.selectedType) {
+      this.selectedType = dataOperation.inputState.selectedType;
+      this.applyTypeSelection(this.selectedType);
+    }
   }
   onTypeChange(type) {
     let checkVal = this.refs[type].checked;

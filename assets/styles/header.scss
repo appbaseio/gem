@@ -8,18 +8,15 @@ footer {
 	z-index: 6;
 	background: $grey-bg;
 	padding: 5px;
-	padding-left: 165px;
+	padding-left: 300px;
 	padding-right: 130px;
 	border-bottom: 1px solid darken($grey-bg, 10%);
 	.action-btns {
 		position: absolute;
 		left: 5px;
 		display: inline-block;
-		.share-btn {
-			padding: 9px 12px;
-		}
-		.link {
-			padding-left: 10px;
+		.action-btn {
+			margin-right: 5px;
 		}
 	}
 	.submit-btn {
@@ -49,7 +46,6 @@ footer {
 		border-bottom: 2px dashed #ccc;
 		.btn {
 			margin-top: -1px;
-			padding: 9px 12px;
 		}
 		&.expand {
 			width: 100%;

@@ -19,6 +19,7 @@ var files = {
             'bower_components/jquery/dist/jquery.min.js',
             'bower_components/bootstrap/dist/js/bootstrap.min.js',
             'bower_components/lodash/dist/lodash.min.js',
+            'bower_components/crypto-js/crypto-js.js',
             'bower_components/lzma/src/lzma.js',
             'bower_components/urlsafe-base64/app.js'
         ],

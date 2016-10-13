@@ -39,25 +39,42 @@ class UrlShare {
 			}
 		});
 	}
-	convertToUrl(type) {
+	convertToUrl() {
 		var ciphertext = this.url;
-		var final_url = '';
-		if (type == 'gh-pages') {
-			final_url = 'appbaseio.github.io/mirage/#?input_state=' + ciphertext;
-		} else {
-			final_url = window.location.protocol + '//' + window.location.host + '#?input_state=' + ciphertext;
-		}
+		let	final_url = 'appbaseio.github.io/gem/#?input_state=' + ciphertext;
 		return final_url;
 	}
 	dejavuLink() {
-		var obj = {
-			url: this.inputs.config.url,
-			appname: this.inputs.config.appname,
-			selectedType: this.inputs.selectedTypes
+		let obj = {
+			url: this.inputs.url,
+			appname: this.inputs.appname,
+			selectedType: this.inputs.selectedType
 		};
-		var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(obj), 'dejvu').toString();
-		var final_url = 'http://appbaseio.github.io/dejaVu/live/#?input_state=' + ciphertext;
+		let ciphertext = CryptoJS.AES.encrypt(JSON.stringify(obj), 'dejvu').toString();
+		let final_url = 'http://appbaseio.github.io/dejaVu/live/#?input_state=' + ciphertext;
 		return final_url;
+	}
+	mirageLink() {
+		let inputs = {
+			config: {
+				url: this.inputs.url,
+				appname: this.inputs.appname
+			},
+			selectedTypes: this.inputs.selectedType
+		};
+		return new Promise((resolve, reject) => {
+			this.compress(inputs, compressCb);
+			function compressCb(error, ciphertext) {
+				if (error) {
+					reject(error);
+					return;
+				}
+				else {
+					let final_url = 'http://appbaseio.github.io/mirage/#?input_state=' + ciphertext;
+					resolve(final_url);
+				}
+			}
+		});
 	}
 	compress(jsonInput, cb) {
 		if (!jsonInput) {
@@ -96,6 +113,25 @@ class UrlShare {
 		} else {
 			return cb('Empty');
 		}
+	}
+	redirectUrl(method) {
+		return new Promise((resolve, reject) => {
+			switch(method) {
+				case 'dejavu':
+					resolve(this.dejavuLink());
+				break;
+				case 'mirage':
+					this.mirageLink().then((url) => {
+						resolve(url);
+					}).catch((error) => {
+						reject(error)
+					});
+				break;
+				case 'gem':
+					resolve(this.convertToUrl());
+				break;
+			}
+		});
 	}
 }
 export const urlShare = new UrlShare();

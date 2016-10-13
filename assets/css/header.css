@@ -7,7 +7,7 @@ footer {
   z-index: 6;
   background: #f7f7f7;
   padding: 5px;
-  padding-left: 165px;
+  padding-left: 300px;
   padding-right: 130px;
   border-bottom: 1px solid #dedede; }
   .init-ES .action-btns,
@@ -15,12 +15,9 @@ footer {
     position: absolute;
     left: 5px;
     display: inline-block; }
-    .init-ES .action-btns .share-btn,
-    footer .action-btns .share-btn {
-      padding: 9px 12px; }
-    .init-ES .action-btns .link,
-    footer .action-btns .link {
-      padding-left: 10px; }
+    .init-ES .action-btns .action-btn,
+    footer .action-btns .action-btn {
+      margin-right: 5px; }
   .init-ES .submit-btn,
   footer .submit-btn {
     position: absolute;
@@ -45,8 +42,7 @@ footer {
     background: #f7f7f7;
     border-bottom: 2px dashed #ccc; }
     .url-container .hide-url .btn {
-      margin-top: -1px;
-      padding: 9px 12px; }
+      margin-top: -1px; }
     .url-container .hide-url.expand {
       width: 100%; }
 

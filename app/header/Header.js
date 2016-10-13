@@ -2,7 +2,9 @@ import { default as React, Component } from 'react';
 import { render } from 'react-dom';
 import { dataOperation } from '../service/DataOperation';
 import { AppSelect } from './AppSelect';
-
+import { DejavuLink } from './DejavuLink';
+import { GemLink } from './GemLink';
+import { MirageLink } from './MirageLink';
 
 export class Header extends Component {
   constructor(props) {
@@ -82,9 +84,9 @@ export class Header extends Component {
     <form className="col-xs-12 init-ES" id="init-ES">
       <div className="esContainer">
         <span className="action-btns">
-          <a className="link btn btn-default">
-            Data View <i className="fa fa-external-link-square"></i>
-          </a>
+          <GemLink />
+          <DejavuLink />
+          <MirageLink />
         </span>
         <div className="form-group m-0 col-xs-4 pd-0 pr-5">
           <AppSelect 

@@ -73,11 +73,11 @@ export class Header extends Component {
     return (<div className="header-container">
     <header className="header text-center">
       <span className="header-container">
-        <span className="img-container">
-          <img src="assets/images/Mirage_Flat_9.png" alt="Mirage" className="img-responsive" />
+        <span className="header-title">
+          GEM
         </span>
         <span className="tag-line">
-          Elasticsearch mapping tool
+          GUI for Elasticsearch Mappings
         </span>
       </span>
     </header>

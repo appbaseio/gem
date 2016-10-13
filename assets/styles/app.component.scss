@@ -26,12 +26,12 @@
     margin: 0 auto;
     .header-container {
     	display: inline-block;
-		.img-container {
-			max-width: 170px;
-		    display: inline-block;
-		    float: left;
-		    padding: 5px;
+		.header-title {
+			color: $primary-color;
+			font-size: 22px;
+			padding: 5px;
 		    left: 10px;
+		    letter-spacing: 2px;
 		}
 		.tag-line {
 			padding-left: 15px;

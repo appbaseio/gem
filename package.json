@@ -16,6 +16,7 @@
     "react": "^15.1.0",
     "react-bootstrap": "^0.30.5",
     "react-dom": "^15.1.0",
+    "react-toastr": "^2.8.1",
     "react-tooltip": "^3.2.1"
   },
   "devDependencies": {

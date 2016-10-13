@@ -3,5 +3,6 @@ bower_components
 app/sampleMapping.json
 _site
 site
+assets/css
 *.log
 npm-debug.log.*

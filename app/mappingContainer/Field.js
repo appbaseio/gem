@@ -2,6 +2,7 @@ import { default as React, Component } from 'react';
 import { render } from 'react-dom';
 import { dataOperation } from '../service/DataOperation';
 import { SingleField } from './SingleField';
+import { ErrorModal } from '../others/ErrorModal';
 
 export class Field extends Component {
   constructor(props) {
@@ -9,7 +10,11 @@ export class Field extends Component {
     this.state = {
       rows: [],
       modifiedField: [],
-      fieldRecord: {}
+      fieldRecord: {},
+      error: {
+        title: null,
+        message: null
+      }
     };
     this.defaultRow = {
       name: 'sample',
@@ -18,6 +23,7 @@ export class Field extends Component {
     };
     this.setModifiedField = this.setModifiedField.bind(this);
     this.removeField = this.removeField.bind(this);
+    this.closeError = this.closeError.bind(this);
   }
   componentWillMount() {
     if(this.props.fieldRecord) {
@@ -108,9 +114,21 @@ export class Field extends Component {
       }
     };
     dataOperation.updateMapping(request, this.props.singleType).done((res) => {
-      alert(JSON.stringify(res));
     }).fail((res) => {
-      alert(res.responseText)
+      let error = this.state.error;
+      error.title = 'Error';
+      error.message = res.responseText;
+      this.setState({
+        error: error
+      });
+    });
+  }
+  closeError() {
+    let error = this.state.error;
+    error.title = null;
+    error.message = null;
+    this.setState({
+      error: error
     });
   }
   multipleField() {
@@ -132,6 +150,7 @@ export class Field extends Component {
   render() {
     let fieldRecord = this.state.fieldRecord;
     let fields = fieldRecord.fields;
+    let singleType = this.props.parent === 0 ? (<span className="typeName">{this.props.singleType+' / '} </span>): '';
     let addRow;
     if(fieldRecord.type && !this.state.rows.length) {
       addRow = (<a className="btn btn-primary pull-right" onClick={() => this.addField()} >
@@ -141,7 +160,7 @@ export class Field extends Component {
     return (<div className="singleProperty col-xs-12">
       <h3 className='title row'>
         <span>
-          {this.props.field} ({this.props.singleType})
+          {singleType} {this.props.field}
         </span>
         <span className={'datatype '+ (!fieldRecord.type ? ' hide ' : '')}>
           {fieldRecord.type}
@@ -155,6 +174,7 @@ export class Field extends Component {
           {this.multipleField()}
         </div>
       </div>
+      <ErrorModal {...this.state.error} closeError={this.closeError} />
     </div>);
   }
 }

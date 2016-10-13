@@ -87,12 +87,12 @@ export class AddField extends Component {
         className="btn btn-primary btn-add-field"
         onClick={() => this.open()}
       >
-        <i className="fa fa-plus"></i>
+        <i className="fa fa-plus"></i> Add new field
       </a>
 
       <Modal show={this.state.showModal} onHide={() => this.close()}>
         <Modal.Header closeButton>
-          <Modal.Title>Add Field</Modal.Title>
+          <Modal.Title>Add new field</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form >

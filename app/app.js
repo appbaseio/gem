@@ -3,6 +3,7 @@ var ReactDOM = require('react-dom');
 import { dataOperation } from './service/DataOperation';
 import { storageService } from './service/StorageService';
 import { Header } from './header/Header';
+import { Footer } from './footer/Footer';
 import { MappingContainer } from './mappingContainer/MappingContainer';
 
 class Main extends Component {
@@ -108,17 +109,18 @@ class Main extends Component {
   	}
     return (
       <div className="appContainer">
-      <section className={(this.state.connecting ? 'loading' : 'hide')}>
-        <div className="is-loadingApp">
-          <div className="loadingBar"></div>
-        </div>
-      </section>
+        <section className={(this.state.connecting ? 'loading' : 'hide')}>
+          <div className="is-loadingApp">
+            <div className="loadingBar"></div>
+          </div>
+        </section>
       	<section className={(this.state.inputState ? "hide" : "loading")}>
     			<div className="is-loadingApp">
     				<div className="loadingBar"></div>
     			</div>
   		  </section>
       	{appContainer}
+        <Footer />
       </div>
     );
   }

@@ -132,6 +132,7 @@ export class Field extends Component {
   render() {
     let fieldRecord = this.state.fieldRecord;
     let fields = fieldRecord.fields;
+    let singleType = this.props.parent === 0 ? (<span className="typeName">{this.props.singleType+' / '} </span>): '';
     let addRow;
     if(fieldRecord.type && !this.state.rows.length) {
       addRow = (<a className="btn btn-primary pull-right" onClick={() => this.addField()} >
@@ -141,7 +142,7 @@ export class Field extends Component {
     return (<div className="singleProperty col-xs-12">
       <h3 className='title row'>
         <span>
-          {this.props.field} ({this.props.singleType})
+          {singleType} {this.props.field}
         </span>
         <span className={'datatype '+ (!fieldRecord.type ? ' hide ' : '')}>
           {fieldRecord.type}

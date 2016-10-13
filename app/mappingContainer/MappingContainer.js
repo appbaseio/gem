@@ -4,15 +4,21 @@ import { dataOperation } from '../service/DataOperation';
 import { Types } from './Types';
 import { Fields } from './Fields';
 import { AddField } from './AddField';
+import { ErrorModal } from '../others/ErrorModal';
 
 export class MappingContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedType: []
+      selectedType: [],
+      error: {
+        title: null,
+        message: null
+      }
     };
     this.typeSelection = this.typeSelection.bind(this);
     this.submitField = this.submitField.bind(this);
+    this.closeError = this.closeError.bind(this);
   }
   componentWillMount() {
 
@@ -42,10 +48,22 @@ export class MappingContainer extends Component {
       properties: mappings[formObj.type].properties
     };
     dataOperation.updateMapping(request, formObj.type).done((res) => {
-      alert(JSON.stringify(res));
       this.props.setField(mappings);
     }).fail((res) => {
-      alert(res.responseText)
+      let error = this.state.error;
+      error.title = 'Error';
+      error.message = res.responseText;
+      this.setState({
+        error: error
+      });
+    });
+  }
+  closeError() {
+    let error = this.state.error;
+    error.title = null;
+    error.message = null;
+    this.setState({
+      error: error
     });
   }
   render() {
@@ -67,6 +85,7 @@ export class MappingContainer extends Component {
     }
     return (<div className="mappingContainer">
       {returnMarkup}
+      <ErrorModal {...this.state.error} closeError={this.closeError} />
     </div>);
   }
 }

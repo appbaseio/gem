@@ -61,3 +61,5 @@
           .mappingContainer .mappingWrapper .FieldContainer .singleProperty .fieldContent .nestedField {
             padding: 0;
             padding-left: 15px; }
+            .mappingContainer .mappingWrapper .FieldContainer .singleProperty .fieldContent .nestedField .singleProperty:first-child {
+              margin-top: 15px; }

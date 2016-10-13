@@ -83,6 +83,9 @@
 					.nestedField {
 						padding: 0;
 						padding-left: 15px;
+						.singleProperty:first-child {
+							margin-top: 15px;
+						}
 					}
 				}
 			}

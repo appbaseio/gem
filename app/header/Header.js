@@ -13,6 +13,7 @@ export class Header extends Component {
     };
     this.setAppName = this.setAppName.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.setConfig = this.setConfig.bind(this);
   }
   componentWillMount() {
     this.setState({
@@ -43,13 +44,28 @@ export class Header extends Component {
       inputState: inputState
     }, this.updateInputState.bind(this));
   }
+  setConfig(inputState) {
+    this.setState({
+      inputState: inputState
+    });
+    dataOperation.updateInputState(inputState);
+  }
   updateInputState() {
     dataOperation.updateInputState(this.state.inputState);
   }
   connect() {
-    dataOperation.getMapping().then((mapping) => {
-      this.props.getMapping(mapping);
-    });
+    if(!this.props.mappings) {
+      this.props.getMapping();
+    } else {
+      this.props.disconnect();
+    }
+  }
+  readOnly() {
+    let opts = {};
+    if(this.props.mappings) {
+      opts.readOnly = 'readOnly';
+    }
+    return opts;
   }
   render() {
     return (<div className="header-container">
@@ -72,13 +88,24 @@ export class Header extends Component {
         </span>
         <div className="form-group m-0 col-xs-4 pd-0 pr-5">
           <AppSelect 
+            setConfig={this.setConfig}
             appsList={this.props.appsList} 
             appname={this.props.inputState.appname} 
-            setAppName={this.setAppName} />
+            setAppName={this.setAppName} 
+            {...this.readOnly()}/>
         </div>
         <div className="form-group m-0 col-xs-8 pr-5">
           <div className="url-container form-element header-element">
-            <input type="text" value={this.state.inputState.url} onChange={this.handleInput} required className="form-control" name="url" placeholder="ElasticSearch Cluster URL: https://username:password@scalr.api.appbase.io" /> 
+            <input 
+              required
+              type="text" 
+              value={this.state.inputState.url} 
+              onChange={this.handleInput} 
+              className="form-control" 
+              name="url" 
+              placeholder="ElasticSearch Cluster URL: https://username:password@scalr.api.appbase.io"
+              {...this.readOnly()}
+            /> 
             <span className="hide-url" className={"hide-url "+(this.state.hide_url_flag ? 'expand' : 'collapse')}>
               <a className="btn btn-default"  onClick={() => this.changeHideUrl()}>
                 <span className={"fa fa-eye "+(this.state.hide_url_flag ? 'hide' : '')}></span> 
@@ -89,9 +116,13 @@ export class Header extends Component {
         </div>
         <div className="submit-btn-container">
           <a onClick={()=> this.connect()} className="btn btn-default submit-btn"> 
-            <span>
-              <i className="fa fa-play"></i>
+            <span className= {(this.props.mappings ? 'hide' : '')}>
+              <i className="fa fa-play"></i>&nbsp;
               Connect
+            </span> 
+            <span className= {(this.props.mappings ? '' : 'hide')}>
+              <i className="fa fa-pause"></i>&nbsp;
+              Disconnect
             </span> 
           </a>
         </div>

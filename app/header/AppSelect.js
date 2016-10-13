@@ -13,6 +13,8 @@ export class AppSelect extends Component {
       setAppClass: 'hide'
     };
     this.handleInput = this.handleInput.bind(this);
+    this.focusInput = this.focusInput.bind(this);
+    this.blurInput = this.blurInput.bind(this);
   }
   componentDidMount() {
     if(!this.state.searchValue) {
@@ -22,26 +24,28 @@ export class AppSelect extends Component {
     }
   }
   handleInput(event) {
+    let value = event.target.value;
+    let setAppClass = (value && value.length) ? 'show' : 'hide';  
+    console.log(value, setAppClass);
     this.setState({
-      searchValue: event.target.value
+      searchValue: value,
+      setAppClass: setAppClass
     });
-    if (this.props.setAppName) {
-      this.props.setAppName(event.target.value);
-    }
+    this.props.setAppName(event.target.value);
   }
   focusInput() {
-    // if (this.props.appsList.length && !this.props.connect) {
-    //   this.setState({
-    //     setAppClass: 'show'
-    //   });
-    // }
+    if (this.props.appsList.length && !this.props.connect) {
+      this.setState({
+        setAppClass: 'show'
+      });
+    }
   }
   blurInput() {
-    // setTimeout(function() {
-    //   this.setState({
-    //     setAppClass: 'hide'
-    //   });
-    // }.bind(this), 300);
+    setTimeout(function() {
+      this.setState({
+        setAppClass: 'hide'
+      });
+    }.bind(this), 300);
   }
   selectOption(appname) {
     this.setState({
@@ -55,14 +59,14 @@ export class AppSelect extends Component {
         };
       }
     });
-    if (app_config.length && app_config[0].url) {
-      this.props.setConfig(app_config[0].url);
+    if (app_config.length) {
+      this.props.setConfig(app_config[0]);
     }
   }
   render() {
     var opts = {};
     var optionsArr = [];
-    if (this.props.connect) {
+    if (this.props.readOnly) {
       opts['readOnly'] = 'readOnly';
     }
     if (this.props.appsList && this.props.appsList.length) {
@@ -76,7 +80,7 @@ export class AppSelect extends Component {
         }.bind(this));
 
       var searchValue = this.state.searchValue;
-      var setAppClass = options.length == 0 ? 'hide' : 'autolist setApp col-xs-12 ' + this.state.setAppClass;
+      var setAppClass = options.length === 0 ? 'hide' : 'autolist setApp col-xs-12 ' + this.state.setAppClass;
       return ( <div className="autocomplete form-element header-element">
           <input className = "search form-control"
           type = "text"
@@ -85,7 +89,8 @@ export class AppSelect extends Component {
           placeholder = "Appname (aka index) goes here"
           onChange = {this.handleInput}
           onFocus = { this.focusInput }
-          onBlur = { this.blurInput } {...opts }
+          onBlur = { this.blurInput }
+          {...opts }
           /> 
           <ul id = "setApp"
           className = { setAppClass }

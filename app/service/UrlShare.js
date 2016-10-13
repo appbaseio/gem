@@ -14,21 +14,17 @@ class UrlShare {
 	}
 	createUrl() {
 		var inputs = JSON.parse(JSON.stringify(this.inputs));
-		try {
-			delete inputs.result.resultQuery.final;
-			delete inputs.result.output;
-		} catch (e) {}
-		var data = JSON.stringify(inputs);
 		this.compress(inputs, compressCb.bind(this));
-
 		function compressCb(error, ciphertext) {
-			if (!error) {
-				this.url = ciphertext;
-				if (window.location.href.indexOf('#?default=true') > -1) {
-					window.location.href = window.location.href.split('?default=true')[0];
-				}
-				window.location.href = '#?input_state=' + ciphertext;
+			if (error) {
+				console.log(error);
+				return;
 			}
+			this.url = ciphertext;
+			if (window.location.href.indexOf('#?default=true') > -1) {
+				window.location.href = window.location.href.split('?default=true')[0];
+			}
+			window.location.href = '#?input_state=' + ciphertext;
 		}
 	}
 	decryptUrl(cb) {

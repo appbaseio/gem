@@ -18,7 +18,9 @@ var files = {
         vendor: [
             'bower_components/jquery/dist/jquery.min.js',
             'bower_components/bootstrap/dist/js/bootstrap.min.js',
-            'bower_components/lodash/dist/lodash.min.js'
+            'bower_components/lodash/dist/lodash.min.js',
+            'bower_components/lzma/src/lzma.js',
+            'bower_components/urlsafe-base64/app.js'
         ],
         custom: [
         ]
@@ -62,12 +64,20 @@ gulp.task('moveFonts', function() {
         .pipe(gulp.dest('dist/fonts'));
 });
 
+// Include dependency in dist
+gulp.task('move_js_depends', function() {
+    return gulp.src(['bower_components/lzma/src/lzma_worker.js',
+        'assets/vendor/JSONURL.js'])
+        .pipe(gulp.dest('dist/vendor'));
+});
+
 gulp.task('compact', [
     'customcss', 
     'vendorcss', 
     'vendorjs', 
     'moveCss', 
-    'moveFonts'
+    'moveFonts',
+    'move_js_depends'
 ]);
 
 gulp.task('watchfiles', function() {

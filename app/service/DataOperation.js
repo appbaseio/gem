@@ -8,6 +8,7 @@ class DataOperation {
       appname: '',
       selectedType: []
     };
+    this.mappingData = null;
     this.defaultApp1 = {
       appname: '2016primaries',
       url: 'https://Uy82NeW8e:c7d02cce-94cc-4b60-9b17-7e7325195851@scalr.api.appbase.io',
@@ -32,14 +33,14 @@ class DataOperation {
       }
       else {
         urlShare.decryptUrl().then((data) => {
-          var decryptedData = data. data;
-          if(decryptedData && decryptedData.config) {
-            this.updateInputState(decryptedData.config);
-            resolve(decryptedData.config);
+          var decryptedData = data.data;
+          if(decryptedData) {
+            this.updateInputState(decryptedData);
+            resolve(decryptedData);
           } else {
             reject(null);
           }
-        });
+        }).catch((error) => console.log(error));
       }
     });
   }
@@ -71,8 +72,17 @@ class DataOperation {
   // updateInputState
   updateInputState(inputState) {
     this.inputState = inputState;
-    storageService.set('gem-appname', inputState.appname);
-    storageService.set('gem-url', inputState.url);
+    // update everything only after successful mapping
+    if(this.mappingData) {
+      storageService.set('gem-appname', inputState.appname);
+      storageService.set('gem-url', inputState.url);
+      urlShare.setInputs(inputState);
+    }
+  }
+  // update mapping state
+  updateMappingState(mappingData) {
+    this.mappingData = mappingData;
+    this.updateInputState(this.inputState)
   }
   // get mapping
   getMapping() {

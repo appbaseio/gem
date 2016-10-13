@@ -10,10 +10,12 @@ class Main extends Component {
       super(props);
       this.state = {
       	inputState: null,
-      	mapping: null
+      	mapping: null,
+        connecting: false
       };
       this.getMapping = this.getMapping.bind(this);
       this.setField = this.setField.bind(this);
+      this.disconnect = this.disconnect.bind(this);
   }
   componentWillMount() {
   	this.getInputState();
@@ -39,7 +41,24 @@ class Main extends Component {
       });
     });
   }
-  getMapping(mappingData) {
+  getMapping() {
+    this.setState({
+      connecting: true
+    });
+    dataOperation.updateMappingState(null);
+    dataOperation.getMapping().done((mapping) => {
+      this.setMappingData(mapping);
+      this.setState({
+        connecting: false
+      });
+      dataOperation.updateMappingState(mapping);
+    }).fail((res) => {
+      this.setState({
+        connecting: false
+      });
+    });
+  }
+  setMappingData(mappingData) {
     if(mappingData && dataOperation.inputState.appname) {
       let appsList = this.setAppsList();
       let mappings = mappingData[dataOperation.inputState.appname].mappings;
@@ -69,22 +88,39 @@ class Main extends Component {
       mappings: mappings
     });
   }
+  disconnect() {
+    this.setState({
+      mappings: null
+    });
+  }
   render() {
   	let appContainer, mappingMarkup;
   	if(this.state.inputState) {
   		appContainer = (<div className="container-fluid app-container">
-	      <Header appsList = {this.state.appsList} inputState = {this.state.inputState} getMapping = {this.getMapping} />
+	      <Header 
+          appsList = {this.state.appsList} 
+          inputState = {this.state.inputState} 
+          getMapping = {this.getMapping}
+          mappings = {this.state.mappings}
+          disconnect = {this.disconnect} />
 	      <MappingContainer setField= {this.setField} mappings = {this.state.mappings} />
 	    </div>);
   	}
-    return (<div className="appContainer">
-    	<section className={(this.state.inputState ? "hide" : "loading")}>
-			<div className="is-loadingApp">
-				<div className="loadingBar"></div>
-			</div>
-		</section>
-    	{appContainer}
-    </div>);
+    return (
+      <div className="appContainer">
+      <section className={(this.state.connecting ? 'loading' : 'hide')}>
+        <div className="is-loadingApp">
+          <div className="loadingBar"></div>
+        </div>
+      </section>
+      	<section className={(this.state.inputState ? "hide" : "loading")}>
+    			<div className="is-loadingApp">
+    				<div className="loadingBar"></div>
+    			</div>
+  		  </section>
+      	{appContainer}
+      </div>
+    );
   }
 }
 

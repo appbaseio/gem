@@ -2,6 +2,7 @@ import { default as React, Component } from 'react';
 import { render } from 'react-dom';
 import { dataOperation } from '../service/DataOperation';
 import { SingleField } from './SingleField';
+import { Editable } from './Editable';
 import { ErrorModal } from '../others/ErrorModal';
 
 export class Field extends Component {
@@ -24,6 +25,7 @@ export class Field extends Component {
     this.setModifiedField = this.setModifiedField.bind(this);
     this.removeField = this.removeField.bind(this);
     this.closeError = this.closeError.bind(this);
+    this.editCb = this.editCb.bind(this);
   }
   componentWillMount() {
     if(this.props.fieldRecord) {
@@ -148,9 +150,14 @@ export class Field extends Component {
       </Field>);
     })
   }
-  render() {
+  editCb(key, value) {
+    if(this.props.handleUpdate) {
+      this.props.handleUpdate(key, value, this.props.id);
+    }
+  }
+  setFieldRow() {
     let fieldRecord = this.state.fieldRecord;
-    let fields = fieldRecord.fields;
+    let fieldName = this.props.field;
     let singleType = this.props.parent === 0 ? (<span className="typeName">{this.props.singleType+' / '} </span>): '';
     let addRow;
     if(fieldRecord.type && !this.state.rows.length) {
@@ -158,16 +165,48 @@ export class Field extends Component {
         <i className="fa fa-pencil"></i> 
       </a>);
     }
-    return (<div className="singleProperty col-xs-12">
+    let finalField = (
       <h3 className='title row'>
-        <span>
-          {singleType} {this.props.field}
-        </span>
+        <span>{singleType + fieldName}</span>
         <span className={'datatype '+ (!fieldRecord.type ? ' hide ' : '')}>
           {fieldRecord.type}
         </span>
         {addRow}
       </h3>
+    );
+    if(this.props.editable) {
+      let editableType;
+      if(fieldRecord.type) {
+        editableType = (<span className="datatype col-xs-12 col-sm-4">
+          <Editable
+            editKey='type'
+            editCb={this.editCb}
+            editValue={fieldRecord.type} 
+            defaultEdit={true} />
+        </span>);
+      }
+      finalField = (
+        <h3 className='title row'>
+          <span className="fieldName col-xs-12 col-sm-4">
+            <Editable 
+              editKey='fieldName'
+              editCb={this.editCb}
+              editValue={fieldName} 
+              defaultEdit={true} >
+            </Editable>
+          </span>
+          {editableType}
+          {addRow}
+        </h3>
+      );
+    }
+    return finalField;
+  }
+  render() {
+    let fieldRecord = this.state.fieldRecord;
+    let fields = fieldRecord.fields;  
+    return (<div className="singleProperty col-xs-12">
+      {this.setFieldRow()}
       <div className="fieldContent row">
         {this.addRows()}
         {this.fieldContent(fields)}

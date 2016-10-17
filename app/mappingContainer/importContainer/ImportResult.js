@@ -6,6 +6,7 @@ import { Field } from '../Field';
 export class ImportResult extends Component {
   constructor(props) {
     super(props);
+    this.handleUpdate = this.handleUpdate.bind(this);
   }
   componentWillMount() {
     
@@ -70,11 +71,15 @@ export class ImportResult extends Component {
           id = {item.id}
           parent = {item.parent}
           editable = {true}
+          handleUpdate = {this.handleUpdate}
           key = {index}>
         </Field>);
       });
 
     }
+  }
+  handleUpdate(key, value, listId) {
+    console.log(key, value, listId);
   }
   render() {
     let fieldList = this.arrangeFields();

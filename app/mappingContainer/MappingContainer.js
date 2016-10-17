@@ -5,6 +5,7 @@ import { Types } from './Types';
 import { Fields } from './Fields';
 import { AddField } from './AddField';
 import { ErrorModal } from '../others/ErrorModal';
+import { ImportContainer } from './importContainer/ImportContainer';
 
 export class MappingContainer extends Component {
   constructor(props) {
@@ -74,13 +75,16 @@ export class MappingContainer extends Component {
           <Types mappings={this.props.mappings}
             setField={this.props.setField}
             typeSelection={this.typeSelection} />
-          <Fields 
-            setField={this.props.setField}
-            mappings={this.props.mappings} 
-            selectedType={this.state.selectedType} />
-          <AddField 
-            types={types}
-            submitField={this.submitField} />
+          <ImportContainer selectedType={this.state.selectedType}></ImportContainer>
+          {
+            // <Fields 
+            // setField={this.props.setField}
+            // mappings={this.props.mappings} 
+            // selectedType={this.state.selectedType} />
+            // <AddField 
+            //   types={types}
+            //   submitField={this.submitField} />
+          }
         </div>);
     }
     return (<div className="mappingContainer">

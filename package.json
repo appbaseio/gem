@@ -15,6 +15,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "react": "^15.1.0",
     "react-bootstrap": "^0.30.5",
+    "react-codemirror": "^0.2.6",
     "react-dom": "^15.1.0",
     "react-toastr": "^2.8.1",
     "react-tooltip": "^3.2.1"

@@ -143,6 +143,7 @@ export class Field extends Component {
         fieldList = {this.props.fieldList}
         id = {item.id}
         parent = {item.parent}
+        editable = {this.props.editable}
         key = {index} >
       </Field>);
     })

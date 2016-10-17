@@ -104,7 +104,10 @@ class Main extends Component {
           getMapping = {this.getMapping}
           mappings = {this.state.mappings}
           disconnect = {this.disconnect} />
-	      <MappingContainer setField= {this.setField} mappings = {this.state.mappings} />
+	      <MappingContainer 
+          setField= {this.setField} 
+          mappings = {this.state.mappings} 
+          getMapping = {this.getMapping}/>
 	    </div>);
   	}
     return (

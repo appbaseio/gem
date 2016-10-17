@@ -69,6 +69,9 @@ export class MappingContainer extends Component {
     });
   }
   changeView(view) {
+    if(view === 'default') {
+      this.props.getMapping();
+    }
     this.setState({
       view: view
     });

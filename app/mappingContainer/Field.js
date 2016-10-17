@@ -115,15 +115,21 @@ export class Field extends Component {
         [this.props.field]: this.state.fieldRecord
       }
     };
-    dataOperation.updateMapping(request, this.props.singleType).done((res) => {
-    }).fail((res) => {
-      let error = this.state.error;
-      error.title = 'Error';
-      error.message = res.responseText;
-      this.setState({
-        error: error
+    if(!this.props.editable) {
+      dataOperation.updateMapping(request, this.props.singleType).done((res) => {
+      }).fail((res) => {
+        let error = this.state.error;
+        error.title = 'Error';
+        error.message = res.responseText;
+        this.setState({
+          error: error
+        });
       });
-    });
+    } else {
+      if(this.props.subfieldUpdate) {
+        this.props.subfieldUpdate(this.state.fieldRecord.fields, this.props.id);
+      }
+    }
   }
   closeError() {
     let error = this.state.error;
@@ -146,11 +152,19 @@ export class Field extends Component {
         id = {item.id}
         parent = {item.parent}
         editable = {this.props.editable}
+        subfieldUpdate = {this.props.subfieldUpdate}
         key = {index} >
       </Field>);
     })
   }
   editCb(key, value) {
+    let fieldRecord = this.state.fieldRecord;
+    if((key === 'type' || key === 'index') && fieldRecord) {
+      fieldRecord[key] = value;
+      this.setState({
+        fieldRecord: fieldRecord
+      });
+    }
     if(this.props.handleUpdate) {
       this.props.handleUpdate(key, value, this.props.id);
     }
@@ -167,7 +181,7 @@ export class Field extends Component {
     }
     let finalField = (
       <h3 className='title row'>
-        <span>{singleType + fieldName}</span>
+        <span>{singleType} {fieldName}</span>
         <span className={'datatype '+ (!fieldRecord.type ? ' hide ' : '')}>
           {fieldRecord.type}
         </span>
@@ -175,15 +189,24 @@ export class Field extends Component {
       </h3>
     );
     if(this.props.editable) {
-      let editableType;
+      let editableType, editableIndex;
       if(fieldRecord.type) {
-        editableType = (<span className="datatype col-xs-12 col-sm-4">
+        editableType = (<span className="col-xs-12 col-sm-4">
           <Editable
             editKey='type'
             editCb={this.editCb}
             editValue={fieldRecord.type} 
             defaultEdit={true} />
         </span>);
+        if(fieldRecord.type === 'string') {
+        editableIndex =(<span className="fieldIndex col-xs-12 col-sm-4">
+            <Editable 
+              editKey='index'
+              editCb={this.editCb}
+              editValue={fieldRecord.index} 
+              defaultEdit={true} />
+          </span>);
+        }
       }
       finalField = (
         <h3 className='title row'>
@@ -196,6 +219,7 @@ export class Field extends Component {
             </Editable>
           </span>
           {editableType}
+          {editableIndex}
           {addRow}
         </h3>
       );

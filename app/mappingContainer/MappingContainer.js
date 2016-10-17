@@ -75,7 +75,10 @@ export class MappingContainer extends Component {
           <Types mappings={this.props.mappings}
             setField={this.props.setField}
             typeSelection={this.typeSelection} />
-          <ImportContainer selectedType={this.state.selectedType}></ImportContainer>
+          <ImportContainer 
+            selectedType={this.state.selectedType}
+            mappings={this.props.mappings} 
+            ></ImportContainer>
           {
             // <Fields 
             // setField={this.props.setField}

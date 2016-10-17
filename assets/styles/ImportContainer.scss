@@ -1,0 +1,24 @@
+@import "variables.scss";
+#ImportContainer {
+	margin: 0;
+	height: 100%;
+	.JsonImport, .ImportResult {
+		height: 100%;
+		padding-bottom: 65px;
+		position: relative;
+		padding-left: 0;
+		border-right: 1px solid darken($bg, 5%); 
+		.ReactCodeMirror {
+			height: 100%;
+			.CodeMirror {
+				height: 100%;
+			}
+		}
+	}
+	.submit-row {
+		position: absolute;
+		padding: 15px;
+		width: 100%;
+		border-top: 1px solid darken($bg, 5%); 
+	}
+}

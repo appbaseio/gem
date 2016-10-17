@@ -5,6 +5,7 @@ import { Types } from './Types';
 import { Fields } from './Fields';
 import { AddField } from './AddField';
 import { ErrorModal } from '../others/ErrorModal';
+import { ImportContainer } from './importContainer/ImportContainer';
 
 export class MappingContainer extends Component {
   constructor(props) {
@@ -14,7 +15,8 @@ export class MappingContainer extends Component {
       error: {
         title: null,
         message: null
-      }
+      },
+      view: 'default'
     };
     this.typeSelection = this.typeSelection.bind(this);
     this.submitField = this.submitField.bind(this);
@@ -66,21 +68,55 @@ export class MappingContainer extends Component {
       error: error
     });
   }
+  changeView(view) {
+    this.setState({
+      view: view
+    });
+  }
+  selectedView() {
+    let types = Object.keys(this.props.mappings);
+    if(this.state.view === 'default') {
+      let fields = (
+        <Fields 
+          key = {1}
+          setField={this.props.setField}
+          mappings={this.props.mappings} 
+          selectedType={this.state.selectedType} ></Fields>
+      );
+      let addFieldBtn = (<AddField 
+          key={2}
+          types={types}
+          submitField={this.submitField} ></AddField>);
+      let importBtn = (<button 
+          key={3}
+          className="btn btn-primary import-btn"
+          onClick={() => this.changeView('import')}
+           >Import json</button>);
+      return [fields, addFieldBtn, importBtn];
+    } else if(this.state.view === 'import') {
+      let importContainer = (
+       <ImportContainer 
+          key={1}
+          selectedType={this.state.selectedType}
+          mappings={this.props.mappings} 
+          ></ImportContainer>
+      );
+      let backBtn = (<button 
+          key={2}
+          className="btn btn-primary back-btn"
+          onClick={() => this.changeView('default')}
+           >Back</button>);
+      return [importContainer, backBtn];
+    }
+  }
   render() {
     let returnMarkup = null;
     if(this.props.mappings) {
-      let types = Object.keys(this.props.mappings);
       returnMarkup = (<div className="mappingWrapper">
           <Types mappings={this.props.mappings}
             setField={this.props.setField}
             typeSelection={this.typeSelection} />
-          <Fields 
-            setField={this.props.setField}
-            mappings={this.props.mappings} 
-            selectedType={this.state.selectedType} />
-          <AddField 
-            types={types}
-            submitField={this.submitField} />
+          {this.selectedView()}
         </div>);
     }
     return (<div className="mappingContainer">

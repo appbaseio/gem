@@ -9,7 +9,10 @@ var files = {
     css: {
         vendor: [
             'bower_components/bootstrap/dist/css/bootstrap.min.css',
-            'bower_components/font-awesome/css/font-awesome.min.css'
+            'bower_components/font-awesome/css/font-awesome.min.css',
+            'node_modules/codemirror/lib/codemirror.css',
+            'node_modules/codemirror/addon/fold/foldgutter.css',
+            'node_modules/codemirror/addon/dialog/dialog.css',
         ],
         custom: ['assets/css/*.css'],
         sassFile: ['assets/styles/*.scss']

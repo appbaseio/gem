@@ -2,6 +2,7 @@ node_modules
 bower_components
 app/sampleMapping.json
 _site
+temp
 site
 assets/css
 *.log

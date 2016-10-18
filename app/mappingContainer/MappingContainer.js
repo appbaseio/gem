@@ -79,6 +79,14 @@ export class MappingContainer extends Component {
   selectedView() {
     let types = Object.keys(this.props.mappings);
     if(this.state.view === 'default') {
+      let typesComponent = (
+        <Types 
+          key = {0}
+          mappings={this.props.mappings}
+          setField={this.props.setField}
+          typeSelection={this.typeSelection}>
+        </Types>    
+      );
       let fields = (
         <Fields 
           key = {1}
@@ -95,7 +103,7 @@ export class MappingContainer extends Component {
           className="btn btn-primary import-btn"
           onClick={() => this.changeView('import')}
            >Import json</button>);
-      return [fields, addFieldBtn, importBtn];
+      return [typesComponent, fields, addFieldBtn, importBtn];
     } else if(this.state.view === 'import') {
       let importContainer = (
        <ImportContainer 
@@ -116,13 +124,10 @@ export class MappingContainer extends Component {
     let returnMarkup = null;
     if(this.props.mappings) {
       returnMarkup = (<div className="mappingWrapper">
-          <Types mappings={this.props.mappings}
-            setField={this.props.setField}
-            typeSelection={this.typeSelection} />
           {this.selectedView()}
         </div>);
     }
-    return (<div className="mappingContainer">
+    return (<div className={"mappingContainer " + this.state.view+"View"}>
       {returnMarkup}
       <ErrorModal {...this.state.error} closeError={this.closeError} />
     </div>);

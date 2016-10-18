@@ -106,4 +106,9 @@
 			}
 		}
 	}
+	&.importView {
+		.mappingWrapper {
+			padding-left: 0;
+		}
+	}
 }

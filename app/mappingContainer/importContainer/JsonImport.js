@@ -47,10 +47,13 @@ export class JsonImport extends Component {
   	this.updateCode = this.updateCode.bind(this);
     this.closeError = this.closeError.bind(this);
   }
+  componentWillMount() {
+    this.submit.call(this);
+  }
   updateCode(newCode) {
   	this.setState({
   	    code: newCode
-  	});
+  	}, this.submit.bind(this));
   }
   submit() {
     if(this.props.selectedType.length === 1) {
@@ -58,21 +61,7 @@ export class JsonImport extends Component {
       if(isJson.validFlag) {
         let parsedJson = isJson.jsonInput;
         this.props.detectMapping(parsedJson);
-      } else {
-        this.setState({
-          error: {
-            title: 'Invalid json',
-            message: 'Json is invalid, provide valid json to proceed further.'
-          }
-        });
-      }
-    } else {
-      this.setState({
-        error: {
-          title: 'Type selection',
-          message: 'Please select only 1 type from the left side.'
-        }
-      });
+      } 
     }
   }
   closeError() {

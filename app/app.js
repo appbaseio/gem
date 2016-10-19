@@ -97,18 +97,20 @@ class Main extends Component {
   render() {
   	let appContainer, mappingMarkup;
   	if(this.state.inputState) {
-  		appContainer = (<div className="container-fluid app-container">
-	      <Header 
-          appsList = {this.state.appsList} 
-          inputState = {this.state.inputState} 
-          getMapping = {this.getMapping}
-          mappings = {this.state.mappings}
-          disconnect = {this.disconnect} />
-	      <MappingContainer 
-          setField= {this.setField} 
-          mappings = {this.state.mappings} 
-          getMapping = {this.getMapping}/>
-	    </div>);
+  		appContainer = (
+        <div className="container-fluid app-container">
+  	      <Header 
+            appsList = {this.state.appsList} 
+            inputState = {this.state.inputState} 
+            getMapping = {this.getMapping}
+            mappings = {this.state.mappings}
+            disconnect = {this.disconnect} />
+  	      <MappingContainer 
+            setField= {this.setField} 
+            mappings = {this.state.mappings} 
+            getMapping = {this.getMapping}/>
+	     </div>
+      );
   	}
     return (
       <div className="appContainer">

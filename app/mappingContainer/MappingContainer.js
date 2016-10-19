@@ -1,5 +1,6 @@
 import { default as React, Component } from 'react';
 import { render } from 'react-dom';
+import { Tabs, Tab } from 'react-bootstrap';
 import { dataOperation } from '../service/DataOperation';
 import { Types } from './Types';
 import { Fields } from './Fields';
@@ -16,11 +17,13 @@ export class MappingContainer extends Component {
         title: null,
         message: null
       },
-      view: 'default'
+      view: 'default',
+      key: 1
     };
     this.typeSelection = this.typeSelection.bind(this);
     this.submitField = this.submitField.bind(this);
     this.closeError = this.closeError.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
   componentWillMount() {
 
@@ -76,9 +79,9 @@ export class MappingContainer extends Component {
       view: view
     });
   }
-  selectedView() {
+  selectedView(method) {
     let types = Object.keys(this.props.mappings);
-    if(this.state.view === 'default') {
+    if(this.state.key === 1 && method === 'default') {
       let typesComponent = (
         <Types 
           key = {0}
@@ -98,13 +101,8 @@ export class MappingContainer extends Component {
           key={2}
           types={types}
           submitField={this.submitField} ></AddField>);
-      let importBtn = (<button 
-          key={3}
-          className="btn btn-primary import-btn"
-          onClick={() => this.changeView('import')}
-           >Import json</button>);
-      return [typesComponent, fields, addFieldBtn, importBtn];
-    } else if(this.state.view === 'import') {
+      return [typesComponent, fields, addFieldBtn];
+    } else if(this.state.key === 2 && method === 'import') {
       let importContainer = (
        <ImportContainer 
           key={1}
@@ -112,24 +110,49 @@ export class MappingContainer extends Component {
           mappings={this.props.mappings} 
           ></ImportContainer>
       );
-      let backBtn = (<button 
-          key={2}
-          className="btn btn-primary back-btn"
-          onClick={() => this.changeView('default')}
-           >Back</button>);
-      return [importContainer, backBtn];
+      return [importContainer];
+    } else {
+      return null;
     }
   }
-  render() {
-    let returnMarkup = null;
+  handleSelect(key) {
+    event.preventDefault();
+    let view;
+    switch(key) {
+      case 1:
+        view = 'default';
+      break;
+      case 2:
+        view = 'import';
+      break;
+    }
+    this.setState({
+      key,
+      view
+    });
+  }
+  viewFor(method) {
+    let markup = null;
     if(this.props.mappings) {
-      returnMarkup = (<div className="mappingWrapper">
-          {this.selectedView()}
+      markup = (<div className="mappingWrapper">
+          {this.selectedView(method)}
         </div>);
     }
-    return (<div className={"mappingContainer " + this.state.view+"View"}>
-      {returnMarkup}
+    return markup;
+  }
+  render() {
+    return (
+      <div className={"mappingContainer " + this.state.view+"View"}>
+      <Tabs activeKey={this.state.key} onSelect={this.handleSelect} id="gem-tabs">
+        <Tab eventKey={1} title="Default">
+          {this.viewFor('default')}
+        </Tab>
+        <Tab eventKey={2} title="Import">
+          {this.viewFor('import')}
+        </Tab>
+      </Tabs>
       <ErrorModal {...this.state.error} closeError={this.closeError} />
-    </div>);
+    </div>
+    );
   }
 }

@@ -1,5 +1,6 @@
 import { default as React, Component } from 'react';
 import { render } from 'react-dom';
+import Select2 from 'react-select2-wrapper';
 import { dataOperation } from '../../service/DataOperation';
 import { ErrorModal } from '../../others/ErrorModal';
 var Codemirror = require('react-codemirror');
@@ -42,36 +43,42 @@ export class JsonImport extends Component {
       error: {
         title: null,
         message: null
-      }
+      },
+      validFlag: false
   	};
+    this.codemirrorOptions = {
+      lineNumbers: false,
+      mode: "javascript",
+      autoCloseBrackets: true,
+      matchBrackets: true,
+      showCursorWhenSelecting: true,
+      tabSize: 2,
+      extraKeys: {"Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }},
+      foldGutter: true,
+      gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+    };
+    this.onTypeSelection = this.onTypeSelection.bind(this);
   	this.updateCode = this.updateCode.bind(this);
     this.closeError = this.closeError.bind(this);
+    this.submit = this.submit.bind(this);
+  }
+  componentWillMount() {
+    this.submit.call(this);
   }
   updateCode(newCode) {
   	this.setState({
   	    code: newCode
-  	});
+  	}, this.submit.bind(this));
   }
   submit() {
-    if(this.props.selectedType.length === 1) {
+    if(this.state.selectedType) {
       let isJson = this.isJson(this.state.code);
       if(isJson.validFlag) {
         let parsedJson = isJson.jsonInput;
-        this.props.detectMapping(parsedJson);
-      } else {
-        this.setState({
-          error: {
-            title: 'Invalid json',
-            message: 'Json is invalid, provide valid json to proceed further.'
-          }
-        });
-      }
-    } else {
+        this.props.detectMapping(parsedJson, this.state.selectedType);
+      } 
       this.setState({
-        error: {
-          title: 'Type selection',
-          message: 'Please select only 1 type from the left side.'
-        }
+        validFlag: isJson.validFlag
       });
     }
   }
@@ -99,21 +106,37 @@ export class JsonImport extends Component {
       jsonInput: jsonInput
     };
   }
+  onTypeSelection(select) {
+    let selectedType = select.currentTarget.value;
+    if(selectedType) {
+      this.setState({
+        selectedType
+      }, this.submit);
+    }
+  }
   render() {
-  	 var options = {
-  	 	lineNumbers: true,
-        mode: "javascript",
-        autoCloseBrackets: true,
-        matchBrackets: true,
-        showCursorWhenSelecting: true,
-        tabSize: 2,
-        extraKeys: {"Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }},
-        foldGutter: true,
-        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
-    };
+    let types = Object.keys(this.props.mappings);
     return (
     	<div className="JsonImport col-xs-12 col-sm-6">
-    		<Codemirror value={this.state.code} onChange={this.updateCode} options={options} />
+        <div className={"json-header "+(this.state.validFlag ? 'success' : 'error')}>
+          <h3 className="title">
+            <span className="pull-left">
+              Json import
+            </span>
+            <span className="pull-right extra-options">
+              <Select2
+                multiple={false}
+                data={ types }
+                value={this.state.selectedType}
+                options={{
+                  placeholder: 'Choose the type'
+                }}
+                onChange={this.onTypeSelection}
+              />
+            </span>
+          </h3>
+        </div>
+    		<Codemirror value={this.state.code} onChange={this.updateCode} options={this.codemirrorOptions} />
     		<div className="submit-row">
     			<button onClick={() => this.submit()} className="btn btn-primary btn-submit">Submit</button>
     		</div>

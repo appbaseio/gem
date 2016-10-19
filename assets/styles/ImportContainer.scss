@@ -4,7 +4,7 @@
 	height: 100%;
 	.JsonImport, .ImportResult {
 		height: 100%;
-		padding-bottom: 65px;
+		padding-top: 67px;
 		position: relative;
 		padding-left: 0;
 		border-right: 1px solid darken($bg, 5%); 
@@ -14,11 +14,33 @@
 				height: 100%;
 			}
 		}
-	}
-	.submit-row {
-		position: absolute;
-		padding: 15px;
-		width: 100%;
-		border-top: 1px solid darken($bg, 5%); 
+		.json-header {
+			position: absolute;
+			padding: 15px;
+			width: 100%;
+			top: 0;
+			left: 0;
+			border-bottom: 1px solid darken($bg, 5%);
+			background: $bg;
+			.title {
+				margin: 0;
+				padding-bottom: 10px;
+				float: left;
+			    width: 100%;
+			    height: 36px;
+				.extra-options {
+					font-size: 14px;
+					.select2-container {
+						min-width: 200px;
+					}
+				}
+			}
+			&.success {
+				background: rgba(82,199,130,.2);
+			}
+			&.error {
+				background: rgba(226,91,25,.2);
+			}
+		}
 	}
 }

@@ -2,6 +2,23 @@
 .mappingContainer {
 	position: relative;
 	height: 100%;
+	#gem-tabs {
+		height: 100%;
+	    position: relative;
+	    padding-top: 42px;
+	    .nav-tabs {
+	    	position: absolute;
+		    left: 0;
+		    width: 100%;
+		    top: 0;
+	    }
+	    .tab-content {
+	    	height: 100%;
+			> div {
+				height: 100%;
+			}
+	    }
+	}
 	.mappingWrapper {
 		height: 100%;
 		position: relative;
@@ -104,6 +121,11 @@
 					}
 				}
 			}
+		}
+	}
+	&.importView {
+		.mappingWrapper {
+			padding-left: 0;
 		}
 	}
 }

@@ -46,6 +46,17 @@ export class JsonImport extends Component {
       },
       validFlag: false
   	};
+    this.codemirrorOptions = {
+      lineNumbers: false,
+      mode: "javascript",
+      autoCloseBrackets: true,
+      matchBrackets: true,
+      showCursorWhenSelecting: true,
+      tabSize: 2,
+      extraKeys: {"Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }},
+      foldGutter: true,
+      gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+    };
     this.onTypeSelection = this.onTypeSelection.bind(this);
   	this.updateCode = this.updateCode.bind(this);
     this.closeError = this.closeError.bind(this);
@@ -104,17 +115,6 @@ export class JsonImport extends Component {
     }
   }
   render() {
-  	 var options = {
-  	 	lineNumbers: true,
-        mode: "javascript",
-        autoCloseBrackets: true,
-        matchBrackets: true,
-        showCursorWhenSelecting: true,
-        tabSize: 2,
-        extraKeys: {"Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }},
-        foldGutter: true,
-        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
-    };
     let types = Object.keys(this.props.mappings);
     return (
     	<div className="JsonImport col-xs-12 col-sm-6">
@@ -136,7 +136,7 @@ export class JsonImport extends Component {
             </span>
           </h3>
         </div>
-    		<Codemirror value={this.state.code} onChange={this.updateCode} options={options} />
+    		<Codemirror value={this.state.code} onChange={this.updateCode} options={this.codemirrorOptions} />
     		<div className="submit-row">
     			<button onClick={() => this.submit()} className="btn btn-primary btn-submit">Submit</button>
     		</div>

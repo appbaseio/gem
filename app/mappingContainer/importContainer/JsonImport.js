@@ -115,7 +115,7 @@ export class JsonImport extends Component {
     }
   }
   render() {
-    let types = Object.keys(this.props.mappings);
+    this.types = Object.keys(this.props.mappings);
     return (
     	<div className="JsonImport col-xs-12 col-sm-6">
         <div className={"json-header "+(this.state.validFlag ? 'success' : 'error')}>
@@ -126,10 +126,11 @@ export class JsonImport extends Component {
             <span className="pull-right extra-options">
               <Select2
                 multiple={false}
-                data={ types }
+                data={ this.types }
                 value={this.state.selectedType}
                 options={{
-                  placeholder: 'Choose the type'
+                  placeholder: 'Choose or create a new type',
+                  tags: {true}
                 }}
                 onChange={this.onTypeSelection}
               />

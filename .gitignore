@@ -7,5 +7,4 @@ site
 assets/css
 *.log
 temp
-dist
 npm-debug.log.*

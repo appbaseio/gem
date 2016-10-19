@@ -22,7 +22,7 @@ export class ImportResult extends Component {
   }
   arrangeFields() {
     this.fieldList = [];
-    if(this.props.selectedType  && this.props.mappings) {
+    if(this.props.selectedType && this.props.mappings) {
       let index = 0;
       for(let singleType in this.props.mappings) {
         if(this.props.selectedType === singleType) {
@@ -75,7 +75,7 @@ export class ImportResult extends Component {
       return this.resolveList();
     } else {
       let fieldList = this.fieldList.filter((item, index) => item.parent === 0);
-      return fieldList.map((item, index) => {
+      let newList = fieldList.map((item, index) => {
         return (<Field 
           mappings = {this.props.mappings}
           fieldRecord = {item.mappingObj}
@@ -88,10 +88,10 @@ export class ImportResult extends Component {
           editable = {!item.isExists}
           handleUpdate = {this.handleUpdate}
           subfieldUpdate = {this.subfieldUpdate}
-          key = {index}>
+          key = {index+new Date().getTime()}>
         </Field>);
       });
-
+      return newList;
     }
   }
   handleUpdate(key, value, listId) {

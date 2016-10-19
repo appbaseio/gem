@@ -178,11 +178,20 @@ export class ImportResult extends Component {
     let fieldList = this.arrangeFields();
     return (
       <div className="ImportResult col-xs-12 col-sm-6 ">
+        <div className="json-header">
+          <h3 className="title">
+            <span className="pull-left">
+              Result 
+            </span>
+            <span className="pull-right extra-options">
+              <button onClick={() => this.submit()} className="btn btn-primary btn-submit">
+                Submit
+              </button>
+            </span>
+          </h3>
+        </div>
         <div className="FieldContainer">
           {fieldList}
-        </div>
-        <div className="submit-row">
-          <button onClick={() => this.submit()} className="btn btn-primary btn-submit">Submit</button>
         </div>
         <ErrorModal {...this.state.error} closeError={this.closeError} />
       </div>

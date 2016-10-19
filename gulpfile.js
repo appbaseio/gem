@@ -13,6 +13,7 @@ var files = {
             'node_modules/codemirror/lib/codemirror.css',
             'node_modules/codemirror/addon/fold/foldgutter.css',
             'node_modules/codemirror/addon/dialog/dialog.css',
+            'node_modules/react-select2-wrapper/css/select2.css'
         ],
         custom: ['assets/css/*.css'],
         sassFile: ['assets/styles/*.scss']

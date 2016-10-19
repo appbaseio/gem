@@ -9,18 +9,20 @@ export class ImportContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      finalMapping: {}
+      finalMapping: {},
+      selectedType: null
     };
     this.detectMapping = this.detectMapping.bind(this);
   }
-  detectMapping(jsonInput) {
+  detectMapping(jsonInput, selectedType) {
     let properties = this.generateMappingStructure(jsonInput);
     let finalMapping = {
-      [this.props.selectedType[0]]: {
+      [selectedType]: {
         properties: properties
       }
     };
     this.setState({
+      selectedType: selectedType,
       finalMapping: finalMapping
     });
   }
@@ -80,10 +82,10 @@ export class ImportContainer extends Component {
   render() {
     return (<div className="row" id="ImportContainer">
       <JsonImport 
-        selectedType={this.props.selectedType} 
+        mappings={this.props.mappings} 
         detectMapping={this.detectMapping} />
       <ImportResult 
-        selectedType={this.props.selectedType}
+        selectedType={this.state.selectedType} 
         mappings={this.state.finalMapping} 
         existingMapping={this.props.mappings}
         />

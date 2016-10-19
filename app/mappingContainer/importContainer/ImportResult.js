@@ -15,16 +15,17 @@ export class ImportResult extends Component {
     };
     this.handleUpdate = this.handleUpdate.bind(this);
     this.subfieldUpdate = this.subfieldUpdate.bind(this);
+    this.closeError = this.closeError.bind(this);
   }
   componentWillMount() {
     
   }
   arrangeFields() {
     this.fieldList = [];
-    if(this.props.selectedType && this.props.selectedType.length && this.props.mappings) {
+    if(this.props.selectedType  && this.props.mappings) {
       let index = 0;
       for(let singleType in this.props.mappings) {
-        if(this.props.selectedType.indexOf(singleType) > -1) {
+        if(this.props.selectedType === singleType) {
           let fields = this.props.mappings[singleType].properties;
           for(let field in fields) {
             index++;
@@ -140,23 +141,32 @@ export class ImportResult extends Component {
       }
     }
     return obj;
-    return obj;
   }
   submit() {
     let finalMapping = this.reverseMapping();
-    let request = {
-      properties: finalMapping
-    };
-    console.log(JSON.stringify(request, null, 4));
-    dataOperation.updateMapping(request, this.props.selectedType[0]).done((res) => {
-    }).fail((res) => {
+    if(this.props.selectedType && finalMapping) { 
+      let request = {
+        properties: finalMapping
+      };
+      console.log(JSON.stringify(request, null, 4));
+      dataOperation.updateMapping(request, this.props.selectedType).done((res) => {
+        this.props.getMapping();
+      }).fail((res) => {
+        let error = this.state.error;
+        error.title = 'Error';
+        error.message = res.responseText;
+        this.setState({
+          error: error
+        });
+      });
+    } else {
       let error = this.state.error;
-      error.title = 'Error';
-      error.message = res.responseText;
+      error.title = 'Type is not selected';
+      error.message = 'Select the type before update the mapping.';
       this.setState({
         error: error
       });
-    });
+    }
   }
   subfieldUpdate(fieldRecord, id) {
     this.fieldList = this.fieldList.map((item) => {
@@ -184,7 +194,9 @@ export class ImportResult extends Component {
               Result 
             </span>
             <span className="pull-right extra-options">
-              <button onClick={() => this.submit()} className="btn btn-primary btn-submit">
+              <button 
+                onClick={() => this.submit()}
+                className="btn btn-primary btn-submit">
                 Submit
               </button>
             </span>

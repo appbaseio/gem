@@ -88,6 +88,7 @@ export class ImportContainer extends Component {
         selectedType={this.state.selectedType} 
         mappings={this.state.finalMapping} 
         existingMapping={this.props.mappings}
+        getMapping={this.props.getMapping}
         />
     </div>);
   }

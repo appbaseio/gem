@@ -14,9 +14,11 @@
 	    }
 	    .tab-content {
 	    	height: 100%;
+	    	background: #fff;
 			> div {
 				height: 100%;
 			}
+
 	    }
 	}
 	.mappingWrapper {
@@ -48,21 +50,26 @@
 			position: absolute;
 			top: 0;
 			left: 0;
-			padding: 15px;
+			padding: 15px 0 15px 15px;
 			width: 250px;
 			height: 100%;
-			overflow: auto;
-			border-right: 1px solid darken($bg, 5%);
-			background: $bg;
-			.title {
-				margin: 0;
-				padding-bottom: 10px;
-			}
-			ul {
-				list-style: none;
-				padding: 0;
-				li {
-					display: block;
+			.typesContainerWrapper {
+				position: relative;
+				height: 100%;
+				overflow: auto;
+				padding: 15px;
+				background: $bg;
+				border: 1px solid darken($bg, 5%);
+				.title {
+					margin: 0;
+					padding-bottom: 10px;
+				}
+				ul {
+					list-style: none;
+					padding: 0;
+					li {
+						display: block;
+					}
 				}
 			}
 		}
@@ -100,6 +107,11 @@
 					.typeName {
 						font-weight: bold;
 					}
+					@media screen and (max-width: 768px) { 
+						.fieldDataType {
+							padding: 0;
+						}
+					}
 				}
 				.fieldContent {
 					margin: 0;
@@ -107,6 +119,11 @@
 						padding: 10px 70px 10px 15px;
 						.fieldName, .fieldIndex {
 							padding: 0;
+						}
+						@media screen and (max-width: 768px) { 
+							.datatype {
+								padding: 0;
+							}
 						}
 						.operationalBtns {
 							position: absolute;
@@ -129,7 +146,7 @@
 	}
 	&.importView {
 		.mappingWrapper {
-			padding-left: 0;
+			padding: 0;
 		}
 	}
 }

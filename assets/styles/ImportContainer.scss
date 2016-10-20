@@ -2,12 +2,14 @@
 #ImportContainer {
 	margin: 0;
 	height: 100%;
+	overflow: auto;
+	padding: 15px;
 	.JsonImport, .ImportResult {
 		height: 100%;
 		padding-top: 67px;
 		position: relative;
 		padding-left: 0;
-		border-right: 1px solid darken($bg, 5%); 
+		border: 1px solid darken($bg, 5%); 
 		.ReactCodeMirror {
 			height: 100%;
 			.CodeMirror {
@@ -42,5 +44,16 @@
 				background: rgba(226,91,25,.2);
 			}
 		}
+	}
+	.JsonImport {
+		border-right: 0; 
+	}
+	@media screen and (max-width: 768px) {
+		.ImportResult {
+			margin-top: 15px;
+		}	
+		.JsonImport {
+			border-right: 1px solid darken($bg, 5%); 
+		}			
 	}
 }

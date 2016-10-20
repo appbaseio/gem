@@ -13,8 +13,10 @@
 		}
 		.backEditable {
 			display: block;
-			.form-group {
-				margin-bottom: 0;
+			@media screen and (min-width: 768px) {
+				.form-group {
+					margin-bottom: 0;
+				}	
 			}
 		}	
 	}

@@ -175,7 +175,7 @@ export class Field extends Component {
     let singleType = this.props.parent === 0 ? (<span className="typeName">{this.props.singleType+' / '} </span>): '';
     let addRow;
     if(fieldRecord.type && !this.state.rows.length) {
-      addRow = (<a className="btn btn-primary pull-right" onClick={() => this.addField()} >
+      addRow = (<a className="btn btn-xs btn-primary pull-right edit-btn" onClick={() => this.addField()} >
         <i className="fa fa-pencil"></i> 
       </a>);
     }
@@ -191,7 +191,7 @@ export class Field extends Component {
     if(this.props.editable) {
       let editableType, editableIndex;
       if(fieldRecord.type) {
-        editableType = (<span className="col-xs-12 col-sm-4">
+        editableType = (<span className="col-xs-12 col-sm-4 fieldDataType">
           <Editable
             editKey='type'
             editCb={this.editCb}

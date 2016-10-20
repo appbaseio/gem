@@ -80,10 +80,15 @@ export class Header extends Component {
           GUI for Elasticsearch Mappings
         </span>
       </span>
+       <div className="action-btns-xs visible-xs">
+        <GemLink />
+        <DejavuLink />
+        <MirageLink />
+      </div>
     </header>
     <form className="col-xs-12 init-ES" id="init-ES">
       <div className="esContainer">
-        <span className="action-btns">
+        <span className="action-btns hidden-xs">
           <GemLink />
           <DejavuLink />
           <MirageLink />

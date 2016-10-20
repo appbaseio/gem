@@ -31,6 +31,11 @@
 		    left: 265px;
 		    border: 15px;
 		    bottom: 15px;
+		    @media screen and (max-width: 768px) {
+		    	position: fixed;
+		    	left: 15px;
+		    	bottom: 50px;
+		    }
 			.btn-add-field {
 			}
 		}
@@ -71,6 +76,12 @@
 						display: block;
 					}
 				}
+			}
+			@media screen and (max-width: 768px) {
+				position: relative;
+				width: 100%;
+				padding: 15px;
+				height: auto;
 			}
 		}
 		.FieldContainer {
@@ -142,6 +153,9 @@
 					}
 				}
 			}
+		}
+		@media screen and (max-width: 768px) {
+			padding-left: 0;
 		}
 	}
 	&.importView {

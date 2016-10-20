@@ -25,6 +25,24 @@ footer {
 		width: 125px;
 	}
 }
+@media screen and (max-width: 768px) {
+	.init-ES {
+		padding-left: 15px;
+		top: 80px;
+		padding-bottom: 10px;
+		.esContainer {
+			.form-group {
+				padding-left: 0;
+			}
+		}
+	}
+	.action-btns-xs {
+		margin-top: 5px;
+		.action-btn {
+			margin-right: 5px;
+		}
+	}
+}
 .share_content {
 	.share_content {
 		display: none;

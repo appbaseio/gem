@@ -138,10 +138,7 @@ export class JsonImport extends Component {
           </h3>
         </div>
     		<Codemirror value={this.state.code} onChange={this.updateCode} options={this.codemirrorOptions} />
-    		<div className="submit-row">
-    			<button onClick={() => this.submit()} className="btn btn-primary btn-submit">Submit</button>
-    		</div>
-        <ErrorModal {...this.state.error} closeError={this.closeError} />
+    		<ErrorModal {...this.state.error} closeError={this.closeError} />
     	</div>
     );
   }

@@ -56,10 +56,12 @@ export class Types extends Component {
     let typeList = this.generateTypeList();
     return (
       <div className="typesContainer">
-        <h3 className="title">Types</h3>
-        <ul>
-          {typeList}
-        </ul>
+        <div className="typesContainerWrapper">
+          <h3 className="title">Types</h3>
+          <ul>
+            {typeList}
+          </ul>
+        </div>
       </div>
     );
   }

@@ -50,9 +50,12 @@
 	.app-container {
 		position: relative;
 		padding: 0;
-		padding-top: 127px;
+		padding-top: 84px;
 		padding-bottom: 35px;
 		height: 100%;
 		overflow: auto;
+		@media screen and (max-width: 768px) {
+			padding-top: 127px;
+		}
 	}
 }

@@ -116,6 +116,7 @@ export class JsonImport extends Component {
   }
   render() {
     this.types = Object.keys(this.props.mappings);
+    this.types.unshift('');
     return (
     	<div className="JsonImport col-xs-12 col-sm-6">
         <div className={"json-header "+(this.state.validFlag ? 'success' : 'error')}>

@@ -4,13 +4,13 @@
     height: 100%;
     overflow: auto;
     padding: 0;
-    padding-left: 80px;
+    padding-left: 50px;
 	.app-sidebar {
 		position: absolute;
 		left: 0;
 		top: 0;
 		height: 100%;
-		width: 80px;
+		width: 50px;
 		background: $dark-bg;
 		ul {
 			list-style: none;
@@ -19,8 +19,8 @@
 				a {
 					display: block;
 				    padding: 15px;
-				    font-size: 30px;
-				    line-height: 48px;
+				    font-size: 20px;
+				    line-height: 30px;
 				    text-align: center;
     				text-decoration: none;
     				color: $primary-font-color;

@@ -11,6 +11,8 @@
 		top: 0;
 		height: 100%;
 		width: 50px;
+		position: fixed;
+		z-index: 9;
 		background: $dark-bg;
 		ul {
 			list-style: none;
@@ -24,8 +26,8 @@
 				    text-align: center;
     				text-decoration: none;
     				color: $primary-font-color;
-    				&:hover {
-    					color: $link-color;
+    				&:hover, &.active {
+    					color: $primary-color;
     				}
 				}
 			}

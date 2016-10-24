@@ -35,23 +35,22 @@ footer {
 			border-radius: 0;
 			border: 0;
 		}
-	}
-}
-@media screen and (max-width: 768px) {
-	.init-ES {
-		padding-left: 15px;
-		top: 80px;
-		padding-bottom: 10px;
-		.esContainer {
-			.form-group {
-				padding-left: 0;
+	}	
+	@media screen and (max-width: 768px) {
+		.init-ES {
+			top: 0;
+			padding: 15px 150px 15px 15px;
+			.esContainer {
+				.form-group {
+					padding-left: 0;
+				}
 			}
 		}
-	}
-	.action-btns-xs {
-		margin-top: 5px;
-		.action-btn {
-			margin-right: 5px;
+		.action-btns-xs {
+			margin-top: 5px;
+			.action-btn {
+				margin-right: 5px;
+			}
 		}
 	}
 }

@@ -103,6 +103,9 @@ export class ImportResult extends Component {
         else if(key === 'fieldName') {
           item.field = value;
         }
+        else {
+          item.additionalOptions = value;
+        }
       }
       return item;
     });
@@ -138,6 +141,11 @@ export class ImportResult extends Component {
       }
       if(selfItem.fields) {
         obj.fields = selfItem.fields;
+      }
+      if(selfItem.additionalOptions) {
+        selfItem.additionalOptions.forEach((option) => {
+          obj[option.key] = option.value;
+        });
       }
     }
     return obj;

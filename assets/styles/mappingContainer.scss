@@ -125,11 +125,16 @@
 					margin: 0;
 					padding: 15px;
 					position: relative;
-					padding-right: 51px;
+					padding-right: 80px;
 					.edit-btn {
 						position: absolute;
 						right: 15px;
 						top: 15px;
+					}
+					.add-option-btn {
+						position: absolute;
+						right: 40px;
+						top: 15px;		
 					}
 					.fieldName, .fieldIndex {
 						padding: 0;
@@ -175,6 +180,28 @@
 						.singleProperty:first-child {
 							margin-top: 15px;
 						}
+					}
+				}
+				.fieldAdditionalRow-container {
+					.fieldAdditionalRow {
+						padding: 0 0 15px 0;
+	    				margin: 0;
+	    				&:first-child {
+	    					padding-top: 15px;
+	    				}
+	    				&.fieldEdit {
+	    					padding-right: 35px;
+	    					.operationalBtns {
+	    						position: absolute;
+	    						right: 15px;
+	    						top: 0px;
+	    					}
+	    					&.first-child {
+		    					.operationalBtns {
+		    						top: 15px;
+		    					}
+		    				}
+	    				}
 					}
 				}
 			}

@@ -29,6 +29,7 @@ export class Field extends Component {
       key: '',
       value: ''
     };
+    this.excludeProperties = ['type', 'properties', 'index', 'fields'];
     this.setModifiedField = this.setModifiedField.bind(this);
     this.removeField = this.removeField.bind(this);
     this.closeError = this.closeError.bind(this);
@@ -201,7 +202,7 @@ export class Field extends Component {
     let fieldName = this.props.field;
     if(!this.props.editable) {
       for(let f_prop in fieldRecord) {
-        if(!(f_prop === 'type' || f_prop === 'properties' || f_prop === 'index')) {
+        if(this.excludeProperties.indexOf(f_prop) < 0) {
           let f_row = (
             <div key={"fieldAdditionalRow-"+fieldName+'-'+f_prop} className="fieldAdditionalRow row">
               <span className="col-xs-6">

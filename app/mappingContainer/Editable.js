@@ -51,6 +51,9 @@ export class Editable extends Component {
             {this.getindexes()}
           </select>);
       break;
+      default:
+        inputSample =(<input className="form-control" type="text" value={this.state.editValue} ref="editInput" onChange={()=> this.inputHandle()} placeholder={this.props.placeholder} ></input>);
+      break;
     }
     return inputSample;
   }

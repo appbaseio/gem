@@ -5,6 +5,8 @@ import { storageService } from './service/StorageService';
 import { Header } from './header/Header';
 import { Footer } from './footer/Footer';
 import { MappingContainer } from './mappingContainer/MappingContainer';
+import { AppLogin } from './appLogin/AppLogin';
+import { Sidebar } from './appLogin/Sidebar';
 
 class Main extends Component {
   constructor(props) {
@@ -99,16 +101,23 @@ class Main extends Component {
   	if(this.state.inputState) {
   		appContainer = (
         <div className="container-fluid app-container">
-  	      <Header 
-            appsList = {this.state.appsList} 
-            inputState = {this.state.inputState} 
-            getMapping = {this.getMapping}
-            mappings = {this.state.mappings}
-            disconnect = {this.disconnect} />
-  	      <MappingContainer 
-            setField= {this.setField} 
-            mappings = {this.state.mappings} 
-            getMapping = {this.getMapping}/>
+  	      <Header />
+          <div className="app-with-sidebar-container container-fluid">
+            <Sidebar />
+    	      <div className="app-main-container">
+              <AppLogin 
+                appsList = {this.state.appsList} 
+                inputState = {this.state.inputState} 
+                getMapping = {this.getMapping}
+                mappings = {this.state.mappings}
+                disconnect = {this.disconnect} 
+              />
+              <MappingContainer 
+                setField= {this.setField} 
+                mappings = {this.state.mappings} 
+                getMapping = {this.getMapping}/>
+            </div>
+          </div>
 	     </div>
       );
   	}

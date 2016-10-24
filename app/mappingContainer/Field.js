@@ -4,12 +4,15 @@ import { dataOperation } from '../service/DataOperation';
 import { SingleField } from './SingleField';
 import { Editable } from './Editable';
 import { ErrorModal } from '../others/ErrorModal';
+import { SingleOption } from './SingleOption';
+
 
 export class Field extends Component {
   constructor(props) {
     super(props);
     this.state = {
       rows: [],
+      options: [],
       modifiedField: [],
       fieldRecord: {},
       error: {
@@ -22,10 +25,15 @@ export class Field extends Component {
       type: 'string',
       index: 'not_analyzed'
     };
+    this.defaultOption = {
+      key: '',
+      value: ''
+    };
     this.setModifiedField = this.setModifiedField.bind(this);
     this.removeField = this.removeField.bind(this);
     this.closeError = this.closeError.bind(this);
     this.editCb = this.editCb.bind(this);
+    this.optionEdit = this.optionEdit.bind(this);
   }
   componentWillMount() {
     if(this.props.fieldRecord) {
@@ -66,6 +74,12 @@ export class Field extends Component {
     this.setState({
       rows: rows
     });
+  }
+  addOptions() {
+    let options = this.state.options;
+    let defaultOption = JSON.parse(JSON.stringify(this.defaultOption));
+    options.push(defaultOption); 
+    this.setState(options); 
   }
   fieldContent(fields) {
     let generateFields = [];
@@ -169,24 +183,78 @@ export class Field extends Component {
       this.props.handleUpdate(key, value, this.props.id);
     }
   }
+  optionEdit(index, value, deleteFlag=false) {
+    let options = this.state.options;
+    if(deleteFlag) {
+      options.splice(index, 1);
+    } else {
+      options[index] = value;
+    }
+    this.setState(options);
+    if(this.props.handleUpdate) {
+      this.props.handleUpdate('options', options, this.props.id);
+    }
+  }
+  additionalOptions() {
+    let additionalOptionsContainer, additionalOptions = [];
+    let fieldRecord = this.state.fieldRecord;
+    let fieldName = this.props.field;
+    if(!this.props.editable) {
+      for(let f_prop in fieldRecord) {
+        if(!(f_prop === 'type' || f_prop === 'properties' || f_prop === 'index')) {
+          let f_row = (
+            <div key={"fieldAdditionalRow-"+fieldName+'-'+f_prop} className="fieldAdditionalRow row">
+              <span className="col-xs-6">
+                {f_prop}
+              </span>
+              <span className="col-xs-6">
+                {fieldRecord[f_prop] + ''}
+              </span>
+            </div>
+          );
+          additionalOptions.push(f_row);
+        }
+      }
+    }
+    if(this.props.editable && this.state.options.length) {
+      additionalOptions = this.state.options.map((option, index) => {
+        return (<SingleOption defaultEdit={true} optionEdit={this.optionEdit} key={index} index={index} option={option} />)
+      }); 
+    }
+    if(additionalOptions.length) {
+      additionalOptionsContainer = (<div className="fieldAdditionalRow-container">
+        {additionalOptions}
+      </div>);
+    }
+    return additionalOptionsContainer;
+  }
   setFieldRow() {
     let fieldRecord = this.state.fieldRecord;
     let fieldName = this.props.field;
     let singleType = this.props.parent === 0 ? (<span className="typeName">{this.props.singleType+' / '} </span>): '';
-    let addRow;
+    let addRow, addOptions;
     if(fieldRecord.type && !this.state.rows.length) {
       addRow = (<a className="btn btn-xs btn-primary pull-right edit-btn" onClick={() => this.addField()} >
         <i className="fa fa-pencil"></i> 
       </a>);
     }
+    if(fieldRecord.type && !this.state.rows.length) {
+      addOptions = (<a className="btn btn-xs btn-primary pull-right add-option-btn" onClick={() => this.addOptions()} >
+        <i className="fa fa-plus"></i> 
+      </a>);
+    }
+    
     let finalField = (
-      <h3 className='title row'>
-        <span>{singleType} {fieldName}</span>
-        <span className={'datatype '+ (!fieldRecord.type ? ' hide ' : '')}>
-          {fieldRecord.type}
-        </span>
-        {addRow}
-      </h3>
+      <div className="field-row">
+        <h3 className='title row'>
+          <span>{singleType} {fieldName}</span>
+          <span className={'datatype '+ (!fieldRecord.type ? ' hide ' : '')}>
+            {fieldRecord.type}
+          </span>
+          {addRow}
+        </h3>
+        {this.additionalOptions()}
+      </div>
     );
     if(this.props.editable) {
       let editableType, editableIndex;
@@ -209,19 +277,25 @@ export class Field extends Component {
         }
       }
       finalField = (
-        <h3 className='title row'>
-          <span className="fieldName col-xs-12 col-sm-4">
-            <Editable 
-              editKey='fieldName'
-              editCb={this.editCb}
-              editValue={fieldName} 
-              defaultEdit={true} >
-            </Editable>
-          </span>
-          {editableType}
-          {editableIndex}
-          {addRow}
-        </h3>
+        <div className="field-row">
+          <h3 className='title row'>
+            <span className="fieldName col-xs-12 col-sm-4">
+              <Editable 
+                editKey='fieldName'
+                editCb={this.editCb}
+                editValue={fieldName} 
+                defaultEdit={true} >
+              </Editable>
+            </span>
+            {editableType}
+            {editableIndex}
+            {addOptions}
+            {addRow}
+          </h3>
+          <div>
+            {this.additionalOptions()}
+          </div>
+        </div>
       );
     }
     return finalField;

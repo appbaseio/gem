@@ -2,19 +2,44 @@
 .mappingContainer {
 	position: relative;
 	height: 100%;
+	padding: 15px;
+	padding-top: 63px;
 	#gem-tabs {
 		height: 100%;
 	    position: relative;
 	    padding-top: 42px;
+	    background: #fff;
 	    .nav-tabs {
 	    	position: absolute;
 		    left: 0;
 		    width: 100%;
 		    top: 0;
+		    border: 0;
+		    >li {
+		    	width: 50%;
+		    	a {
+		    		border: 0;
+		    		background: $dark-bg;
+		    		text-align: center;
+		    		font-size: 16px;
+		    		font-weight: bold;
+		    		margin: 0;
+		    		color: $primary-font-color;
+		    		&:hover {
+		    			color: $primary-font-color;
+		    		}
+		    	}
+		    	&.active {
+		    		a {
+		    			background: #fff;
+		    		}
+		    	}
+		    }
 	    }
 	    .tab-content {
 	    	height: 100%;
 	    	background: #fff;
+	    	border-top: 1px solid $dark-bg;
 			> div {
 				height: 100%;
 			}
@@ -55,7 +80,7 @@
 			position: absolute;
 			top: 0;
 			left: 0;
-			padding: 15px 0 15px 15px;
+			padding: 15px;
 			width: 250px;
 			height: 100%;
 			.typesContainerWrapper {
@@ -100,11 +125,16 @@
 					margin: 0;
 					padding: 15px;
 					position: relative;
-					padding-right: 51px;
+					padding-right: 80px;
 					.edit-btn {
 						position: absolute;
 						right: 15px;
 						top: 15px;
+					}
+					.add-option-btn {
+						position: absolute;
+						right: 40px;
+						top: 15px;		
 					}
 					.fieldName, .fieldIndex {
 						padding: 0;
@@ -150,6 +180,28 @@
 						.singleProperty:first-child {
 							margin-top: 15px;
 						}
+					}
+				}
+				.fieldAdditionalRow-container {
+					.fieldAdditionalRow {
+						padding: 0 0 15px 0;
+	    				margin: 0;
+	    				&:first-child {
+	    					padding-top: 15px;
+	    				}
+	    				&.fieldEdit {
+	    					padding-right: 35px;
+	    					.operationalBtns {
+	    						position: absolute;
+	    						right: 15px;
+	    						top: 0px;
+	    					}
+	    					&.first-child {
+		    					.operationalBtns {
+		    						top: 15px;
+		    					}
+		    				}
+	    				}
 					}
 				}
 			}

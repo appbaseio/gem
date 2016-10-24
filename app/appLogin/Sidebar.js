@@ -17,6 +17,11 @@ export class Sidebar extends Component {
         <div className="app-sidebar">
           <ul>
             <li>
+              <a title="GEM - GUI for Elasticsearch Mappings" className="active" href="javascript:void;">
+                G
+              </a>
+            </li>
+            <li>
               <DejavuLink />
             </li>
             <li>

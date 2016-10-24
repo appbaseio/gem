@@ -142,16 +142,22 @@ export class MappingContainer extends Component {
     return markup;
   }
   render() {
+    let tabs;
+    if(this.props.mappings) {
+      tabs =(
+        <Tabs activeKey={this.state.key} onSelect={this.handleSelect} id="gem-tabs">
+          <Tab eventKey={1} title="Default">
+            {this.viewFor('default')}
+          </Tab>
+          <Tab eventKey={2} title="Import">
+            {this.viewFor('import')}
+          </Tab>
+        </Tabs>
+        );
+    }
     return (
       <div className={"mappingContainer " + this.state.view+"View"}>
-      <Tabs activeKey={this.state.key} onSelect={this.handleSelect} id="gem-tabs">
-        <Tab eventKey={1} title="Default">
-          {this.viewFor('default')}
-        </Tab>
-        <Tab eventKey={2} title="Import">
-          {this.viewFor('import')}
-        </Tab>
-      </Tabs>
+      {tabs}
       <ErrorModal {...this.state.error} closeError={this.closeError} />
     </div>
     );

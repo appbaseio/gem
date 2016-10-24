@@ -10,7 +10,7 @@ export class Header extends Component {
     return (
     <header className="header text-center">
       <div className="img-container">
-        <img src="../assets/images/logo.png" alt="Gem" className="img-responsive"/>
+        <img src="assets/images/logo.png" alt="Gem" className="img-responsive"/>
       </div>
       <div className="tag-line">
         GUI for Elasticsearch Mappings

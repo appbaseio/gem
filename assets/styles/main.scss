@@ -48,6 +48,9 @@
 a {
   cursor: pointer;
 }
+.btn {
+  border-radius: 0;
+}
 .btn-primary {
   color: $contrast-color;
   background-color: $primary-color;
@@ -82,7 +85,11 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
-  color: #333;
+  color: $primary-font-color;
+}
+.btn-default {
+  color: $primary-font-color; 
+  border: 0;
 }
 a {
   color: $link-color;

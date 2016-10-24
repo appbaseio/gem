@@ -8,13 +8,13 @@ export class DejavuLink extends Component {
   }
   redirect() {
     urlShare.redirectUrl('dejavu').then((url) => {
-      window.open(url, '_blank');
+      window.open(url, '_self');
     }).catch((error) => console.log(error));
   }
   render() {
     return (
-      <a className="link btn btn-default action-btn" onClick = {() => this.redirect()}>
-        Data View <i className="fa fa-external-link-square"></i>
+      <a title="Dejavu - data view" className="link action-btn" onClick = {() => this.redirect()}>
+        D
       </a>
     );
   }

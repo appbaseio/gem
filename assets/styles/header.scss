@@ -13,7 +13,7 @@ footer {
 	border-bottom: 1px solid darken($grey-bg, 10%);
 	.action-btns {
 		position: absolute;
-		left: 5px;
+		left: 15px;
 		display: inline-block;
 		.action-btn {
 			margin-right: 5px;
@@ -21,8 +21,20 @@ footer {
 	}
 	.submit-btn {
 		position: absolute;
-		right: 5px;
+		right: 15px;
 		width: 125px;
+	}
+}
+.app-login-container {
+	.init-ES {
+		top: 0;
+		padding: 15px 150px 15px 68px;
+		border: 0;
+		input {
+			background: $dark-bg;
+			border-radius: 0;
+			border: 0;
+		}
 	}
 }
 @media screen and (max-width: 768px) {
@@ -60,11 +72,7 @@ footer {
 		display: block;
 		text-align: right;
 		border-radius: 4px;
-		background: $grey-bg;
-		border-bottom: 2px dashed #ccc;
-		.btn {
-			margin-top: -1px;
-		}
+		background: $dark-bg;
 		&.expand {
 			width: 100%;
 		}
@@ -78,34 +86,31 @@ footer {
 	z-index: 9;
 	background: $grey-bg;
 	border-bottom: 0;
-	padding: 6px;
-	max-height: 40px;
+	padding: 0;
+	max-height: 100px;
 	margin: 0 auto;
-	.header-container {
-		display: inline-block;
-		.img-container {
-			max-width: 170px;
-			display: inline-block;
-			float: left;
-			padding: 5px;
-			left: 10px;
-		}
-		.tag-line {
-			padding-left: 15px;
-			line-height: 30px;
-			font-size: 20px;
+	position: absolute;
+    height: auto;
+    background: #fff;
+    border-bottom: 2px solid #ccc;
+	.img-container {
+		margin-top: 10px;
+		margin-bottom: 10px;
+		img {
+			max-width: 100px;
+			margin: 0 auto;
 		}
 	}
+	.tag-line {
+		line-height: 22px;
+		font-size: 20px;
+		margin-bottom: 10px;
+		font-weight: lighter;
+	}
 	@media screen and (max-width: 768px) {
-		.header-container {
-			.img-container {
-				max-width: 120px;
-			}
-			.tag-line {
-				padding-left: 15px;
-				line-height: 30px;
-				font-size: 14px;
-			}
+		.tag-line {
+			line-height: 16px;
+			font-size: 14px;
 		}
 	}
 	@media screen and (max-width: 500px) { 

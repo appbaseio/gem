@@ -110,19 +110,22 @@ export class MappingContainer extends Component {
     return markup;
   }
   render() {
-    let view;
+    let view, importModal;
     if(this.props.mappings) {
       view = this.viewFor('default');
-    }
-    return (
-      <div className={"mappingContainer " + this.state.view+"View"}>
-      {view}
-      <ImportModal 
+      importModal = (
+        <ImportModal 
         key={1}
         selectedType={this.state.selectedType}
         mappings={this.props.mappings} 
         getMapping={this.props.getMapping}
         ></ImportModal>
+      );
+    }
+    return (
+      <div className={"mappingContainer " + this.state.view+"View"}>
+      {view}
+      {importModal}
       <ErrorModal {...this.state.error} closeError={this.closeError} />
     </div>
     );

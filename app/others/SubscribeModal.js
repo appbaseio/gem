@@ -47,7 +47,7 @@ export class SubscribeModal extends Component {
   render() {
     return (
       <div>
-        <a title="subscribe to appbase" href="javascript:void;" onClick={() => this.open()}>
+        <a title="subscribe to appbase" className="subscribe" href="javascript:void;" onClick={() => this.open()}>
           {this.showIcon()}
         </a>
         <Modal className="modal-info" show={this.state.showModal} onHide={() => this.close()}>

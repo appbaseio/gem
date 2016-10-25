@@ -4,7 +4,6 @@ import { render } from 'react-dom';
 import { GemLink } from './GemLink';
 import { MirageLink } from './MirageLink';
 import { DejavuLink } from './DejavuLink';
-import { SubscribeModal } from '../others/SubscribeModal';
 
 export class Sidebar extends Component {
   constructor(props) {
@@ -28,9 +27,6 @@ export class Sidebar extends Component {
             </li>
             <li>
               <MirageLink />
-            </li>
-            <li className="subscribe">
-              <SubscribeModal />
             </li>
           </ul>
         </div>

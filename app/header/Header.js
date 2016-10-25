@@ -1,6 +1,7 @@
 import { default as React, Component } from 'react';
 import { render } from 'react-dom';
 import { dataOperation } from '../service/DataOperation';
+import { SubscribeModal } from '../others/SubscribeModal';
 
 export class Header extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ export class Header extends Component {
       <div className="tag-line">
         GUI for Elasticsearch Mappings
       </div>
+      <SubscribeModal />
     </header> 
     );
   }

@@ -1,4 +1,21 @@
 @import "variables.scss";
+#importModal {
+	.modal-dialog {
+		width: 80%;
+		height: 80%;
+		.modal-content {
+			height: 100%;
+			.modal-body {
+				height: calc(100% - 90px);
+			}
+		}
+	}
+}
+.importBtn {
+	position: fixed;
+	left: 30px;
+    bottom: 65px;
+}
 #ImportContainer {
 	margin: 0;
 	height: 100%;

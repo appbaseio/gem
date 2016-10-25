@@ -27,7 +27,6 @@ export class SubscribeModal extends Component {
   close() {
     this.internalClose = true;
     this.setState({ showModal: false });
-    this.props.closeModal();
   }
   open() {
     if(!this.state.profile) {

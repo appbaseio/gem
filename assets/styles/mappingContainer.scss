@@ -4,228 +4,11 @@
 	height: 100%;
 	padding: 15px;
 	padding-top: 63px;
-	#gem-tabs {
-		height: 100%;
-	    position: relative;
-	    padding-top: 46px;
-	    background: #fff;
-	    .nav-tabs {
-	    	position: absolute;
-		    left: 0;
-		    width: 100%;
-		    top: 0;
-		    border: 0;
-		    >li {
-		    	width: 50%;
-		    	a {
-		    		border: 0;
-		    		background: #fff;
-		    		text-align: center;
-		    		font-size: 16px;
-		    		font-weight: bold;
-		    		margin: 0;
-		    		color: $primary-font-color;
-		    		border-bottom: 2px solid #fff;
-		    		&:hover {
-		    			color: $primary-font-color;
-		    		}
-		    	}
-		    	&.active {
-		    		a {
-		    			border-bottom: 4px solid $primary-color;
-		    		}
-		    	}
-		    }
-	    }
-	    .tab-content {
-	    	height: 100%;
-	    	background: #fff;
-	    	border-top: 1px solid $dark-bg;
-			> div {
-				height: 100%;
-			}
-
-	    }
-	}
 	.mappingWrapper {
 		height: 100%;
 		position: relative;
 		padding-left: 250px;
 		background: #fff;
-		.btn-add-field-container {
-			position: absolute;
-		    left: 265px;
-		    border: 15px;
-		    bottom: 15px;
-		    @media screen and (max-width: 768px) {
-		    	position: fixed;
-		    	left: 15px;
-		    	bottom: 50px;
-		    }
-			.btn-add-field {
-			}
-		}
-		.import-btn {
-			position: absolute;
-		    left: 395px;
-		    border: 15px;
-		    bottom: 15px;	
-		}
-		.back-btn {
-			position: absolute;
-		    left: 340px;
-		    border: 15px;
-		    bottom: 15px;	
-		}
-		.typesContainer {
-			position: absolute;
-			top: 0;
-			left: 0;
-			padding: 15px;
-			width: 250px;
-			height: 100%;
-			.typesContainerWrapper {
-				position: relative;
-				height: 100%;
-				overflow: auto;
-				padding: 15px;
-				background: $bg;
-				border: 1px solid darken($bg, 5%);
-				.title {
-					margin: 0;
-					padding-bottom: 10px;
-				}
-				ul {
-					list-style: none;
-					padding: 0;
-					li {
-						display: block;
-					}
-				}
-			}
-			@media screen and (max-width: 768px) {
-				position: relative;
-				width: 100%;
-				padding: 15px;
-				height: auto;
-			}
-		}
-		.FieldContainer {
-			padding: 15px;
-			position: relative;
-			overflow: auto;
-    		max-height: 100%;
-			.singleProperty {
-				margin-bottom: 15px;
-				border: 1px solid darken($bg, 5%);
-				padding: 0;
-				.title {
-					background: $bg;
-					border-bottom: 1px solid darken($bg, 5%);
-					font-size: 16px;
-					margin: 0;
-					padding: 15px 15px 15px 55px;
-					position: relative;
-					padding-right: 80px;
-					.edit-btn {
-						position: absolute;
-						right: 15px;
-						top: 15px;
-					}
-					.add-option-btn {
-						position: absolute;
-						right: 40px;
-						top: 15px;		
-					}
-					.fieldName, .fieldIndex {
-						padding: 0;
-					}
-					.datatype {
-						color: $grey-font;
-						margin-left: 15px;
-						padding: 5px;
-						border: 1px solid darken($bg, 10%);
-					}
-					.typeName {
-						font-weight: bold;
-					}
-					.jsonPopoverBtn {
-						background: transparent;
-						border: 1px solid $primary-color;
-						border-radius: 50%;
-						width: 30px;
-						height: 30px;
-						position: absolute;
-						left: 15px;
-						top: 8px;
-    					font-size: 12px;
-						&:before {
-							content: "{...}";
-						}
-					}
-					@media screen and (max-width: 768px) { 
-						.fieldDataType {
-							padding: 0;
-						}
-					}
-				}
-				.fieldContent {
-					margin: 0;
-					.internalField {
-						padding: 10px 70px 10px 15px;
-						.fieldName, .fieldIndex {
-							padding: 0;
-						}
-						@media screen and (max-width: 768px) { 
-							.datatype {
-								padding: 0;
-							}
-						}
-						.operationalBtns {
-							position: absolute;
-							right: 0;
-							a {
-								margin-right: 5px
-							}
-						}
-					}
-					.nestedField {
-						padding: 0;
-						padding-left: 15px;
-						.singleProperty:first-child {
-							margin-top: 15px;
-						}
-					}
-				}
-				.fieldAdditionalRow-container {
-					.fieldAdditionalRow {
-						padding: 0 0 15px 0;
-	    				margin: 0;
-	    				&:first-child {
-	    					padding-top: 15px;
-	    				}
-	    				&.fieldEdit {
-	    					padding-right: 35px;
-	    					.operationalBtns {
-	    						position: absolute;
-	    						right: 15px;
-	    						top: 0px;
-	    					}
-	    					&:first-child {
-		    					.operationalBtns {
-		    						top: 15px;
-		    					}
-		    				}
-	    				}
-					}
-				}
-			}
-			>.singleProperty {
-				&:last-child {
-					padding-bottom: 15px;
-				}
-			}
-		}
 		@media screen and (max-width: 768px) {
 			padding-left: 0;
 		}
@@ -236,7 +19,188 @@
 		}
 	}
 }
-.jsonPopover  {
+
+.btn-add-field-container {
+	position: absolute;
+	left: 265px;
+	border: 15px;
+	bottom: 15px;
+	@media screen and (max-width: 768px) {
+		position: fixed;
+		left: 15px;
+		bottom: 50px;
+	}
+	.btn-add-field {}
+}
+
+.import-btn {
+	position: absolute;
+	left: 395px;
+	border: 15px;
+	bottom: 15px;
+}
+
+.back-btn {
+	position: absolute;
+	left: 340px;
+	border: 15px;
+	bottom: 15px;
+}
+
+.typesContainer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 15px;
+	width: 250px;
+	height: 100%;
+	.typesContainerWrapper {
+		position: relative;
+		height: 100%;
+		overflow: auto;
+		padding: 15px;
+		background: $bg;
+		border: 1px solid darken($bg, 5%);
+		.title {
+			margin: 0;
+			padding-bottom: 10px;
+		}
+		ul {
+			list-style: none;
+			padding: 0;
+			li {
+				display: block;
+			}
+		}
+	}
+	@media screen and (max-width: 768px) {
+		position: relative;
+		width: 100%;
+		padding: 15px;
+		height: auto;
+	}
+}
+
+.FieldContainer {
+	padding: 15px;
+	position: relative;
+	overflow: auto;
+	max-height: 100%;
+	.singleProperty {
+		margin-bottom: 15px;
+		border: 1px solid darken($bg, 5%);
+		padding: 0;
+		.title {
+			background: $bg;
+			border-bottom: 1px solid darken($bg, 5%);
+			font-size: 16px;
+			margin: 0;
+			padding: 15px 15px 15px 55px;
+			position: relative;
+			padding-right: 80px;
+			.edit-btn {
+				position: absolute;
+				right: 15px;
+				top: 15px;
+			}
+			.add-option-btn {
+				position: absolute;
+				right: 40px;
+				top: 15px;
+			}
+			.fieldName,
+			.fieldIndex {
+				padding: 0;
+			}
+			.datatype {
+				color: $grey-font;
+				margin-left: 15px;
+				padding: 5px;
+				border: 1px solid darken($bg, 10%);
+			}
+			.typeName {
+				font-weight: bold;
+			}
+			.jsonPopoverBtn {
+				background: transparent;
+				border: 1px solid $primary-color;
+				border-radius: 50%;
+				width: 30px;
+				height: 30px;
+				position: absolute;
+				left: 15px;
+				top: 8px;
+				font-size: 12px;
+				&:before {
+					content: "{...}";
+				}
+			}
+			@media screen and (max-width: 768px) {
+				.fieldDataType {
+					padding: 0;
+				}
+			}
+		}
+		.fieldContent {
+			margin: 0;
+			.internalField {
+				padding: 10px 70px 10px 15px;
+				.fieldName,
+				.fieldIndex {
+					padding: 0;
+				}
+				@media screen and (max-width: 768px) {
+					.datatype {
+						padding: 0;
+					}
+				}
+				.operationalBtns {
+					position: absolute;
+					right: 0;
+					a {
+						margin-right: 5px
+					}
+				}
+			}
+			.nestedField {
+				padding: 0;
+				padding-left: 15px;
+				.singleProperty:first-child {
+					margin-top: 15px;
+				}
+			}
+		}
+		.fieldAdditionalRow-container {
+			.fieldAdditionalRow {
+				padding: 0 0 15px 0;
+				margin: 0;
+				&:first-child {
+					padding-top: 15px;
+				}
+				&.fieldEdit {
+					padding-right: 35px;
+					.operationalBtns {
+						position: absolute;
+						right: 15px;
+						top: 0px;
+					}
+					&:first-child {
+						.operationalBtns {
+							top: 15px;
+						}
+					}
+				}
+			}
+		}
+	}
+	>.singleProperty {
+		&:last-child {
+			padding-bottom: 15px;
+		}
+	}
+}
+
+.jsonPopover {
 	max-width: 250px;
 	min-width: 250px;
 	pre {

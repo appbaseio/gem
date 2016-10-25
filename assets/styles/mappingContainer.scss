@@ -210,7 +210,7 @@
 	    						right: 15px;
 	    						top: 0px;
 	    					}
-	    					&.first-child {
+	    					&:first-child {
 		    					.operationalBtns {
 		    						top: 15px;
 		    					}

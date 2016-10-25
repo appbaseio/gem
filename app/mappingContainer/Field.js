@@ -202,23 +202,6 @@ export class Field extends Component {
     let additionalOptionsContainer, additionalOptions = [];
     let fieldRecord = this.state.fieldRecord;
     let fieldName = this.props.field;
-    if(!this.props.editable) {
-      for(let f_prop in fieldRecord) {
-        if(this.excludeProperties.indexOf(f_prop) < 0) {
-          let f_row = (
-            <div key={"fieldAdditionalRow-"+fieldName+'-'+f_prop} className="fieldAdditionalRow row">
-              <span className="col-xs-6">
-                {f_prop}
-              </span>
-              <span className="col-xs-6">
-                {fieldRecord[f_prop] + ''}
-              </span>
-            </div>
-          );
-          additionalOptions.push(f_row);
-        }
-      }
-    }
     if(this.props.editable && this.state.options.length) {
       additionalOptions = this.state.options.map((option, index) => {
         return (<SingleOption defaultEdit={true} optionEdit={this.optionEdit} key={index} index={index} option={option} />)

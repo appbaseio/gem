@@ -49,8 +49,10 @@ class AuthOperation {
     let domain = location.href.split('#')[0];
     let savedState = storageService.get('savedState');
     let finalPath = domain;
-    if (savedState) {
+    if (savedState && savedState.indexOf('access_token') < 0) {
       finalPath += savedState;
+    } else {
+      finalPath += '#';
     }
     window.location.href = finalPath;
     location.reload();

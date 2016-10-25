@@ -223,7 +223,7 @@ export class Field extends Component {
       </Popover>
     );
     const jsonOverlay = (
-      <OverlayTrigger trigger={['click']} placement="left" overlay={jsonPopover}>
+      <OverlayTrigger trigger={['hover', 'focus']} placement="left" overlay={jsonPopover}>
         <button className="jsonPopoverBtn"></button>
       </OverlayTrigger>
     );

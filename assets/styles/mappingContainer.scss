@@ -123,7 +123,7 @@
 					border-bottom: 1px solid darken($bg, 5%);
 					font-size: 16px;
 					margin: 0;
-					padding: 15px;
+					padding: 15px 15px 15px 55px;
 					position: relative;
 					padding-right: 80px;
 					.edit-btn {
@@ -147,6 +147,20 @@
 					}
 					.typeName {
 						font-weight: bold;
+					}
+					.jsonPopoverBtn {
+						background: transparent;
+						border: 1px solid $primary-color;
+						border-radius: 50%;
+						width: 30px;
+						height: 30px;
+						position: absolute;
+						left: 15px;
+						top: 8px;
+    					font-size: 12px;
+						&:before {
+							content: "{...}";
+						}
 					}
 					@media screen and (max-width: 768px) { 
 						.fieldDataType {
@@ -214,5 +228,12 @@
 		.mappingWrapper {
 			padding: 0;
 		}
+	}
+}
+.jsonPopover  {
+	max-width: 300px;
+	min-width: 300px;
+	pre {
+		padding: 0;
 	}
 }

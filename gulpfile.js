@@ -10,6 +10,7 @@ var files = {
         vendor: [
             'bower_components/bootstrap/dist/css/bootstrap.min.css',
             'bower_components/font-awesome/css/font-awesome.min.css',
+            'node_modules/highlight.js/styles/arduino-light.css',
             'node_modules/codemirror/lib/codemirror.css',
             'node_modules/codemirror/addon/fold/foldgutter.css',
             'node_modules/codemirror/addon/dialog/dialog.css',

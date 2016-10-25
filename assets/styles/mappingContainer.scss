@@ -7,7 +7,7 @@
 	#gem-tabs {
 		height: 100%;
 	    position: relative;
-	    padding-top: 42px;
+	    padding-top: 46px;
 	    background: #fff;
 	    .nav-tabs {
 	    	position: absolute;
@@ -19,19 +19,20 @@
 		    	width: 50%;
 		    	a {
 		    		border: 0;
-		    		background: $dark-bg;
+		    		background: #fff;
 		    		text-align: center;
 		    		font-size: 16px;
 		    		font-weight: bold;
 		    		margin: 0;
 		    		color: $primary-font-color;
+		    		border-bottom: 2px solid #fff;
 		    		&:hover {
 		    			color: $primary-font-color;
 		    		}
 		    	}
 		    	&.active {
 		    		a {
-		    			background: #fff;
+		    			border-bottom: 4px solid $primary-color;
 		    		}
 		    	}
 		    }
@@ -217,6 +218,11 @@
 		    				}
 	    				}
 					}
+				}
+			}
+			>.singleProperty {
+				&:last-child {
+					padding-bottom: 15px;
 				}
 			}
 		}

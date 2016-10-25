@@ -6,7 +6,6 @@ import { Header } from './header/Header';
 import { Footer } from './footer/Footer';
 import { MappingContainer } from './mappingContainer/MappingContainer';
 import { AppLogin } from './appLogin/AppLogin';
-import { Sidebar } from './appLogin/Sidebar';
 
 class Main extends Component {
   constructor(props) {
@@ -103,8 +102,7 @@ class Main extends Component {
         <div className="container-fluid app-container">
   	      <Header />
           <div className="app-with-sidebar-container container-fluid">
-            <Sidebar />
-    	      <div className="app-main-container">
+            <div className="app-main-container">
               <AppLogin 
                 appsList = {this.state.appsList} 
                 inputState = {this.state.inputState} 

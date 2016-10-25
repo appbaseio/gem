@@ -106,6 +106,19 @@ footer {
 		margin-bottom: 10px;
 		font-weight: lighter;
 	}
+	.subscribe {
+		position: absolute;
+		right: 15px;
+	    top: 15px;
+	    width: 50px;
+	    height: 50px;
+	    line-height: 50px;
+	    font-size: 24px;
+	    color: $primary-font-color;
+	    img {
+	    	border-radius: 50%;
+	    }
+	}
 	@media screen and (max-width: 768px) {
 		.tag-line {
 			line-height: 16px;

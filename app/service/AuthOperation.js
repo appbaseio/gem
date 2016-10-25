@@ -59,8 +59,15 @@ class AuthOperation {
   }
   getUserProfile() {
     var url = this.serverAddress+'/api/getUserProfile';
-    $.post(url, {
+    var request = {
       token: storageService.get('id_token')
+    };
+    $.ajax({
+      type: 'POST',
+      url: url,
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      data: JSON.stringify(request)
     })
     .done(function(res) {
       authEmitter.emit('profile', res.message);

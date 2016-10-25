@@ -1,12 +1,11 @@
 import { default as React, Component } from 'react';
 import { render } from 'react-dom';
-import { Tabs, Tab } from 'react-bootstrap';
 import { dataOperation } from '../service/DataOperation';
 import { Types } from './Types';
 import { Fields } from './Fields';
 import { AddField } from './AddField';
 import { ErrorModal } from '../others/ErrorModal';
-import { ImportContainer } from './importContainer/ImportContainer';
+import { ImportModal } from './importContainer';
 
 export class MappingContainer extends Component {
   constructor(props) {
@@ -23,7 +22,6 @@ export class MappingContainer extends Component {
     this.typeSelection = this.typeSelection.bind(this);
     this.submitField = this.submitField.bind(this);
     this.closeError = this.closeError.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
   }
   componentWillMount() {
 
@@ -97,40 +95,10 @@ export class MappingContainer extends Component {
           mappings={this.props.mappings} 
           selectedType={this.state.selectedType} ></Fields>
       );
-      let addFieldBtn = (<AddField 
-          key={2}
-          types={types}
-          submitField={this.submitField} ></AddField>);
-      return [typesComponent, fields, addFieldBtn];
-    } else if(this.state.key === 2 && method === 'import') {
-      let importContainer = (
-       <ImportContainer 
-          key={1}
-          selectedType={this.state.selectedType}
-          mappings={this.props.mappings} 
-          getMapping={this.props.getMapping}
-          ></ImportContainer>
-      );
-      return [importContainer];
-    } else {
+      return [typesComponent, fields];
+    }  else {
       return null;
     }
-  }
-  handleSelect(key) {
-    event.preventDefault();
-    let view;
-    switch(key) {
-      case 1:
-        view = 'default';
-      break;
-      case 2:
-        view = 'import';
-      break;
-    }
-    this.setState({
-      key,
-      view
-    });
   }
   viewFor(method) {
     let markup = null;
@@ -142,22 +110,19 @@ export class MappingContainer extends Component {
     return markup;
   }
   render() {
-    let tabs;
+    let view;
     if(this.props.mappings) {
-      tabs =(
-        <Tabs activeKey={this.state.key} onSelect={this.handleSelect} id="gem-tabs">
-          <Tab eventKey={1} title="Default">
-            {this.viewFor('default')}
-          </Tab>
-          <Tab eventKey={2} title="Import">
-            {this.viewFor('import')}
-          </Tab>
-        </Tabs>
-        );
+      view = this.viewFor('default');
     }
     return (
       <div className={"mappingContainer " + this.state.view+"View"}>
-      {tabs}
+      {view}
+      <ImportModal 
+        key={1}
+        selectedType={this.state.selectedType}
+        mappings={this.props.mappings} 
+        getMapping={this.props.getMapping}
+        ></ImportModal>
       <ErrorModal {...this.state.error} closeError={this.closeError} />
     </div>
     );

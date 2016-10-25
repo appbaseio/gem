@@ -159,6 +159,7 @@ export class ImportResult extends Component {
       console.log(JSON.stringify(request, null, 4));
       dataOperation.updateMapping(request, this.props.selectedType).done((res) => {
         this.props.getMapping();
+        this.props.close();
       }).fail((res) => {
         let error = this.state.error;
         error.title = 'Error';

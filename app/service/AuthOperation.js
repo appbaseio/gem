@@ -11,7 +11,7 @@ class AuthOperation {
       callbackURL: location.href,
       callbackOnLocationHash: true
     };
-    this.serverAddress = 'http://127.0.0.1:3000';
+    this.serverAddress = 'http://139.59.24.182:3000';
 
     this.auth0 = new Auth0(this.authConfig);
     this.isTokenExpired = this.isTokenExpired.bind(this);

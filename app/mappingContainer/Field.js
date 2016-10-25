@@ -8,7 +8,6 @@ import { Editable } from './Editable';
 import { ErrorModal } from '../others/ErrorModal';
 import { SingleOption } from './SingleOption';
 
-
 export class Field extends Component {
   constructor(props) {
     super(props);
@@ -223,7 +222,7 @@ export class Field extends Component {
       </Popover>
     );
     const jsonOverlay = (
-      <OverlayTrigger trigger={['hover', 'focus']} placement="left" overlay={jsonPopover}>
+      <OverlayTrigger trigger={['click']} rootClose placement="left" overlay={jsonPopover}>
         <button className="jsonPopoverBtn"></button>
       </OverlayTrigger>
     );

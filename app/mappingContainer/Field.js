@@ -1,5 +1,7 @@
 import { default as React, Component } from 'react';
 import { render } from 'react-dom';
+import { Popover, OverlayTrigger } from 'react-bootstrap';
+import Highlight from 'react-highlight';
 import { dataOperation } from '../service/DataOperation';
 import { SingleField } from './SingleField';
 import { Editable } from './Editable';
@@ -200,23 +202,6 @@ export class Field extends Component {
     let additionalOptionsContainer, additionalOptions = [];
     let fieldRecord = this.state.fieldRecord;
     let fieldName = this.props.field;
-    if(!this.props.editable) {
-      for(let f_prop in fieldRecord) {
-        if(this.excludeProperties.indexOf(f_prop) < 0) {
-          let f_row = (
-            <div key={"fieldAdditionalRow-"+fieldName+'-'+f_prop} className="fieldAdditionalRow row">
-              <span className="col-xs-6">
-                {f_prop}
-              </span>
-              <span className="col-xs-6">
-                {fieldRecord[f_prop] + ''}
-              </span>
-            </div>
-          );
-          additionalOptions.push(f_row);
-        }
-      }
-    }
     if(this.props.editable && this.state.options.length) {
       additionalOptions = this.state.options.map((option, index) => {
         return (<SingleOption defaultEdit={true} optionEdit={this.optionEdit} key={index} index={index} option={option} />)
@@ -228,6 +213,21 @@ export class Field extends Component {
       </div>);
     }
     return additionalOptionsContainer;
+  }
+  setJsonPopover() {
+    let fieldRecord = this.state.fieldRecord;
+    let fieldRecordStringify = JSON.stringify(fieldRecord, null, 4);
+    const jsonPopover = (
+      <Popover id="jsonPopover" className='jsonPopover' title="Json">
+        <Highlight className="json">{fieldRecordStringify}</Highlight>
+      </Popover>
+    );
+    const jsonOverlay = (
+      <OverlayTrigger trigger={['click']} placement="left" overlay={jsonPopover}>
+        <button className="jsonPopoverBtn"></button>
+      </OverlayTrigger>
+    );
+    return jsonOverlay;
   }
   setFieldRow() {
     let fieldRecord = this.state.fieldRecord;
@@ -247,7 +247,8 @@ export class Field extends Component {
     
     let finalField = (
       <div className="field-row">
-        <h3 className='title row'>
+        <h3 className='title row'>       
+          {this.setJsonPopover()}
           <span>{singleType} {fieldName}</span>
           <span className={'datatype '+ (!fieldRecord.type ? ' hide ' : '')}>
             {fieldRecord.type}

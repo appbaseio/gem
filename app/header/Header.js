@@ -18,7 +18,6 @@ export class Header extends Component {
     </header> 
     );
   }
-
 }
 
 Header.propTypes = {  

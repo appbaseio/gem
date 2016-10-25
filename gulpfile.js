@@ -26,7 +26,8 @@ var files = {
             'bower_components/lodash/dist/lodash.min.js',
             'bower_components/crypto-js/crypto-js.js',
             'bower_components/lzma/src/lzma.js',
-            'bower_components/urlsafe-base64/app.js'
+            'bower_components/urlsafe-base64/app.js',
+            'bower_components/auth0.js/build/auth0.min.js'
         ],
         custom: [
         ]

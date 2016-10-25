@@ -20,7 +20,8 @@
 			li {
 				a {
 					display: block;
-				    padding: 15px;
+				    padding: 5px;
+				    margin: 10px 0;
 				    font-size: 20px;
 				    line-height: 30px;
 				    text-align: center;
@@ -29,6 +30,11 @@
     				&:hover, &.active {
     					color: $primary-color;
     				}
+				}
+				&.subscribe {
+				    position: absolute;
+    				bottom: 25px;
+    				width: 100%;
 				}
 			}
 		}

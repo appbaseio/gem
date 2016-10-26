@@ -46,11 +46,14 @@
 	padding: 15px;
 	.JsonImport, .ImportResult {
 		height: 100%;
-		padding-top: 97px;
+		padding-top: 67px;
 		position: relative;
 		padding-left: 0;
 		padding-right: 0;
 		border: 1px solid darken($bg, 5%); 
+		@media screen and (max-width: 768px) { 
+			padding-top: 97px;
+		}
 		.ReactCodeMirror {
 			height: 100%;
 			.CodeMirror {
@@ -70,7 +73,7 @@
 				padding-bottom: 10px;
 				float: left;
 			    width: 100%;
-			    height: 66px;
+			    height: 36px;
 				.extra-options {
 					font-size: 14px;
 					padding-right: 0;
@@ -81,6 +84,7 @@
 				}
 				@media screen and (max-width: 768px) { 
 					font-size: 18px;
+					height: 66px;
 					.extra-options {
 						padding: 5px 0;
 						.select2-container {

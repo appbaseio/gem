@@ -7,6 +7,24 @@
 			height: 100%;
 			.modal-body {
 				height: calc(100% - 90px);
+				#ImportContainer {
+					overflow: inherit;
+					.import-bottom {
+						position: absolute;
+					    bottom: -78px;
+					}
+					.ImportResult {
+						.import-bottom {
+							right: 0;
+						}
+					}
+					.JsonImport {
+						.import-bottom {
+							left: 0;
+							bottom: -66px;
+						}
+					}
+				}
 			}
 		}
 	}
@@ -15,6 +33,7 @@
 	position: fixed;
 	left: 30px;
     bottom: 65px;
+    width: 220px;
 }
 #ImportContainer {
 	margin: 0;
@@ -50,8 +69,10 @@
 			    height: 36px;
 				.extra-options {
 					font-size: 14px;
+					padding-right: 0;
 					.select2-container {
 						min-width: 200px;
+						float: right;
 					}
 				}
 				@media screen and (max-width: 768px) { 
@@ -74,6 +95,28 @@
 	}
 	.JsonImport {
 		border-right: 0; 
+		.CodeMirror-empty { 
+			outline: 1px solid #c22; 
+		}
+		.CodeMirror-empty.CodeMirror-focused { 
+			outline: none; 
+		}
+		.CodeMirror pre.CodeMirror-placeholder { 
+			color: #999; 
+		}
+		.importType {
+			font-size: 14px;
+			padding-left: 0;
+			.single-option {
+				padding-bottom: 5px;
+				input[type=radio] {
+					margin-top: 2px;
+				}
+			}
+		}
+		.extra-options {
+			padding-right: 0;
+		}
 	}
 	@media screen and (max-width: 768px) {
 		.ImportResult {

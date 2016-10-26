@@ -1,5 +1,6 @@
 export const authConfig = {
-	AUTH0_DOMAIN: 'farhan687.auth0.com',
-	AUTH0_CLIENT_ID: 'zcw8TVbDcOdii9niVtsqskrcUd6eFsUm',
-	AUTH0_CALLBACK_URL: location.href
+	domain: 'appbaseio.auth0.com',
+	clientID: 'tCy6GxnrsyKec3UxXCuYLhU6XWFCMgRD',
+	callbackURL: location.href,
+	callbackOnLocationHash: true
 }

@@ -45,6 +45,13 @@
   background: $primary-color;
   color: #fff;
 }
+.modal.modal-yellow .modal-content {
+  border-color: $yellow;
+}
+.modal.modal-yellow .modal-header,
+.modal.modal-yellow .modal-header .close {
+  color: $yellow;
+}
 .modal.modal-info .modal-content {
   border-color: $primary-color;
 }

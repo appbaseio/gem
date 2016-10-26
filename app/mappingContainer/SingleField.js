@@ -66,21 +66,24 @@ export class SingleField extends Component {
             editKey='fieldName'
             editCb={this.editCb}
             editValue={this.props.fieldName} 
-            defaultEdit={this.state.defaultEdit} />
+            defaultEdit={this.state.defaultEdit} 
+            placeholder="fieldname"/>
         </span>
         <span className="datatype col-xs-12 col-sm-4">
           <Editable
             editKey='type'
             editCb={this.editCb}
             editValue={this.props.fieldInfo.type} 
-            defaultEdit={this.state.defaultEdit} />
+            defaultEdit={this.state.defaultEdit} 
+            placeholder="datatype"/>
         </span>
         <span className="fieldIndex col-xs-12 col-sm-4">
           <Editable 
             editKey='index'
             editCb={this.editCb}
             editValue={this.props.fieldInfo.index} 
-            defaultEdit={this.state.defaultEdit} />
+            defaultEdit={this.state.defaultEdit} 
+            placeholder="index"/>
         </span>
         {operationalBtn}
       </div>

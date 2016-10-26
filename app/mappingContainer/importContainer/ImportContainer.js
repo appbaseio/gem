@@ -14,13 +14,20 @@ export class ImportContainer extends Component {
     };
     this.detectMapping = this.detectMapping.bind(this);
   }
-  detectMapping(jsonInput, selectedType) {
-    let properties = this.generateMappingStructure(jsonInput);
-    let finalMapping = {
-      [selectedType]: {
-        properties: properties
-      }
-    };
+  detectMapping(jsonInput, selectedType, importType='data') {
+    let finalMapping;
+    if(importType === 'data' ) {
+      let properties = this.generateMappingStructure(jsonInput);
+      finalMapping = {
+        [selectedType]: {
+          properties: properties
+        }
+      };
+    } else {
+      finalMapping = {
+        [selectedType]: jsonInput
+      };
+    }
     this.setState({
       selectedType: selectedType,
       finalMapping: finalMapping

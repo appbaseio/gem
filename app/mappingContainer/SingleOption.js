@@ -55,7 +55,7 @@ export class SingleOption extends Component {
     let operationalBtn = this.operationalBtn();
     return (
       <div className="fieldAdditionalRow fieldEdit col-xs-12">
-        <span className="fieldName col-xs-12 col-sm-6">
+        <span className="fieldName col-xs-12 col-sm-6 pd-l0">
           <Editable 
             editKey='key'
             editCb={this.editCb}

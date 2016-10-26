@@ -22,7 +22,7 @@ export class SubscribeModal extends Component {
       if(!this.state.profile) {
         this.open();
       }
-    }, 1000*15);
+    }, 1000*60*15);
   }
   close() {
     this.internalClose = true;
@@ -65,9 +65,6 @@ export class SubscribeModal extends Component {
               </div>
             </div>
           </Modal.Body>
-          <Modal.Footer>
-            <a className="btn btn-primary" onClick={() => this.close()}>Close</a>
-          </Modal.Footer>
         </Modal>
       </div>
     )

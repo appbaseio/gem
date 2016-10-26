@@ -27,10 +27,10 @@ export class ImportModal extends Component {
   render() {
     return (
       <div>
-        <a title="subscribe to appbase" className="btn btn-primary importBtn" href="javascript:void;" onClick={() => this.open()}>
-          Add new field
+        <a title="Add new import" className="btn btn-yellow importBtn" href="javascript:void;" onClick={() => this.open()}>
+          Import new data
         </a>
-        <Modal className="modal-info" id="importModal" show={this.state.showModal} onHide={() => this.close()}>
+        <Modal className="modal-yellow" id="importModal" show={this.state.showModal} onHide={() => this.close()}>
           <Modal.Header closeButton>
             <Modal.Title>Import</Modal.Title>
           </Modal.Header>
@@ -44,7 +44,7 @@ export class ImportModal extends Component {
                 ></ImportContainer>
           </Modal.Body>
           <Modal.Footer>
-            <a className="btn btn-primary" onClick={() => this.close()}>Close</a>
+            
           </Modal.Footer>
         </Modal>
       </div>

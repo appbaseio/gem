@@ -33,7 +33,7 @@ export class SubscribeModal extends Component {
       if(!this.state.profile) {
         this.open();
       }
-    }, 1000*60*15);
+    }, 1000*60*1);
   }
   close() {
     this.internalClose = true;

@@ -26,14 +26,18 @@ export class Editable extends Component {
     this.props.editCb(this.props.editKey, editValue);
   }
   gettypes() {
-    return this.types.map((type, i) => {
+    let types = this.types.map((type, i) => {
       return (<option key={i} value={type}>{type}</option>)
     });
+    types.unshift(<option key={-1} value=''>select datatype</option>);
+    return types;
   }
   getindexes() {
-    return this.indexes.map((index, i) => {
+    let indexes = this.indexes.map((index, i) => {
       return (<option key={i} value={index}>{index}</option>)
     });
+    indexes.unshift(<option key={-1} value=''>select index</option>);
+    return indexes;
   }
   inputOptions() {
     let inputSample;

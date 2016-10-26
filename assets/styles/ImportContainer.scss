@@ -2,7 +2,7 @@
 #importModal {
 	.modal-dialog {
 		width: 90%;
-		height: 90%;
+		height: calc(90% - 40px);
 		.modal-content {
 			height: 100%;
 			.modal-body {

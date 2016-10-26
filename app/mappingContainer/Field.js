@@ -99,7 +99,7 @@ export class Field extends Component {
         key={index} ></SingleField>);
       generateFields.push(fieldMarkup);
     }
-    if(generateFields.length) {
+    if(generateFields.length && !this.state.rows.length) {
       generateFields.unshift(title);
     }
     return generateFields;
@@ -255,15 +255,18 @@ export class Field extends Component {
       }
     }
     if(this.props.operationalBtn) {
+      if(fieldRecord.type && !this.state.rows.length) {
+        addRow = (<MenuItem eventKey="1" onClick={() => this.addField()}>
+          Add subfield
+        </MenuItem>);
+      }
       operationalBtn = (
         <Dropdown id="operationa-btn" pullRight className="edit-btn operational-btn">
           <Dropdown.Toggle>
             <i className="fa fa-ellipsis-v"></i>
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <MenuItem eventKey="1" onClick={() => this.addField()}>
-              Add subfield
-            </MenuItem>
+            {addRow}
             <MenuItem eventKey="2" onClick={() => this.addOptions()}>
               Add optional
             </MenuItem>

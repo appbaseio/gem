@@ -93,6 +93,15 @@
 	}
 	.JsonImport {
 		border-right: 0; 
+		.CodeMirror-empty { 
+			outline: 1px solid #c22; 
+		}
+		.CodeMirror-empty.CodeMirror-focused { 
+			outline: none; 
+		}
+		.CodeMirror pre.CodeMirror-placeholder { 
+			color: #999; 
+		}
 	}
 	@media screen and (max-width: 768px) {
 		.ImportResult {

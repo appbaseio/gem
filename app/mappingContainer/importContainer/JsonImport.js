@@ -11,7 +11,7 @@ require('codemirror/addon/dialog/dialog.js');
 require('codemirror/addon/edit/matchbrackets.js');
 require('codemirror/addon/edit/closebrackets.js');
 require('codemirror/addon/comment/comment.js');
-require('codemirror/addon/comment/comment.js');
+require('codemirror/addon/display/placeholder');
 require('codemirror/addon/fold/foldcode.js');
 require('codemirror/addon/fold/foldgutter.js');
 require('codemirror/addon/fold/brace-fold.js');
@@ -24,22 +24,9 @@ require('codemirror/keymap/sublime.js');
 export class JsonImport extends Component {
   constructor(props) {
     super(props);
-    this.sample = {
-      "name": "Foo",
-      "id": 1234,
-      "flag": true,
-      "location": {
-        "lat": 1234,
-        "lon": 1234
-      },
-      "place": {
-        "country": "india",
-        "city": "ahmedabad",
-        "pincode": 380055
-      }
-    };
+    this.sample = '';
   	this.state = {
-  		code: JSON.stringify(this.sample, null, 4),
+  		code: null,
       error: {
         title: null,
         message: null
@@ -144,7 +131,8 @@ export class JsonImport extends Component {
         <span className={"json-valid-message import-bottom "+(this.state.validFlag ? 'text-success' : 'text-danger')}>
           {this.getValidMessage()}
         </span>
-    		<Codemirror value={this.state.code} onChange={this.updateCode} options={this.codemirrorOptions} />
+    		<Codemirror ref="editor" value={this.state.code} onChange={this.updateCode} 
+        placeholder='Add json here' options={this.codemirrorOptions} />
     		<ErrorModal {...this.state.error} closeError={this.closeError} />
     	</div>
     );

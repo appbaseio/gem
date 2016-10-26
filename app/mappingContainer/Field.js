@@ -22,9 +22,9 @@ export class Field extends Component {
       }
     };
     this.defaultRow = {
-      name: 'sample',
-      type: 'string',
-      index: 'not_analyzed'
+      name: '',
+      type: '',
+      index: ''
     };
     this.defaultOption = {
       key: '',

@@ -144,10 +144,17 @@
 		.fieldContent {
 			margin: 0;
 			.internalField {
-				padding: 10px 70px 10px 15px;
+				padding: 10px 70px 10px 55px;
 				.fieldName,
 				.fieldIndex {
 					padding: 0;
+				}
+				.datatype .editableContainer.off .frontEditable {
+					color: $grey-font;
+					padding: 5px;
+					width: auto;
+					display: inline-block;
+					border: 1px solid darken($bg, 10%);
 				}
 				@media screen and (max-width: 768px) {
 					.datatype {
@@ -179,6 +186,7 @@
 				}
 				&.fieldEdit {
 					padding-right: 35px;
+					padding-left: 55px;
 					.operationalBtns {
 						position: absolute;
 						right: 15px;

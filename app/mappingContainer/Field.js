@@ -248,7 +248,7 @@ export class Field extends Component {
       <div className="field-row">
         <h3 className='title row'>       
           {this.setJsonPopover()}
-          <span>{singleType} {fieldName}</span>
+          <span className="col-xs-12 col-sm-4 pd-l0">{singleType} {fieldName}</span>
           <span className={'datatype '+ (!fieldRecord.type ? ' hide ' : '')}>
             {fieldRecord.type}
           </span>

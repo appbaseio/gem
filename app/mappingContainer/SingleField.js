@@ -34,11 +34,22 @@ export class SingleField extends Component {
   editCb(key, value) {
     this.modified[key] = value;
   }
+  validate() {
+    let flag = true;
+    for(let field in this.modified) {
+      if(!(this.modified[field] && this.modified[field] !== '')) {
+        flag = false;
+      }
+    }
+    return flag;
+  }
   saveEdit() {
-    this.props.setModifiedField(this.props.fieldName, this.modified);
-    this.setState({
-      defaultEdit: false
-    });
+    if(this.validate()) {
+      this.props.setModifiedField(this.props.fieldName, this.modified);
+      this.setState({
+        defaultEdit: false
+      });
+    }
   }
   quitEditable() {
     this.props.removeField(this.props.fieldName);
@@ -58,7 +69,20 @@ export class SingleField extends Component {
     return operationalBtn;
   }
   render() {
+    let indexRow;
     let operationalBtn = this.operationalBtn();
+    if(this.modified.type === 'string') {
+      indexRow = (
+        <span className="fieldIndex col-xs-12 col-sm-4">
+          <Editable 
+            editKey='index'
+            editCb={this.editCb}
+            editValue={this.props.fieldInfo.index} 
+            defaultEdit={this.state.defaultEdit} 
+            placeholder="index"/>
+        </span>
+      );
+    }
     return (
       <div className="internalField col-xs-12">
         <span className="fieldName col-xs-12 col-sm-4">
@@ -77,14 +101,7 @@ export class SingleField extends Component {
             defaultEdit={this.state.defaultEdit} 
             placeholder="datatype"/>
         </span>
-        <span className="fieldIndex col-xs-12 col-sm-4">
-          <Editable 
-            editKey='index'
-            editCb={this.editCb}
-            editValue={this.props.fieldInfo.index} 
-            defaultEdit={this.state.defaultEdit} 
-            placeholder="index"/>
-        </span>
+        {indexRow}
         {operationalBtn}
       </div>
     );

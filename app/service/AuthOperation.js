@@ -1,19 +1,13 @@
 var {EventEmitter} = require('fbemitter');
 import { storageService } from './StorageService';
+import { authConfig } from './authConfig';
 
 export var authEmitter = new EventEmitter();
 
 class AuthOperation {
   constructor() {
-    this.authConfig = {
-      domain: 'farhan687.auth0.com',
-      clientID: 'zcw8TVbDcOdii9niVtsqskrcUd6eFsUm',
-      callbackURL: location.href,
-      callbackOnLocationHash: true
-    };
-    this.serverAddress = 'http://139.59.24.182:3000';
-
-    this.auth0 = new Auth0(this.authConfig);
+    this.serverAddress = 'https://ossauth.appbase.io';
+    this.auth0 = new Auth0(authConfig);
     this.isTokenExpired = this.isTokenExpired.bind(this);
     this.show_logged_in = this.show_logged_in.bind(this);
     this.login = this.login.bind(this);

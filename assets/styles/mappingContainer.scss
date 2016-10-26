@@ -108,6 +108,15 @@
 				right: 40px;
 				top: 15px;
 			}
+			.operational-btn {
+				.btn {
+					background: $primary-color;
+					color: #fff;
+				}
+				.caret {
+					display: none;
+				}
+			}
 			.fieldName,
 			.fieldIndex {
 				padding: 0;
@@ -141,10 +150,15 @@
 				}
 			}
 		}
+		.sub-title {
+			font-size: 16px;
+			padding-left: 55px;
+			font-weight: bold;
+		}
 		.fieldContent {
 			margin: 0;
 			.internalField {
-				padding: 10px 70px 10px 55px;
+				padding: 0 70px 10px 55px;
 				.fieldName,
 				.fieldIndex {
 					padding: 0;

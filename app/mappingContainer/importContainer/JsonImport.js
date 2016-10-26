@@ -24,9 +24,22 @@ require('codemirror/keymap/sublime.js');
 export class JsonImport extends Component {
   constructor(props) {
     super(props);
-    this.sample = '';
+    this.sample = {
+      "name": "Foo",
+      "id": 1234,
+      "flag": true,
+      "location": {
+        "lat": 1234,
+        "lon": 1234
+      },
+      "place": {
+        "country": "india",
+        "city": "ahmedabad",
+        "pincode": 380055
+      }
+    };
   	this.state = {
-  		code: null,
+  		code: JSON.stringify(this.sample, null, 4),
       error: {
         title: null,
         message: null

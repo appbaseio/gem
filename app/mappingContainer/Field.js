@@ -1,6 +1,6 @@
 import { default as React, Component } from 'react';
 import { render } from 'react-dom';
-import { Popover, OverlayTrigger } from 'react-bootstrap';
+import { Popover, OverlayTrigger, Dropdown, DropdownButton, MenuItem } from 'react-bootstrap';
 import Highlight from 'react-highlight';
 import { dataOperation } from '../service/DataOperation';
 import { SingleField } from './SingleField';
@@ -84,6 +84,7 @@ export class Field extends Component {
     this.setState(options); 
   }
   fieldContent(fields) {
+    let title = (<h4 className="sub-title col-xs-12" key="subtitle">Sub Fields</h4>);
     let generateFields = [];
     let index = 0;
     for(let singleField in fields) {
@@ -98,9 +99,13 @@ export class Field extends Component {
         key={index} ></SingleField>);
       generateFields.push(fieldMarkup);
     }
+    if(generateFields.length) {
+      generateFields.unshift(title);
+    }
     return generateFields;
   }
   addRows() {
+    let title = (<h4 className="sub-title col-xs-12" key="subtitle">Sub Fields</h4>);
     let generateFields = [];
     let index = 0;
     let existingRows = this.state.rows;
@@ -118,6 +123,9 @@ export class Field extends Component {
         removeField = {this.removeField}
         key={index} ></SingleField>);
     });
+    if(generateFields.length) {
+      generateFields.unshift(title);
+    }
     return generateFields;
   }
   removeField() {
@@ -201,12 +209,14 @@ export class Field extends Component {
     let additionalOptionsContainer, additionalOptions = [];
     let fieldRecord = this.state.fieldRecord;
     let fieldName = this.props.field;
+    let title = (<h4 className="sub-title col-xs-12" key="subtitle">Additional Options</h4>);
     if(this.props.editable && this.state.options.length) {
       additionalOptions = this.state.options.map((option, index) => {
         return (<SingleOption defaultEdit={true} optionEdit={this.optionEdit} key={index} index={index} option={option} />)
       }); 
     }
     if(additionalOptions.length) {
+      additionalOptions.unshift(title);
       additionalOptionsContainer = (<div className="fieldAdditionalRow-container">
         {additionalOptions}
       </div>);
@@ -228,21 +238,44 @@ export class Field extends Component {
     );
     return jsonOverlay;
   }
+  operationalBtn() {
+    let addRow, addOptions, operationalBtn;
+    let fieldRecord = this.state.fieldRecord;
+    if(fieldRecord.type && !this.state.rows.length) {
+      addRow = (<a key="add-subfield" className="btn btn-xs btn-primary pull-right edit-btn" onClick={() => this.addField()} >
+        Add subfield
+      </a>);
+    }
+    if(fieldRecord.type && !this.state.rows.length && this.props.editable) {
+      addOptions = (<a key="add-options" className="btn btn-xs btn-primary pull-right add-option-btn" onClick={() => this.addOptions()} >
+        Add optional
+      </a>);
+    }
+    if(this.props.editable) {
+      operationalBtn = (
+        <Dropdown id="operationa-btn" pullRight className="edit-btn operational-btn">
+          <Dropdown.Toggle>
+            <i className="fa fa-ellipsis-v"></i>
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <MenuItem eventKey="1" onClick={() => this.addField()}>
+              Add subfield
+            </MenuItem>
+            <MenuItem eventKey="2" onClick={() => this.addOptions()}>
+              Add optional
+            </MenuItem>
+          </Dropdown.Menu>
+        </Dropdown>
+      );
+    } else {
+      operationalBtn = [addRow, addOptions];
+    }
+    return operationalBtn;
+  }
   setFieldRow() {
     let fieldRecord = this.state.fieldRecord;
     let fieldName = this.props.field;
     let singleType = this.props.parent === 0 ? (<span className="typeName">{this.props.singleType+' / '} </span>): '';
-    let addRow, addOptions;
-    if(fieldRecord.type && !this.state.rows.length) {
-      addRow = (<a className="btn btn-xs btn-primary pull-right edit-btn" onClick={() => this.addField()} >
-        <i className="fa fa-pencil"></i> 
-      </a>);
-    }
-    if(fieldRecord.type && !this.state.rows.length) {
-      addOptions = (<a className="btn btn-xs btn-primary pull-right add-option-btn" onClick={() => this.addOptions()} >
-        <i className="fa fa-plus"></i> 
-      </a>);
-    }
     
     let finalField = (
       <div className="field-row">
@@ -252,7 +285,7 @@ export class Field extends Component {
           <span className={'datatype '+ (!fieldRecord.type ? ' hide ' : '')}>
             {fieldRecord.type}
           </span>
-          {addRow}
+          {this.operationalBtn()}
         </h3>
         {this.additionalOptions()}
       </div>
@@ -290,8 +323,7 @@ export class Field extends Component {
             </span>
             {editableType}
             {editableIndex}
-            {addOptions}
-            {addRow}
+            {this.operationalBtn()}
           </h3>
           <div>
             {this.additionalOptions()}

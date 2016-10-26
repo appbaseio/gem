@@ -33,6 +33,7 @@ export class SingleField extends Component {
   }
   editCb(key, value) {
     this.modified[key] = value;
+    this.setState(this.modified);
   }
   validate() {
     let flag = true;

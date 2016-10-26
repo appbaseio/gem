@@ -254,10 +254,15 @@ export class Field extends Component {
         </a>);
       }
     }
-    if(this.props.operationalBtn) {
+    if(fieldRecord.type && this.props.operationalBtn) {
       if(fieldRecord.type && !this.state.rows.length) {
         addRow = (<MenuItem eventKey="1" onClick={() => this.addField()}>
           Add subfield
+        </MenuItem>);
+      }
+      if(this.props.editable) {
+        addOptions = (<MenuItem eventKey="2" onClick={() => this.addOptions()}>
+          Add optional
         </MenuItem>);
       }
       operationalBtn = (
@@ -267,9 +272,7 @@ export class Field extends Component {
           </Dropdown.Toggle>
           <Dropdown.Menu>
             {addRow}
-            <MenuItem eventKey="2" onClick={() => this.addOptions()}>
-              Add optional
-            </MenuItem>
+            {addOptions}
           </Dropdown.Menu>
         </Dropdown>
       );

@@ -65,9 +65,6 @@ export class SubscribeModal extends Component {
               </div>
             </div>
           </Modal.Body>
-          <Modal.Footer>
-            <a className="btn btn-primary" onClick={() => this.close()}>Close</a>
-          </Modal.Footer>
         </Modal>
       </div>
     )

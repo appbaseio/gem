@@ -44,7 +44,8 @@ export class JsonImport extends Component {
         title: null,
         message: null
       },
-      validFlag: false
+      validFlag: false,
+      "importType": "data"
   	};
     this.codemirrorOptions = {
       lineNumbers: false,
@@ -61,6 +62,7 @@ export class JsonImport extends Component {
   	this.updateCode = this.updateCode.bind(this);
     this.closeError = this.closeError.bind(this);
     this.submit = this.submit.bind(this);
+    this.importTypeChange = this.importTypeChange.bind(this);
   }
   componentWillMount() {
     this.submit.call(this);
@@ -75,7 +77,7 @@ export class JsonImport extends Component {
       let isJson = this.isJson(this.state.code);
       if(isJson.validFlag) {
         let parsedJson = isJson.jsonInput;
-        this.props.detectMapping(parsedJson, this.state.selectedType);
+        this.props.detectMapping(parsedJson, this.state.selectedType, this.state.importType);
       } 
       this.setState({
         validFlag: isJson.validFlag
@@ -117,6 +119,33 @@ export class JsonImport extends Component {
   getValidMessage() {
     return this.state.selectedType ? (this.state.validFlag ? 'Json is valid.' : 'Json is invalid.') : 'Type is not selected';
   }
+  importTypeChange(type) {
+    this.setState({
+      importType: type
+    }, this.submit.bind(this));
+  }
+  radioOptions() {
+    return (
+      <div className="row">
+        <div className="col-xs-12 single-option">
+          <label className="radio-inline">
+            <input type="radio"
+              checked={this.state.importType === 'data'} 
+              onChange={() => this.importTypeChange('data')} 
+              name="importType" id="importType" value="data" /> json data
+          </label>
+        </div>
+        <div className="col-xs-12 single-option">
+          <label className="radio-inline">
+            <input type="radio" 
+              checked={this.state.importType === 'mapping'} 
+              onChange={() => this.importTypeChange('mapping')} 
+              name="importType1" id="importType1" value="mapping" /> json mapping
+          </label>
+        </div>
+      </div>
+    );
+  }
   render() {
     this.types = Object.keys(this.props.mappings);
     this.types.unshift('');
@@ -124,10 +153,10 @@ export class JsonImport extends Component {
     	<div className="JsonImport col-xs-12 col-sm-6">
         <div className={"json-header "+(this.state.validFlag ? 'success' : 'error')}>
           <h3 className="title">
-            <span className="pull-left">
-              Json import
+            <span className="pull-left col-xs-12 col-sm-6 importType">
+              {this.radioOptions()}
             </span>
-            <span className="pull-right extra-options">
+            <span className="pull-right extra-options col-xs-12 col-sm-6">
               <Select2
                 multiple={false}
                 data={ this.types }
@@ -151,21 +180,3 @@ export class JsonImport extends Component {
     );
   }
 }
-
-// test
-/*
-{
-  "name": "Foo",
-  "id": 1234,
-  "flag": true,
-  "location": {
-    "lat": 1234,
-    "lon": 1234
-  },
-  "place": {
-    "country": "india",
-    "city": "ahmedabad",
-    "pincode": 380055
-  }
-}
-*/

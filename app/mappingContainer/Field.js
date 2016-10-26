@@ -215,9 +215,9 @@ export class Field extends Component {
   }
   setJsonPopover() {
     let fieldRecord = this.state.fieldRecord;
-    let fieldRecordStringify = JSON.stringify(fieldRecord, null, 4);
+    let fieldRecordStringify = JSON.stringify(fieldRecord, null, 2);
     const jsonPopover = (
-      <Popover id="jsonPopover" className='jsonPopover' title="Json">
+      <Popover id="jsonPopover" className='jsonPopover'>
         <Highlight className="json">{fieldRecordStringify}</Highlight>
       </Popover>
     );

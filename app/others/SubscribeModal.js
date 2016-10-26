@@ -8,8 +8,19 @@ export class SubscribeModal extends Component {
     super(props);
     this.state = {
       showModal: false,
-      profile: false
+      profile: false,
+      subscribeOption: 'major'
     };
+    this.options = {
+      option1: {
+        value: 'major',
+        text: 'Only for major release'
+      },
+      option2: {
+        value: 'all',
+        text: 'For all releases'
+      }
+    }
     this.init();
   }
   init() {
@@ -34,7 +45,12 @@ export class SubscribeModal extends Component {
     }
   }
   subscribe() {
-    authOperation.login();
+    authOperation.login(this.state.subscribeOption);
+  }
+  subscribeOptionChange(value) {
+    this.setState({
+      subscribeOption: value
+    });
   }
   showIcon() {
     let icon = (<i className="fa fa-envelope-o"></i>);
@@ -57,14 +73,34 @@ export class SubscribeModal extends Component {
             <div className="row">
               <div className="col-xs-12">
                 <p>Subscribe to appbase</p>
-              </div>
-              <div className="col-xs-12 text-center">
-                <button className="btn btn-primary" onClick={() => this.subscribe()}>
-                  Subscribe
-                </button>
+                <div className="row">
+                  <div className="col-xs-12 single-option">
+                    <label className="radio-inline">
+                      <input type="radio"
+                        checked={this.state.subscribeOption === this.options.option1.value} 
+                        onChange={() => this.subscribeOptionChange(this.options.option1.value)} 
+                        name="subscribeOption" id="subscribeOption" value={this.options.option1.value} /> {this.options.option1.text}
+                    </label>
+                  </div>
+                  <div className="col-xs-12 single-option">
+                    <label className="radio-inline">
+                      <input type="radio" 
+                        checked={this.state.subscribeOption === this.options.option2.value} 
+                        onChange={() => this.subscribeOptionChange(this.options.option2.value)} 
+                        name="subscribeOption1" id="subscribeOption1" value={this.options.option2.value} /> {this.options.option2.text}
+                    </label>
+                  </div>
+                </div>
               </div>
             </div>
           </Modal.Body>
+          <Modal.Footer>
+            <div className="col-xs-12 text-center">
+              <button className="btn btn-primary" onClick={() => this.subscribe()}>
+                Subscribe
+              </button>
+            </div>
+          </Modal.Footer>
         </Modal>
       </div>
     )

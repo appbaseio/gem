@@ -7,6 +7,7 @@
 			height: 100%;
 			.modal-body {
 				height: calc(100% - 90px);
+				overflow: auto;
 				#ImportContainer {
 					overflow: inherit;
 					.import-bottom {
@@ -34,6 +35,9 @@
 	left: 30px;
     bottom: 65px;
     width: 220px;
+    @media screen and (max-width: 768px) {
+    	bottom: 45px;
+    }
 }
 #ImportContainer {
 	margin: 0;
@@ -47,6 +51,9 @@
 		padding-left: 0;
 		padding-right: 0;
 		border: 1px solid darken($bg, 5%); 
+		@media screen and (max-width: 768px) { 
+			padding-top: 97px;
+		}
 		.ReactCodeMirror {
 			height: 100%;
 			.CodeMirror {
@@ -77,10 +84,14 @@
 				}
 				@media screen and (max-width: 768px) { 
 					font-size: 18px;
+					height: 66px;
 					.extra-options {
+						padding: 5px 0;
 						.select2-container {
 							min-width: 150px !important;
-							width: 150px !important;
+							width: 100% !important;
+							float: left;
+
 						}
 					}
 				}

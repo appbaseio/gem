@@ -46,8 +46,7 @@ export class ImportModal extends Component {
                 close={this.close}
                 ></ImportContainer>
           </Modal.Body>
-          <Modal.Footer>
-            
+          <Modal.Footer>  
           </Modal.Footer>
         </Modal>
       </div>

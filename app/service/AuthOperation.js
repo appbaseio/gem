@@ -19,8 +19,9 @@ class AuthOperation {
     var now = (new Date()).getTime() / 1000;
     return decoded.exp < now;
   }
-  login() {
+  login(subscribeOption) {
     let savedState = window.location.hash;
+    storageService.set('subscribeOption', subscribeOption);
     if (savedState.indexOf('access_token') < 0) {
       storageService.set('savedState', savedState);
     }
@@ -53,8 +54,10 @@ class AuthOperation {
   }
   getUserProfile() {
     var url = this.serverAddress+'/api/getUserProfile';
+    let subscribeOption = storageService.get('subscribeOption') && storageService.get('subscribeOption') !== 'null' ? storageService.get('subscribeOption') : null;
     var request = {
-      token: storageService.get('id_token')
+      token: storageService.get('id_token'),
+      subscribeOption: subscribeOption
     };
     $.ajax({
       type: 'POST',
@@ -64,6 +67,7 @@ class AuthOperation {
       data: JSON.stringify(request)
     })
     .done(function(res) {
+      storageService.set('subscribeOption', null);
       authEmitter.emit('profile', res.message);
     })
     .fail(function(err) {

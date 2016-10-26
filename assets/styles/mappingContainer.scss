@@ -58,7 +58,7 @@
 		position: relative;
 		height: 100%;
 		overflow: auto;
-		padding: 15px;
+		padding: 15px 15px 40px 15px;
 		background: $bg;
 		border: 1px solid darken($bg, 5%);
 		.title {
@@ -126,6 +126,10 @@
 				margin-left: 15px;
 				padding: 5px;
 				border: 1px solid darken($bg, 10%);
+				@media screen and (max-width: 768px) {
+					margin: 15px 0 0 0;
+					float: left;
+				}
 			}
 			.typeName {
 				font-weight: bold;

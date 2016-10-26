@@ -61,6 +61,16 @@ a {
     background-color: darken($primary-color, 5%);
   }
 }
+.btn-yellow {
+  color: $contrast-color;
+  background-color: $yellow;
+  border-color: darken($yellow, 5%);
+  &:hover,
+  &:focus,
+  &.active {
+    background-color: darken($yellow, 5%);
+  }
+}
 .btn-grey {
   color: $grey-font;
   border-color: transparent;

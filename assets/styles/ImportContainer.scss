@@ -7,6 +7,24 @@
 			height: 100%;
 			.modal-body {
 				height: calc(100% - 90px);
+				#ImportContainer {
+					overflow: inherit;
+					.import-bottom {
+						position: absolute;
+					    bottom: -78px;
+					}
+					.ImportResult {
+						.import-bottom {
+							right: 0;
+						}
+					}
+					.JsonImport {
+						.import-bottom {
+							left: 0;
+							bottom: -66px;
+						}
+					}
+				}
 			}
 		}
 	}
@@ -15,6 +33,7 @@
 	position: fixed;
 	left: 30px;
     bottom: 65px;
+    width: 220px;
 }
 #ImportContainer {
 	margin: 0;

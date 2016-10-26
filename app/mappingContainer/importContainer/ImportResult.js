@@ -202,18 +202,16 @@ export class ImportResult extends Component {
             <span className="pull-left">
               Result 
             </span>
-            <span className="pull-right extra-options">
-              <button 
-                onClick={() => this.submit()}
-                className="btn btn-primary btn-submit">
-                Submit
-              </button>
-            </span>
           </h3>
         </div>
         <div className="FieldContainer">
           {fieldList}
         </div>
+        <button 
+          onClick={() => this.submit()}
+          className="btn btn-yellow import-bottom">
+          Apply mapping
+        </button>
         <ErrorModal {...this.state.error} closeError={this.closeError} />
       </div>
     );

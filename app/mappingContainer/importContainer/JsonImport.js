@@ -114,6 +114,9 @@ export class JsonImport extends Component {
       }, this.submit);
     }
   }
+  getValidMessage() {
+    return this.state.selectedType ? (this.state.validFlag ? 'Json is valid.' : 'Json is invalid.') : 'Type is not selected';
+  }
   render() {
     this.types = Object.keys(this.props.mappings);
     this.types.unshift('');
@@ -138,6 +141,9 @@ export class JsonImport extends Component {
             </span>
           </h3>
         </div>
+        <span className={"json-valid-message import-bottom "+(this.state.validFlag ? 'text-success' : 'text-danger')}>
+          {this.getValidMessage()}
+        </span>
     		<Codemirror value={this.state.code} onChange={this.updateCode} options={this.codemirrorOptions} />
     		<ErrorModal {...this.state.error} closeError={this.closeError} />
     	</div>

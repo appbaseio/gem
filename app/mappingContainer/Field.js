@@ -177,6 +177,7 @@ export class Field extends Component {
         parent = {item.parent}
         editable = {this.props.editable}
         subfieldUpdate = {this.props.subfieldUpdate}
+        operationalBtn = {this.props.operationalBtn}
         key = {index} >
       </Field>);
     })
@@ -241,17 +242,19 @@ export class Field extends Component {
   operationalBtn() {
     let addRow, addOptions, operationalBtn;
     let fieldRecord = this.state.fieldRecord;
-    if(fieldRecord.type && !this.state.rows.length) {
-      addRow = (<a key="add-subfield" className="btn btn-xs btn-primary pull-right edit-btn" onClick={() => this.addField()} >
-        Add subfield
-      </a>);
+    if(!this.props.operationalBtn) {
+      if(fieldRecord.type && !this.state.rows.length) {
+        addRow = (<a key="add-subfield" className="btn btn-xs btn-primary pull-right edit-btn" onClick={() => this.addField()} >
+          Add subfield
+        </a>);
+      }
+      if(fieldRecord.type && !this.state.rows.length && this.props.editable) {
+        addOptions = (<a key="add-options" className="btn btn-xs btn-primary pull-right add-option-btn" onClick={() => this.addOptions()} >
+          Add optional
+        </a>);
+      }
     }
-    if(fieldRecord.type && !this.state.rows.length && this.props.editable) {
-      addOptions = (<a key="add-options" className="btn btn-xs btn-primary pull-right add-option-btn" onClick={() => this.addOptions()} >
-        Add optional
-      </a>);
-    }
-    if(this.props.editable) {
+    if(this.props.operationalBtn) {
       operationalBtn = (
         <Dropdown id="operationa-btn" pullRight className="edit-btn operational-btn">
           <Dropdown.Toggle>

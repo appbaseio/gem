@@ -88,6 +88,7 @@ export class ImportResult extends Component {
           editable = {!item.isExists}
           handleUpdate = {this.handleUpdate}
           subfieldUpdate = {this.subfieldUpdate}
+          operationalBtn = {true}
           key = {index+new Date().getTime()}>
         </Field>);
       });

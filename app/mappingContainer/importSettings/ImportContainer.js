@@ -11,11 +11,23 @@ export class ImportContainer extends Component {
       error: {
         title: null,
         message: null
-      }
+      },
+      successMessage: null
     };
     this.settingsObj = null;
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateSuccess = this.updateSuccess.bind(this);
+  }
+  updateSuccess() {
+    this.setState({
+      successMessage: 'Setting is updated successfully!'
+    }, function() {
+      setTimeout(() => {
+        this.props.getMapping();
+        this.props.close();
+      }, 1000*3);
+    }.bind(this));
   }
   handleUpdate(jsonInput, selectedType, importType='data') {
     this.settingsObj = {
@@ -28,8 +40,7 @@ export class ImportContainer extends Component {
     dataOperation.ocIndex('_close').done((res) => {
       dataOperation.updateSettings(this.settingsObj).done((res) => {
         dataOperation.ocIndex('_open').done((res) => {
-          this.props.getMapping();
-          this.props.close();
+          this.updateSuccess();
         }).fail((res) => {
           this.errorShow();
         });    
@@ -62,6 +73,8 @@ export class ImportContainer extends Component {
         mappings={this.props.mappings} 
         handleUpdate={this.handleUpdate} 
         handleSubmit={this.handleSubmit} 
+        updateSuccess={this.updateSuccess}
+        successMessage={this.state.successMessage}
         />
       <ErrorModal {...this.state.error} closeError={this.closeError} />
     </div>);

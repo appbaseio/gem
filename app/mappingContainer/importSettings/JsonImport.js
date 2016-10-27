@@ -107,7 +107,7 @@ export class JsonImport extends Component {
     }
   }
   getValidMessage() {
-    return  this.state.validFlag ? 'JSON is valid  ☺.' : 'JSON is invalid  ☹.';
+    return  this.props.successMessage ? this.props.successMessage : (this.state.validFlag ? 'JSON is valid  ☺.' : 'JSON is invalid  ☹.');
   }
   importTypeChange(type) {
     this.setState({

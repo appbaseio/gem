@@ -32,21 +32,21 @@ export class ImportModal extends Component {
         </a>
         <Modal backdrop="static" className="modal-yellow" id="importModal" 
           enforceFocus={false}
-          show={this.state.showModal} 
+          show={this.state.showModal}
           onHide={() => this.close()}>
           <Modal.Header closeButton>
-            <Modal.Title>Import</Modal.Title>
+            <Modal.Title>Import sample JSON data to create new mapping</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-             <ImportContainer 
+             <ImportContainer
                 key={1}
                 selectedType={this.props.selectedType}
-                mappings={this.props.mappings} 
+                mappings={this.props.mappings}
                 getMapping={this.props.getMapping}
                 close={this.close}
                 ></ImportContainer>
           </Modal.Body>
-          <Modal.Footer>  
+          <Modal.Footer>
           </Modal.Footer>
         </Modal>
       </div>

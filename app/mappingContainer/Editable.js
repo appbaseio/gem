@@ -39,6 +39,13 @@ export class Editable extends Component {
     indexes.unshift(<option key={-1} value=''>select index</option>);
     return indexes;
   }
+  getanalyzers() {
+    let analyzer = this.props.registeredAnalyzers.map((index, i) => {
+      return (<option key={i} value={index}>{index}</option>)
+    });
+    analyzer.unshift(<option key={-1} value=''>select analyzer</option>);
+    return analyzer;
+  }
   inputOptions() {
     let inputSample;
     switch(this.props.editKey) {
@@ -53,6 +60,11 @@ export class Editable extends Component {
       case 'index':
         inputSample =(<select className="form-control" value={this.state.editValue} ref="editInput" onChange={()=> this.inputHandle()} >
             {this.getindexes()}
+          </select>);
+      break;
+      case 'analyzer':
+        inputSample =(<select className="form-control" value={this.state.editValue} ref="editInput" onChange={()=> this.inputHandle()} >
+            {this.getanalyzers()}
           </select>);
       break;
       default:

@@ -7,6 +7,7 @@
 			height: 100%;
 			.modal-body {
 				height: calc(100% - 90px);
+				padding-bottom: 15px;
 				@media screen and (max-width: 768px) {
 					overflow: auto;
 				}
@@ -25,10 +26,19 @@
 						.import-bottom {
 							left: 0;
 							bottom: -66px;
+							&.btn-submit {
+								right: 0;
+								left: inherit;
+							}
 						}
 					}
 				}
 			}
+		}
+	}
+	&.importSettingModal {
+		.JsonImport {
+			padding-top: 0;
 		}
 	}
 }

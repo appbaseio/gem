@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { Modal } from 'react-bootstrap';
 import { ImportContainer } from './ImportContainer';
 
-export class ImportModal extends Component {
+export class ImportSettings extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,15 +27,15 @@ export class ImportModal extends Component {
   render() {
     return (
       <div>
-        <a title="Add new import" className="btn btn-yellow col-xs-12" href="javascript:void;" onClick={() => this.open()}>
-          Import new data
+        <a title="Add new import" className="btn btn-yellow col-xs-12 importSettingsBtn" href="javascript:void;" onClick={() => this.open()}>
+          Import settings
         </a>
-        <Modal backdrop="static" className="modal-yellow" id="importModal" 
+        <Modal backdrop="static" className="modal-yellow importSettingModal" id="importModal" 
           enforceFocus={false}
           show={this.state.showModal}
           onHide={() => this.close()}>
           <Modal.Header closeButton>
-            <Modal.Title>Import sample JSON data to create new mapping</Modal.Title>
+            <Modal.Title>Import sattings</Modal.Title>
           </Modal.Header>
           <Modal.Body>
              <ImportContainer

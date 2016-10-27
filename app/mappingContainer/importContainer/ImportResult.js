@@ -104,6 +104,9 @@ export class ImportResult extends Component {
         else if(key === 'fieldName') {
           item.field = value;
         }
+        else if(key === 'analyzer') {
+          item.analyzer = value;
+        }
         else {
           item.additionalOptions = value;
         }
@@ -144,6 +147,9 @@ export class ImportResult extends Component {
       if(selfItem.fields) {
         obj.fields = selfItem.fields;
       }
+      if(selfItem.analyzer) {
+        obj.analyzer = selfItem.analyzer;
+      }
       if(selfItem.additionalOptions) {
         for(let opt in selfItem.additionalOptions[0]) {
           obj[opt] = selfItem.additionalOptions[0][opt];
@@ -159,17 +165,17 @@ export class ImportResult extends Component {
         properties: finalMapping
       };
       console.log(JSON.stringify(request, null, 4));
-      // dataOperation.updateMapping(request, this.props.selectedType).done((res) => {
-      //   this.props.getMapping();
-      //   this.props.close();
-      // }).fail((res) => {
-      //   let error = this.state.error;
-      //   error.title = 'Error';
-      //   error.message = res.responseText;
-      //   this.setState({
-      //     error: error
-      //   });
-      // });
+      dataOperation.updateMapping(request, this.props.selectedType).done((res) => {
+        this.props.getMapping();
+        this.props.close();
+      }).fail((res) => {
+        let error = this.state.error;
+        error.title = 'Error';
+        error.message = res.responseText;
+        this.setState({
+          error: error
+        });
+      });
     } else {
       let error = this.state.error;
       error.title = 'Type is not selected';

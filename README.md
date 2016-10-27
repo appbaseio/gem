@@ -74,3 +74,60 @@ A GUI for creating Elasticsearch data type mappings.
 	}
 }
 ```
+
+### Import Settings sample
+```json
+{
+	"filter": {
+	  "nGram_filter": {
+	    "type": "edge_ngram",
+	    "min_gram": 1,
+	    "max_gram": 20,
+	    "token_chars": [
+	      "letter",
+	      "digit",
+	      "punctuation",
+	      "symbol"
+	    ]
+	  }
+	},
+	"analyzer": {
+	  "nGram_analyzer": {
+	    "type": "custom",
+	    "tokenizer": "whitespace",
+	    "filter": [
+	      "lowercase",
+	      "asciifolding",
+	      "nGram_filter"
+	    ]
+	  },
+	  "body_analyzer": {
+	    "type": "custom",
+	    "tokenizer": "standard",
+	    "filter": [
+	      "lowercase",
+	      "asciifolding",
+	      "stop",
+	      "snowball",
+	      "word_delimiter"
+	    ]
+	  },
+	  "standard_analyzer": {
+	    "type": "custom",
+	    "tokenizer": "standard",
+	    "filter": [
+	      "lowercase",
+	      "asciifolding"
+	    ]
+	  },
+	  "whitespace_analyzer": {
+	    "type": "whitespace",
+	    "tokenizer": "whitespace",
+	    "filter": [
+	      "lowercase",
+	      "asciifolding"
+	    ]
+	  }
+	}
+}
+```

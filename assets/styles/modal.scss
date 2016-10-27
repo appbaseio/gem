@@ -10,6 +10,9 @@
   padding: 5px 15px 0 15px;
   color: $primary-color;
 }
+.modal .modal-title {
+	text-align: center;
+}
 .modal .modal-header .close {
   width: 20px;
   height: 20px;
@@ -26,6 +29,9 @@
   background: transparent;
   opacity: 1;
   color: $primary-color;
+}
+.modal .modal-body {
+	padding-bottom: 50px;
 }
 .modal .btn-success {
   background: transparent;

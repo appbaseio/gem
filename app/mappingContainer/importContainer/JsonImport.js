@@ -65,7 +65,7 @@ export class JsonImport extends Component {
       if(isJson.validFlag) {
         let parsedJson = isJson.jsonInput;
         this.props.detectMapping(parsedJson, this.state.selectedType, this.state.importType);
-      } 
+      }
       this.setState({
         validFlag: isJson.validFlag
       });
@@ -104,7 +104,7 @@ export class JsonImport extends Component {
     }
   }
   getValidMessage() {
-    return this.state.selectedType ? (this.state.validFlag ? 'Json is valid.' : 'Json is invalid.') : 'Type is not selected';
+    return this.state.selectedType ? (this.state.validFlag ? 'JSON is valid  ☺.' : 'JSON is invalid  ☹.') : 'Type is not selected';
   }
   importTypeChange(type) {
     this.setState({
@@ -117,17 +117,17 @@ export class JsonImport extends Component {
         <div className="col-xs-12 single-option">
           <label className="radio-inline">
             <input type="radio"
-              checked={this.state.importType === 'data'} 
-              onChange={() => this.importTypeChange('data')} 
-              name="importType" id="importType" value="data" /> json data
+              checked={this.state.importType === 'data'}
+              onChange={() => this.importTypeChange('data')}
+              name="importType" id="importType" value="data" /> Data as JSON
           </label>
         </div>
         <div className="col-xs-12 single-option">
           <label className="radio-inline">
-            <input type="radio" 
-              checked={this.state.importType === 'mapping'} 
-              onChange={() => this.importTypeChange('mapping')} 
-              name="importType1" id="importType1" value="mapping" /> json mapping
+            <input type="radio"
+              checked={this.state.importType === 'mapping'}
+              onChange={() => this.importTypeChange('mapping')}
+              name="importType1" id="importType1" value="mapping" /> Mappings as JSON
           </label>
         </div>
       </div>
@@ -149,7 +149,7 @@ export class JsonImport extends Component {
                 data={ this.types }
                 value={this.state.selectedType}
                 options={{
-                  placeholder: 'Choose or create a new type',
+                  placeholder: 'Choose or create a Type',
                   tags: {true}
                 }}
                 onChange={this.onTypeSelection}
@@ -160,7 +160,7 @@ export class JsonImport extends Component {
         <span className={"json-valid-message import-bottom "+(this.state.validFlag ? 'text-success' : 'text-danger')}>
           {this.getValidMessage()}
         </span>
-    		<Codemirror ref="editor" value={this.state.code} onChange={this.updateCode} 
+    		<Codemirror ref="editor" value={this.state.code} onChange={this.updateCode}
         placeholder='Add json here' options={this.codemirrorOptions} />
     		<ErrorModal {...this.state.error} closeError={this.closeError} />
     	</div>

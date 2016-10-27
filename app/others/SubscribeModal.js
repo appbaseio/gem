@@ -1,4 +1,5 @@
 import { default as React, Component } from 'react';
+import { storageService } from '../service/StorageService';
 import { render } from 'react-dom';
 import { Modal } from 'react-bootstrap';
 import { authOperation, authEmitter } from '../service/authOperation';
@@ -14,13 +15,14 @@ export class SubscribeModal extends Component {
     this.options = {
       option1: {
         value: 'major',
-        text: 'Only for major release'
+        text: 'New GEM releases'
       },
       option2: {
         value: 'all',
-        text: 'For all releases'
+        text: 'Limited major updates'
       }
     }
+    this.timer = 1;
     this.init();
   }
   init() {
@@ -29,14 +31,18 @@ export class SubscribeModal extends Component {
         profile: data
       });
     });
+    if(storageService.get('popuptimer')) {
+      this.timer = parseInt(storageService.get('popuptimer'));
+    }
     setTimeout(() => {
       if(!this.state.profile) {
         this.open();
       }
-    }, 1000*60*1);
+    }, 1000*60*this.timer);
   }
   close() {
     this.internalClose = true;
+    storageService.set('popuptimer', this.timer+5);
     this.setState({ showModal: false });
   }
   open() {
@@ -62,45 +68,42 @@ export class SubscribeModal extends Component {
   render() {
     return (
       <div>
-        <a title="subscribe to appbase" className="subscribe" href="javascript:void;" onClick={() => this.open()}>
+        <a title="Subscribe to updates" className="subscribe" href="javascript:void;" onClick={() => this.open()}>
           {this.showIcon()}
         </a>
         <Modal className="modal-info" show={this.state.showModal} onHide={() => this.close()}>
           <Modal.Header closeButton>
-            <Modal.Title>Subscribe</Modal.Title>
+            <Modal.Title>Be in the know about major updates!</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
               <div className="col-xs-12">
-                <p>Subscribe to appbase</p>
                 <div className="row">
                   <div className="col-xs-12 single-option">
                     <label className="radio-inline">
                       <input type="radio"
-                        checked={this.state.subscribeOption === this.options.option1.value} 
-                        onChange={() => this.subscribeOptionChange(this.options.option1.value)} 
+                        checked={this.state.subscribeOption === this.options.option1.value}
+                        onChange={() => this.subscribeOptionChange(this.options.option1.value)}
                         name="subscribeOption" id="subscribeOption" value={this.options.option1.value} /> {this.options.option1.text}
                     </label>
                   </div>
                   <div className="col-xs-12 single-option">
                     <label className="radio-inline">
-                      <input type="radio" 
-                        checked={this.state.subscribeOption === this.options.option2.value} 
-                        onChange={() => this.subscribeOptionChange(this.options.option2.value)} 
+                      <input type="radio"
+                        checked={this.state.subscribeOption === this.options.option2.value}
+                        onChange={() => this.subscribeOptionChange(this.options.option2.value)}
                         name="subscribeOption1" id="subscribeOption1" value={this.options.option2.value} /> {this.options.option2.text}
                     </label>
                   </div>
                 </div>
               </div>
             </div>
-          </Modal.Body>
-          <Modal.Footer>
-            <div className="col-xs-12 text-center">
+						<div className="col-xs-12 text-center">
               <button className="btn btn-primary" onClick={() => this.subscribe()}>
-                Subscribe
+                <i className="fa fa-github"></i> Subscribe with Github
               </button>
             </div>
-          </Modal.Footer>
+          </Modal.Body>
         </Modal>
       </div>
     )

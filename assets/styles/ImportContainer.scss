@@ -7,7 +7,9 @@
 			height: 100%;
 			.modal-body {
 				height: calc(100% - 90px);
-				overflow: auto;
+				@media screen and (max-width: 768px) {
+					overflow: auto;
+				}
 				#ImportContainer {
 					overflow: inherit;
 					.import-bottom {

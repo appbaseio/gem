@@ -7,10 +7,12 @@ export class SingleOption extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      defaultEdit: false
+      defaultEdit: false,
+      value: ''
     };
     this.modified = {};
     this.editCb = this.editCb.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
   componentWillMount() {
     if(this.props.defaultEdit) {
@@ -40,11 +42,19 @@ export class SingleOption extends Component {
   quitEditable() {
     this.props.optionEdit(this.props.index, this.modified, true);
   }
+  handleChange(event) {
+    let value = event.target.value;
+    this.setState({value: value});
+    try {
+      let data = JSON.parse(value);
+      this.props.optionEdit(this.props.index, data);
+    } catch(e) {}
+  }
   operationalBtn() {
     let operationalBtn;
     if(this.state.defaultEdit) {
       operationalBtn = (<span className="operationalBtns">
-        <a onClick={() => this.quitEditable()} className="btn btn-xs btn-danger">
+        <a onClick={() => this.quitEditable()} className="btn btn-xs btn-grey-bg">
           <i className="fa fa-times"></i>
         </a>
       </span>);
@@ -55,21 +65,14 @@ export class SingleOption extends Component {
     let operationalBtn = this.operationalBtn();
     return (
       <div className="fieldAdditionalRow fieldEdit col-xs-12">
-        <span className="fieldName col-xs-12 col-sm-6 pd-l0">
-          <Editable 
-            editKey='key'
-            editCb={this.editCb}
-            editValue={this.props.option.key} 
-            defaultEdit={this.state.defaultEdit}
-            placeholder="Key" />
-        </span>
-        <span className="datatype col-xs-12 col-sm-6">
-          <Editable
-            editKey='value'
-            editCb={this.editCb}
-            editValue={this.props.option.value} 
-            defaultEdit={this.state.defaultEdit}
-            placeholder="Value" />
+        <span className="fieldName col-xs-12 pd-l0">
+          <textarea
+            className="col-xs-12"
+            name="description"
+            value={this.state.value}
+            placeholder="add json here"
+            onChange={this.handleChange}
+          />
         </span>
         {operationalBtn}
       </div>

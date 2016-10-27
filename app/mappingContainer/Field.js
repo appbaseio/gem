@@ -260,7 +260,7 @@ export class Field extends Component {
           Add subfield
         </MenuItem>);
       }
-      if(this.props.editable) {
+      if(this.props.editable && !this.state.options.length) {
         addOptions = (<MenuItem eventKey="2" onClick={() => this.addOptions()}>
           Add optional
         </MenuItem>);

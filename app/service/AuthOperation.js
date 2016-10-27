@@ -7,6 +7,7 @@ export var authEmitter = new EventEmitter();
 class AuthOperation {
   constructor() {
     this.serverAddress = 'https://ossauth.appbase.io';
+    // this.serverAddress = 'http://127.0.0.1:3000';
     this.auth0 = new Auth0(authConfig);
     this.isTokenExpired = this.isTokenExpired.bind(this);
     this.show_logged_in = this.show_logged_in.bind(this);
@@ -57,7 +58,8 @@ class AuthOperation {
     let subscribeOption = storageService.get('subscribeOption') && storageService.get('subscribeOption') !== 'null' ? storageService.get('subscribeOption') : null;
     var request = {
       token: storageService.get('id_token'),
-      subscribeOption: subscribeOption
+      origin_app: 'GEM',
+      email_preference: subscribeOption
     };
     $.ajax({
       type: 'POST',

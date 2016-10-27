@@ -15,6 +15,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "fbemitter": "^2.1.1",
     "jquery": "^3.1.1",
+    "md5": "^2.2.1",
     "react": "^15.1.0",
     "react-bootstrap": "^0.30.5",
     "react-codemirror": "^0.2.6",

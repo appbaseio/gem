@@ -69,6 +69,7 @@ a {
   &:focus,
   &.active {
     background-color: darken($yellow, 5%);
+    color: $contrast-color;
   }
 }
 .btn-grey {

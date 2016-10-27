@@ -72,6 +72,17 @@ a {
     color: $contrast-color;
   }
 }
+.btn-grey-bg {
+  color: $contrast-color;
+  background-color: $gray-button;
+  border-color: darken($gray-button, 5%);
+  &:hover,
+  &:focus,
+  &.active {
+    background-color: darken($gray-button, 5%);
+    color: $contrast-color;
+  }
+}
 .btn-grey {
   color: $grey-font;
   border-color: transparent;

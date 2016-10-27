@@ -59,10 +59,10 @@ export class SingleField extends Component {
     let operationalBtn;
     if(this.state.defaultEdit) {
       operationalBtn = (<span className="operationalBtns">
-        <a onClick={() => this.saveEdit()} className="btn btn-xs btn-success">
+        <a onClick={() => this.saveEdit()} className="btn btn-xs btn-primary">
           <i className="fa fa-check"></i>
         </a>
-        <a onClick={() => this.quitEditable()} className="btn btn-xs btn-danger">
+        <a onClick={() => this.quitEditable()} className="btn btn-xs btn-grey-bg">
           <i className="fa fa-times"></i>
         </a>
       </span>);

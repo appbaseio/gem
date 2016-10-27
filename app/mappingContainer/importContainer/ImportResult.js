@@ -108,6 +108,7 @@ export class ImportResult extends Component {
           item.additionalOptions = value;
         }
       }
+      console.log(item);
       return item;
     });
   }
@@ -144,9 +145,9 @@ export class ImportResult extends Component {
         obj.fields = selfItem.fields;
       }
       if(selfItem.additionalOptions) {
-        selfItem.additionalOptions.forEach((option) => {
-          obj[option.key] = option.value;
-        });
+        for(let opt in selfItem.additionalOptions[0]) {
+          obj[opt] = selfItem.additionalOptions[0][opt];
+        }
       }
     }
     return obj;
@@ -158,17 +159,17 @@ export class ImportResult extends Component {
         properties: finalMapping
       };
       console.log(JSON.stringify(request, null, 4));
-      dataOperation.updateMapping(request, this.props.selectedType).done((res) => {
-        this.props.getMapping();
-        this.props.close();
-      }).fail((res) => {
-        let error = this.state.error;
-        error.title = 'Error';
-        error.message = res.responseText;
-        this.setState({
-          error: error
-        });
-      });
+      // dataOperation.updateMapping(request, this.props.selectedType).done((res) => {
+      //   this.props.getMapping();
+      //   this.props.close();
+      // }).fail((res) => {
+      //   let error = this.state.error;
+      //   error.title = 'Error';
+      //   error.message = res.responseText;
+      //   this.setState({
+      //     error: error
+      //   });
+      // });
     } else {
       let error = this.state.error;
       error.title = 'Type is not selected';

@@ -6,6 +6,7 @@ import { Fields } from './Fields';
 import { AddField } from './AddField';
 import { ErrorModal } from '../others/ErrorModal';
 import { ImportModal } from './importContainer';
+import { ImportSettings } from './importSettings/';
 
 export class MappingContainer extends Component {
   constructor(props) {
@@ -110,7 +111,7 @@ export class MappingContainer extends Component {
     return markup;
   }
   render() {
-    let view, importModal;
+    let view, importModal, importSettings;
     if(this.props.mappings) {
       view = this.viewFor('default');
       importModal = (
@@ -121,11 +122,22 @@ export class MappingContainer extends Component {
         getMapping={this.props.getMapping}
         ></ImportModal>
       );
+      importSettings = (
+        <ImportSettings 
+        key={2}
+        selectedType={this.state.selectedType}
+        mappings={this.props.mappings} 
+        getMapping={this.props.getMapping}
+        ></ImportSettings>
+      );
     }
     return (
       <div className={"mappingContainer " + this.state.view+"View"}>
       {view}
-      {importModal}
+      <span className="importBtn">
+        {importModal}
+        {importSettings}
+      </span>
       <ErrorModal {...this.state.error} closeError={this.closeError} />
     </div>
     );

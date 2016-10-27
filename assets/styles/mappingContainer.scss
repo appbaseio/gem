@@ -85,7 +85,7 @@
 	padding: 15px;
 	position: relative;
 	overflow: auto;
-	max-height: 100%;
+	height: 100%;
 	.singleProperty {
 		margin-bottom: 15px;
 		border: 1px solid darken($bg, 5%);
@@ -118,8 +118,11 @@
 				}
 			}
 			.fieldName,
-			.fieldIndex {
+			.fieldAnalyzer {
 				padding: 0;
+			}
+			.fieldIndex {
+				padding-left: 0;
 			}
 			.datatype {
 				color: $grey-font;
@@ -164,8 +167,11 @@
 			.internalField {
 				padding: 0 70px 10px 55px;
 				.fieldName,
-				.fieldIndex {
+				.fieldAnalyzer {
 					padding: 0;
+				}
+				.fieldIndex {
+					padding-left: 0;
 				}
 				.datatype .editableContainer.off .frontEditable {
 					color: $grey-font;

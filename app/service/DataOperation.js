@@ -9,6 +9,7 @@ class DataOperation {
       selectedType: []
     };
     this.mappingData = null;
+    this.settings = null;
     this.defaultApp1 = {
       appname: '2016primaries',
       url: 'https://Uy82NeW8e:c7d02cce-94cc-4b60-9b17-7e7325195851@scalr.api.appbase.io',
@@ -84,6 +85,10 @@ class DataOperation {
     this.mappingData = mappingData;
     this.updateInputState(this.inputState)
   }
+  // update settings state
+  updateSettingState(settingsData) {
+    this.settings = settingsData;
+  }
   // get mapping
   getMapping() {
     let requestConfig = this.requestConfig = this.filterurl(this.inputState.url); 
@@ -112,6 +117,58 @@ class DataOperation {
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
       data: JSON.stringify(request),
+      xhrFields: {
+        withCredentials: true
+      }
+    });
+  }
+  // get settings
+  getSettings() {
+    let requestConfig  = this.filterurl(this.inputState.url);
+    let url = requestConfig.url + '/' + this.inputState.appname+ '/_settings';
+    return $.ajax({
+      type: 'GET',
+      beforeSend: function(request) {
+        request.setRequestHeader('Authorization', 'Basic ' + btoa(requestConfig.username + ':' + requestConfig.password));
+      },
+      url: url,
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      xhrFields: {
+        withCredentials: true
+      }
+    });
+  }
+  // update settings
+  updateSettings(request) {
+    let requestConfig  = this.filterurl(this.inputState.url);
+    let url = requestConfig.url + '/' + this.inputState.appname+ '/_settings';
+    return $.ajax({
+      type: 'PUT',
+      beforeSend: function(request) {
+        request.setRequestHeader('Authorization', 'Basic ' + btoa(requestConfig.username + ':' + requestConfig.password));
+      },
+      url: url,
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      data: JSON.stringify(request),
+      xhrFields: {
+        withCredentials: true
+      }
+    });
+  }
+  // oc index
+  ocIndex(type) {
+    let requestConfig  = this.filterurl(this.inputState.url);
+    let url = requestConfig.url + '/' + this.inputState.appname+ '/'+type;
+    return $.ajax({
+      type: 'POST',
+      beforeSend: function(request) {
+        request.setRequestHeader('Authorization', 'Basic ' + btoa(requestConfig.username + ':' + requestConfig.password));
+      },
+      url: url,
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
       xhrFields: {
         withCredentials: true
       }

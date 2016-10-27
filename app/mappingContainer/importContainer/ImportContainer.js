@@ -10,9 +10,21 @@ export class ImportContainer extends Component {
     super(props);
     this.state = {
       finalMapping: {},
-      selectedType: null
+      selectedType: null,
+      successMessage: null
     };
     this.detectMapping = this.detectMapping.bind(this);
+    this.updateSuccess = this.updateSuccess.bind(this);
+  }
+  updateSuccess() {
+    this.setState({
+      successMessage: 'Mapping is updated successfully!'
+    }, function() {
+      setTimeout(() => {
+        this.props.getMapping();
+        this.props.close();
+      }, 1000*3);
+    }.bind(this));
   }
   detectMapping(jsonInput, selectedType, importType='data') {
     let finalMapping;
@@ -90,12 +102,15 @@ export class ImportContainer extends Component {
     return (<div className="row" id="ImportContainer">
       <JsonImport 
         mappings={this.props.mappings} 
-        detectMapping={this.detectMapping} />
+        detectMapping={this.detectMapping}
+        updateSuccess={this.updateSuccess}
+        successMessage={this.state.successMessage} />
       <ImportResult 
         selectedType={this.state.selectedType} 
         mappings={this.state.finalMapping} 
         existingMapping={this.props.mappings}
         getMapping={this.props.getMapping}
+        updateSuccess={this.updateSuccess}
         close={this.props.close}
         />
     </div>);

@@ -48,17 +48,25 @@ class Main extends Component {
       connecting: true
     });
     dataOperation.updateMappingState(null);
-    dataOperation.getMapping().done((mapping) => {
-      this.setMappingData(mapping);
-      this.setState({
-        connecting: false
-      });
-      dataOperation.updateMappingState(mapping);
+    dataOperation.getSettings().done((settings) => {
+      dataOperation.updateSettingState(settings);  
+      getMapping.call(this);
     }).fail((res) => {
-      this.setState({
-        connecting: false
-      });
+      getMapping.call(this);
     });
+    function getMapping() {
+      dataOperation.getMapping().done((mapping) => {
+        this.setMappingData(mapping);
+        this.setState({
+          connecting: false
+        });
+        dataOperation.updateMappingState(mapping);
+      }).fail((res) => {
+        this.setState({
+          connecting: false
+        });
+      });
+    }
   }
   setMappingData(mappingData) {
     if(mappingData && dataOperation.inputState.appname) {

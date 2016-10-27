@@ -16,6 +16,7 @@ export class Field extends Component {
       options: [],
       modifiedField: [],
       fieldRecord: {},
+      defaultEdit: false,
       error: {
         title: null,
         message: null
@@ -24,7 +25,8 @@ export class Field extends Component {
     this.defaultRow = {
       name: '',
       type: '',
-      index: ''
+      index: '',
+      analyzer: ''
     };
     this.defaultOption = {
       key: '',
@@ -46,7 +48,7 @@ export class Field extends Component {
   }
   setModifiedField(oldfieldName, newfield) {
     let modifiedField = this.state.modifiedField;
-    let fieldRecord = this.state.fieldRecord;
+    let fieldRecord = JSON.parse(JSON.stringify(this.state.fieldRecord));
     let fields = fieldRecord.fields;
     let rows = this.state.rows;
     rows = rows.filter((row) => {
@@ -58,23 +60,29 @@ export class Field extends Component {
       fields = {};
     }
     fields[newfield.fieldName] = {
-      type: newfield.type,
-      index: newfield.index,
+      type: newfield.type
     };
+    if(newfield.index) {
+      fields[newfield.fieldName].index = newfield.index;
+    }
+    if(newfield.analyzer) {
+      fields[newfield.fieldName].analyzer = newfield.analyzer;
+    }
     fieldRecord.fields = fields;
     modifiedField.push(newfield);
-    this.setState({
-      modifiedField: modifiedField,
-      fieldRecord: fieldRecord,
-      rows: rows
-    }, this.submit.call(this));
+    this.fieldRecord = fieldRecord;
+    this.modifiedField = modifiedField;
+    this.rows = rows;
+    this.fieldRecord = fieldRecord;
+    this.submit.call(this, fieldRecord);
   }
   addField(field, type) {
     let rows = this.state.rows;
     let defaultRow = JSON.parse(JSON.stringify(this.defaultRow));
     rows.push(defaultRow); 
     this.setState({
-      rows: rows
+      rows: rows,
+      defaultEdit: true
     });
   }
   addOptions() {
@@ -113,10 +121,11 @@ export class Field extends Component {
       return (<SingleField 
         fieldInfo={{
           type: field.type,
-          index: field.index
+          index: field.index,
+          analyzer: field.analyzer
         }} 
         fieldName={field.name} 
-        defaultEdit={true}
+        defaultEdit={this.state.defaultEdit}
         field={field}
         singleType={this.props.singleType}
         setModifiedField = {this.setModifiedField}
@@ -133,14 +142,16 @@ export class Field extends Component {
       rows: []
     });
   }
-  submit() {
+  submit(fieldRecord=this.state.fieldRecord) {
     let request = {
       properties: {
-        [this.props.field]: this.state.fieldRecord
+        [this.props.field]: fieldRecord
       }
     };
     if(!this.props.editable) {
+      console.log(request);
       dataOperation.updateMapping(request, this.props.singleType).done((res) => {
+        this.updateAfterSubmit();
       }).fail((res) => {
         let error = this.state.error;
         error.title = 'Error';
@@ -150,10 +161,20 @@ export class Field extends Component {
         });
       });
     } else {
-      if(this.props.subfieldUpdate) {
+      this.updateAfterSubmit();
+    }
+  }
+  updateAfterSubmit() {
+    this.setState({
+      modifiedField: this.modifiedField,
+      fieldRecord: this.fieldRecord,
+      rows: this.rows,
+      defaultEdit: false
+    }, function() {
+      if(this.props.editable && this.props.subfieldUpdate) {
         this.props.subfieldUpdate(this.state.fieldRecord.fields, this.props.id);
       }
-    }
+    }.bind(this));
   }
   closeError() {
     let error = this.state.error;
@@ -190,7 +211,7 @@ export class Field extends Component {
         fieldRecord: fieldRecord
       });
     }
-    if(this.props.handleUpdate) {
+    if(this.props.handleUpdate && value && value != '') {
       this.props.handleUpdate(key, value, this.props.id);
     }
   }
@@ -281,11 +302,34 @@ export class Field extends Component {
     }
     return operationalBtn;
   }
+  editableAnalyzer() {
+    let fieldRecord = this.state.fieldRecord;
+    let analyzer, analyzerRow, registeredAnalyzers = null;
+    if(dataOperation.settings && fieldRecord.type) {
+      try {
+        registeredAnalyzers = dataOperation.settings[dataOperation.inputState.appname].settings.index.analysis.analyzer;
+      } catch(e) {}
+      registeredAnalyzers = registeredAnalyzers ? Object.keys(registeredAnalyzers) : [];
+      if(registeredAnalyzers.length) {
+        analyzerRow = (
+          <span className="fieldAnalyzer col-xs-12 col-sm-6 col-md-3">
+            <Editable 
+              editKey='analyzer'
+              editCb={this.editCb}
+              editValue={fieldRecord.analyzer} 
+              defaultEdit={true}
+              registeredAnalyzers={registeredAnalyzers}
+              placeholder="analyzer"/>
+          </span>
+        );
+      } 
+    }
+    return analyzerRow;
+  }
   setFieldRow() {
     let fieldRecord = this.state.fieldRecord;
     let fieldName = this.props.field;
     let singleType = this.props.parent === 0 ? (<span className="typeName">{this.props.singleType+' / '} </span>): '';
-    
     let finalField = (
       <div className="field-row">
         <h3 className='title row'>       
@@ -300,9 +344,9 @@ export class Field extends Component {
       </div>
     );
     if(this.props.editable) {
-      let editableType, editableIndex;
+      let editableType, editableIndex, editableAnalyzer;
       if(fieldRecord.type) {
-        editableType = (<span className="col-xs-12 col-sm-4 fieldDataType">
+        editableType = (<span className="col-xs-12 col-sm-6 col-md-3 fieldDataType">
           <Editable
             editKey='type'
             editCb={this.editCb}
@@ -310,7 +354,7 @@ export class Field extends Component {
             defaultEdit={true} />
         </span>);
         if(fieldRecord.type === 'string') {
-        editableIndex =(<span className="fieldIndex col-xs-12 col-sm-4">
+        editableIndex =(<span className="fieldIndex col-xs-12  col-sm-6 col-md-3">
             <Editable 
               editKey='index'
               editCb={this.editCb}
@@ -322,7 +366,7 @@ export class Field extends Component {
       finalField = (
         <div className="field-row">
           <h3 className='title row'>
-            <span className="fieldName col-xs-12 col-sm-4">
+            <span className="fieldName col-xs-12 col-sm-6 col-md-3">
               <Editable 
                 editKey='fieldName'
                 editCb={this.editCb}
@@ -332,6 +376,7 @@ export class Field extends Component {
             </span>
             {editableType}
             {editableIndex}
+            {this.editableAnalyzer()}
             {this.operationalBtn()}
           </h3>
           <div>

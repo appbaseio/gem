@@ -50,6 +50,7 @@ export class JsonImport extends Component {
     this.closeError = this.closeError.bind(this);
     this.submit = this.submit.bind(this);
     this.importTypeChange = this.importTypeChange.bind(this);
+    this.applySettings = this.applySettings.bind(this);
   }
   componentWillMount() {
     this.submit.call(this);
@@ -60,16 +61,17 @@ export class JsonImport extends Component {
   	}, this.submit.bind(this));
   }
   submit() {
-    if(this.state.selectedType) {
-      let isJson = this.isJson(this.state.code);
-      if(isJson.validFlag) {
-        let parsedJson = isJson.jsonInput;
-        this.props.detectMapping(parsedJson, this.state.selectedType, this.state.importType);
-      }
-      this.setState({
-        validFlag: isJson.validFlag
-      });
+    let isJson = this.isJson(this.state.code);
+    if(isJson.validFlag) {
+      let parsedJson = isJson.jsonInput;
+      this.props.handleUpdate(parsedJson, this.state.selectedType, this.state.importType);
     }
+    this.setState({
+      validFlag: isJson.validFlag
+    });
+  }
+  applySettings() {
+    this.props.handleSubmit();
   }
   closeError() {
     let error = this.state.error;
@@ -90,6 +92,7 @@ export class JsonImport extends Component {
     } else {
       validFlag = false;
     }
+    console.log(jsonInput, validFlag);
     return {
       validFlag: validFlag,
       jsonInput: jsonInput
@@ -104,7 +107,7 @@ export class JsonImport extends Component {
     }
   }
   getValidMessage() {
-    return this.props.successMessage ? this.props.successMessage : (this.state.selectedType ? (this.state.validFlag ? 'JSON is valid  ☺.' : 'JSON is invalid  ☹.') : 'Type is not selected');
+    return  this.props.successMessage ? this.props.successMessage : (this.state.validFlag ? 'JSON is valid  ☺.' : 'JSON is invalid  ☹.');
   }
   importTypeChange(type) {
     this.setState({
@@ -137,29 +140,15 @@ export class JsonImport extends Component {
     this.types = Object.keys(this.props.mappings);
     this.types.unshift('');
     return (
-    	<div className="JsonImport col-xs-12 col-sm-6">
-        <div className={"json-header "+(this.state.validFlag ? 'success' : 'error')}>
-          <h3 className="title">
-            <span className="pull-left col-xs-12 col-sm-6 importType">
-              {this.radioOptions()}
-            </span>
-            <span className="pull-right extra-options col-xs-12 col-sm-6">
-              <Select2
-                multiple={false}
-                data={ this.types }
-                value={this.state.selectedType}
-                options={{
-                  placeholder: 'Choose or create a Type',
-                  tags: {true}
-                }}
-                onChange={this.onTypeSelection}
-              />
-            </span>
-          </h3>
-        </div>
+    	<div className="JsonImport col-xs-12">
         <span className={"json-valid-message import-bottom "+(this.state.validFlag ? 'text-success' : 'text-danger')}>
           {this.getValidMessage()}
         </span>
+        <button
+          onClick={() => this.applySettings()}
+          className="btn btn-yellow import-bottom btn-submit">
+          Apply settings
+        </button>
     		<Codemirror ref="editor" value={this.state.code} onChange={this.updateCode}
         placeholder='Add json here' options={this.codemirrorOptions} />
     		<ErrorModal {...this.state.error} closeError={this.closeError} />

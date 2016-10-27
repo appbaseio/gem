@@ -30,7 +30,7 @@ export class ImportModal extends Component {
         <a title="Add new import" className="btn btn-yellow importBtn" href="javascript:void;" onClick={() => this.open()}>
           Import new data
         </a>
-        <Modal className="modal-yellow" id="importModal" 
+        <Modal backdrop="static" className="modal-yellow" id="importModal" 
           enforceFocus={false}
           show={this.state.showModal} 
           onHide={() => this.close()}>

@@ -71,7 +71,7 @@ export class SingleField extends Component {
     let operationalBtn = this.operationalBtn();
     if(this.modified.type === 'string') {
       indexRow = (
-        <span className="fieldIndex col-xs-12 col-sm-6 col-md-3">
+        <span className="fieldIndex col-xs-12 col-sm-4">
           <Editable 
             editKey='index'
             editCb={this.editCb}
@@ -88,7 +88,7 @@ export class SingleField extends Component {
       registeredAnalyzers = registeredAnalyzers ? Object.keys(registeredAnalyzers) : [];
       if(registeredAnalyzers.length) {
         analyzerRow = (
-          <span className="fieldAnalyzer col-xs-12 col-sm-6 col-md-3">
+          <span className="fieldAnalyzer col-xs-12 col-sm-4">
             <Editable 
               editKey='analyzer'
               editCb={this.editCb}
@@ -102,7 +102,7 @@ export class SingleField extends Component {
     }   
     return (
       <div className="internalField col-xs-12">
-        <span className="fieldName col-xs-12 col-sm-6 col-md-3">
+        <span className="fieldName col-xs-12 col-sm-4">
           <Editable 
             editKey='fieldName'
             editCb={this.editCb}
@@ -110,7 +110,7 @@ export class SingleField extends Component {
             defaultEdit={this.props.defaultEdit} 
             placeholder="fieldname"/>
         </span>
-        <span className="datatype col-xs-12 col-sm-6 col-md-3">
+        <span className="datatype col-xs-12 col-sm-4">
           <Editable
             editKey='type'
             editCb={this.editCb}

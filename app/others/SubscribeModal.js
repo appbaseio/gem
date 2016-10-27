@@ -1,4 +1,5 @@
 import { default as React, Component } from 'react';
+import { storageService } from '../service/StorageService';
 import { render } from 'react-dom';
 import { Modal } from 'react-bootstrap';
 import { authOperation, authEmitter } from '../service/authOperation';
@@ -21,6 +22,7 @@ export class SubscribeModal extends Component {
         text: 'Limited major updates'
       }
     }
+    this.timer = 1;
     this.init();
   }
   init() {
@@ -29,14 +31,18 @@ export class SubscribeModal extends Component {
         profile: data
       });
     });
+    if(storageService.get('popuptimer')) {
+      this.timer = parseInt(storageService.get('popuptimer'));
+    }
     setTimeout(() => {
       if(!this.state.profile) {
         this.open();
       }
-    }, 1000*60*1);
+    }, 1000*60*this.timer);
   }
   close() {
     this.internalClose = true;
+    storageService.set('popuptimer', this.timer+5);
     this.setState({ showModal: false });
   }
   open() {

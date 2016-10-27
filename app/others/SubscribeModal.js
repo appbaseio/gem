@@ -14,11 +14,11 @@ export class SubscribeModal extends Component {
     this.options = {
       option1: {
         value: 'major',
-        text: 'Only for major release'
+        text: 'New GEM releases'
       },
       option2: {
         value: 'all',
-        text: 'For all releases'
+        text: 'Limited major updates'
       }
     }
     this.init();
@@ -62,45 +62,42 @@ export class SubscribeModal extends Component {
   render() {
     return (
       <div>
-        <a title="subscribe to appbase" className="subscribe" href="javascript:void;" onClick={() => this.open()}>
+        <a title="Subscribe to updates" className="subscribe" href="javascript:void;" onClick={() => this.open()}>
           {this.showIcon()}
         </a>
         <Modal className="modal-info" show={this.state.showModal} onHide={() => this.close()}>
           <Modal.Header closeButton>
-            <Modal.Title>Subscribe</Modal.Title>
+            <Modal.Title>Be in the know about major updates!</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
               <div className="col-xs-12">
-                <p>Subscribe to appbase</p>
                 <div className="row">
                   <div className="col-xs-12 single-option">
                     <label className="radio-inline">
                       <input type="radio"
-                        checked={this.state.subscribeOption === this.options.option1.value} 
-                        onChange={() => this.subscribeOptionChange(this.options.option1.value)} 
+                        checked={this.state.subscribeOption === this.options.option1.value}
+                        onChange={() => this.subscribeOptionChange(this.options.option1.value)}
                         name="subscribeOption" id="subscribeOption" value={this.options.option1.value} /> {this.options.option1.text}
                     </label>
                   </div>
                   <div className="col-xs-12 single-option">
                     <label className="radio-inline">
-                      <input type="radio" 
-                        checked={this.state.subscribeOption === this.options.option2.value} 
-                        onChange={() => this.subscribeOptionChange(this.options.option2.value)} 
+                      <input type="radio"
+                        checked={this.state.subscribeOption === this.options.option2.value}
+                        onChange={() => this.subscribeOptionChange(this.options.option2.value)}
                         name="subscribeOption1" id="subscribeOption1" value={this.options.option2.value} /> {this.options.option2.text}
                     </label>
                   </div>
                 </div>
               </div>
             </div>
-          </Modal.Body>
-          <Modal.Footer>
-            <div className="col-xs-12 text-center">
+						<div className="col-xs-12 text-center">
               <button className="btn btn-primary" onClick={() => this.subscribe()}>
-                Subscribe
+                <i className="fa fa-github"></i> Subscribe with Github
               </button>
             </div>
-          </Modal.Footer>
+          </Modal.Body>
         </Modal>
       </div>
     )

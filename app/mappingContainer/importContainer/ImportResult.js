@@ -18,7 +18,7 @@ export class ImportResult extends Component {
     this.closeError = this.closeError.bind(this);
   }
   componentWillMount() {
-    
+
   }
   arrangeFields() {
     this.fieldList = [];
@@ -31,7 +31,7 @@ export class ImportResult extends Component {
             index++;
             let mappingObj = fields[field];
             let obj = this.isNested(index, 0, mappingObj, field, singleType);
-            this.fieldList.push(obj); 
+            this.fieldList.push(obj);
           }
         }
       }
@@ -46,7 +46,7 @@ export class ImportResult extends Component {
       singleType: singleType,
       mappingObj: mappingObj,
       isExists: isExists.call(this, parent, field)
-    };    
+    };
     if(mappingObj.hasOwnProperty('properties')) {
       obj.resolved = false;
     } else {
@@ -69,19 +69,19 @@ export class ImportResult extends Component {
           index++;
           let mappingObj = item.mappingObj.properties[field];
           let obj = this.isNested(index, item.id, mappingObj, field, item.singleType);
-          this.fieldList.push(obj); 
+          this.fieldList.push(obj);
         }
       });
       return this.resolveList();
     } else {
       let fieldList = this.fieldList.filter((item, index) => item.parent === 0);
       let newList = fieldList.map((item, index) => {
-        return (<Field 
+        return (<Field
           mappings = {this.props.mappings}
           fieldRecord = {item.mappingObj}
           field = {item.field}
           singleType = {item.singleType}
-          className="singleProperty col-xs-12" 
+          className="singleProperty col-xs-12"
           fieldList = {this.fieldList}
           id = {item.id}
           parent = {item.parent}
@@ -128,7 +128,7 @@ export class ImportResult extends Component {
     if(isChildExists.length) {
       obj.properties = {};
       this.fieldList.forEach((cItem, index1) => {
-        if(cItem.parent === id && !cItem.resolved1) { 
+        if(cItem.parent === id && !cItem.resolved1) {
           obj.properties[cItem.field] = this.generateObj(cItem.id, cItem, index1);
         }
       });
@@ -153,7 +153,7 @@ export class ImportResult extends Component {
   }
   submit() {
     let finalMapping = this.reverseMapping();
-    if(this.props.selectedType && finalMapping) { 
+    if(this.props.selectedType && finalMapping) {
       let request = {
         properties: finalMapping
       };
@@ -201,14 +201,14 @@ export class ImportResult extends Component {
         <div className="json-header">
           <h3 className="title">
             <span className="pull-left">
-              Result 
+              Auto Mapping Inference
             </span>
           </h3>
         </div>
         <div className="FieldContainer">
           {fieldList}
         </div>
-        <button 
+        <button
           onClick={() => this.submit()}
           className="btn btn-yellow import-bottom">
           Apply mapping

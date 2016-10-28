@@ -3,6 +3,8 @@ import { render } from 'react-dom';
 import Select2 from 'react-select2-wrapper';
 import { dataOperation } from '../../service/DataOperation';
 import { ErrorModal } from '../../others/ErrorModal';
+import { MappingLink } from '../../appLogin/MappingLink';
+
 var Codemirror = require('react-codemirror');
 require('codemirror/mode/javascript/javascript');
 require('codemirror/addon/search/searchcursor.js');
@@ -32,7 +34,11 @@ export class JsonImport extends Component {
         message: null
       },
       validFlag: false,
-      "importType": "data"
+      importType: "data",
+      mappingObj: {
+        type: 'data',
+        input: {}
+      }
   	};
     this.codemirrorOptions = {
       lineNumbers: false,
@@ -52,23 +58,36 @@ export class JsonImport extends Component {
     this.importTypeChange = this.importTypeChange.bind(this);
   }
   componentWillMount() {
-    this.submit.call(this);
+    if(this.props.input_mapping && this.props.input_mapping.type && this.props.input_mapping.input) {
+      this.setState({
+        mappingObj: this.props.input_mapping,
+        importType: this.props.input_mapping.type,
+        code: JSON.stringify(this.props.input_mapping.input, null, 4)
+      }, this.submit.bind(this));
+    } else {
+      this.submit.call(this);
+    }
   }
   updateCode(newCode) {
-  	this.setState({
+    this.setState({
   	    code: newCode
   	}, this.submit.bind(this));
   }
   submit() {
     if(this.state.selectedType) {
       let isJson = this.isJson(this.state.code);
+      let updateObj = {
+        validFlag: isJson.validFlag
+      };
       if(isJson.validFlag) {
         let parsedJson = isJson.jsonInput;
         this.props.detectMapping(parsedJson, this.state.selectedType, this.state.importType);
+        updateObj.mappingObj = {
+          type: this.state.importType,
+          input: parsedJson
+        };
       }
-      this.setState({
-        validFlag: isJson.validFlag
-      });
+      this.setState(updateObj);
     }
   }
   closeError() {
@@ -104,7 +123,7 @@ export class JsonImport extends Component {
     }
   }
   getValidMessage() {
-    return this.props.successMessage ? this.props.successMessage : (this.state.selectedType ? (this.state.validFlag ? 'JSON is valid  ☺.' : 'JSON is invalid  ☹.') : 'Type is not selected');
+    return this.props.mappings ? (this.props.successMessage ? this.props.successMessage : (this.state.selectedType ? (this.state.validFlag ? 'JSON is valid  ☺.' : 'JSON is invalid  ☹.') : 'Type is not selected')) : 'Appname and url is not preset.';
   }
   importTypeChange(type) {
     this.setState({
@@ -134,12 +153,16 @@ export class JsonImport extends Component {
     );
   }
   render() {
-    this.types = Object.keys(this.props.mappings);
-    this.types.unshift('');
+    this.types = [];
+    if(this.props.mappings) {
+      this.types = Object.keys(this.props.mappings);
+      this.types.unshift('');
+    }
     return (
     	<div className="JsonImport col-xs-12 col-sm-6">
         <div className={"json-header "+(this.state.validFlag ? 'success' : 'error')}>
           <h3 className="title">
+            <MappingLink mappingObj={this.state.mappingObj} />
             <span className="pull-left col-xs-12 col-sm-6 importType">
               {this.radioOptions()}
             </span>

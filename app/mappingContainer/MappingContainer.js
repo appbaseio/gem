@@ -20,13 +20,22 @@ export class MappingContainer extends Component {
       view: 'default',
       key: 1
     };
+    this.input_mapping = null;
     this.typeSelection = this.typeSelection.bind(this);
     this.submitField = this.submitField.bind(this);
     this.closeError = this.closeError.bind(this);
     this.changeView = this.changeView.bind(this);
   }
   componentWillMount() {
-
+    let queryParams = dataOperation.queryParams;
+    if(queryParams && queryParams.input_mapping) {
+      try {
+        this.input_mapping = JSON.parse(atob(queryParams.input_mapping));
+        this.setState({
+          view: 'mapping'
+        });
+      } catch(e) {}
+    }
   }
   typeSelection(selectedType) {
     let inputState = dataOperation.inputState;
@@ -110,6 +119,7 @@ export class MappingContainer extends Component {
                 mappings={this.props.mappings} 
                 getMapping={this.props.getMapping}
                 changeView = {this.changeView}
+                input_mapping = {this.input_mapping}
                 >
               </ImportModal>
             </div>

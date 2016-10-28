@@ -21,6 +21,13 @@
 		#importModal {
 			height: 100%;
 		}
+		.title {
+			padding-left: 50px;
+			.share-btn {
+				position: absolute;
+				left: 15px;
+			}
+		}
 	}
 	.btn-operational {
 		left: inherit;

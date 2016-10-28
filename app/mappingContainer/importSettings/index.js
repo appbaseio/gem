@@ -45,7 +45,7 @@ export class ImportSettings extends Component {
                 mappings={this.props.mappings}
                 getMapping={this.props.getMapping}
                 close={this.close}
-                ></ImportContainer>
+              />
           </Modal.Body>
           <Modal.Footer>
           </Modal.Footer>

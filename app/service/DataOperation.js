@@ -22,6 +22,7 @@ class DataOperation {
   }
   // Get input stats from url
   getInputState() {
+    this.queryParams = this.getQueryParameters();
     return new Promise((resolve, reject) => {
       let config = null;
       let isDefault = window.location.href.indexOf('#?default=true') > -1 ? true : false;
@@ -33,7 +34,7 @@ class DataOperation {
         reject('learn');
       }
       else {
-        urlShare.decryptUrl().then((data) => {
+        urlShare.decryptUrl(this.queryParams).then((data) => {
           var decryptedData = data.data;
           if(decryptedData) {
             this.updateInputState(decryptedData);
@@ -44,6 +45,14 @@ class DataOperation {
         }).catch((error) => console.log(error));
       }
     });
+  }
+  getQueryParameters(str) {
+    let hash = window.location.hash.split('#');
+    if(hash.length > 1) {
+      return (str || hash[1]).replace(/(^\?)/,'').split("&").map(function(n){return n = n.split("="),this[n[0]] = n[1],this}.bind({}))[0];
+    } else {
+      return null;
+    }
   }
   //Get config from localstorage 
   getLocalConfig() {

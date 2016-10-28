@@ -20,6 +20,7 @@ export class ImportModal extends Component {
           mappings={this.props.mappings}
           getMapping={this.props.getMapping}
           changeView={this.props.changeView}
+          input_mapping={this.props.input_mapping}
           >
         </ImportContainer>
       </div>

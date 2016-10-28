@@ -135,8 +135,19 @@ export class MappingContainer extends Component {
       <div className={"mappingContainer " + this.state.view+"View"}>
       {view}
       <span className="importBtn">
-        {importModal}
-        {importSettings}
+        <div className="btn-group">
+          <button type="button" className="btn btn-yellow">
+            {importModal}
+          </button>
+          <button type="button" className="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span className="caret"></span>
+          </button>
+          <ul className="dropdown-menu">
+            <li>
+              {importSettings}
+            </li>
+          </ul>
+        </div>
       </span>
       <ErrorModal {...this.state.error} closeError={this.closeError} />
     </div>

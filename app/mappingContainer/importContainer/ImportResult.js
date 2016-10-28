@@ -89,6 +89,7 @@ export class ImportResult extends Component {
           handleUpdate = {this.handleUpdate}
           subfieldUpdate = {this.subfieldUpdate}
           operationalBtn = {true}
+          view = 'mapping'
           key = {index+new Date().getTime()}>
         </Field>);
       });

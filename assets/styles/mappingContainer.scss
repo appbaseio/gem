@@ -17,6 +17,15 @@
 		.mappingWrapper {
 			padding: 0;
 		}
+	}	
+	.btn-operational {
+		position: fixed;
+		left: 30px;
+	    bottom: 65px;
+	    width: 220px;
+	    @media screen and (max-width: 768px) {
+	    	bottom: 45px;
+	    }
 	}
 }
 

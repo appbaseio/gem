@@ -56,7 +56,7 @@ export class SingleField extends Component {
     let operationalBtn;
     if(this.props.defaultEdit) {
       operationalBtn = (<span className="operationalBtns">
-        <a onClick={() => this.saveEdit()} className="btn btn-xs btn-primary">
+        <a onClick={() => this.saveEdit()} className={"btn btn-xs "+(this.props.view === 'mapping' ? 'btn-yellow' : 'btn-primary')}>
           <i className="fa fa-check"></i>
         </a>
         <a onClick={() => this.quitEditable()} className="btn btn-xs btn-grey-bg">

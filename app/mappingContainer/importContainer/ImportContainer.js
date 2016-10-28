@@ -22,7 +22,7 @@ export class ImportContainer extends Component {
     }, function() {
       setTimeout(() => {
         this.props.getMapping();
-        this.props.close();
+        this.props.changeView();
       }, 1000*3);
     }.bind(this));
   }

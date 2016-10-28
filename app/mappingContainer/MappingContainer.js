@@ -23,6 +23,7 @@ export class MappingContainer extends Component {
     this.typeSelection = this.typeSelection.bind(this);
     this.submitField = this.submitField.bind(this);
     this.closeError = this.closeError.bind(this);
+    this.changeView = this.changeView.bind(this);
   }
   componentWillMount() {
 
@@ -70,74 +71,85 @@ export class MappingContainer extends Component {
       error: error
     });
   }
-  changeView(view) {
-    if(view === 'default') {
-      this.props.getMapping();
-    }
+  changeView() {
+    let view = this.state.view === 'default' ? 'mapping' : 'default';
     this.setState({
       view: view
     });
   }
-  selectedView(method) {
-    let types = Object.keys(this.props.mappings);
-    if(this.state.key === 1 && method === 'default') {
-      let typesComponent = (
-        <Types 
-          key = {0}
-          mappings={this.props.mappings}
-          setField={this.props.setField}
-          typeSelection={this.typeSelection}>
-        </Types>    
-      );
-      let fields = (
-        <Fields 
-          key = {1}
-          setField={this.props.setField}
-          mappings={this.props.mappings} 
-          selectedType={this.state.selectedType} ></Fields>
-      );
-      return [typesComponent, fields];
-    }  else {
-      return null;
-    }
-  }
-  viewFor(method) {
+  viewFor() {
     let markup = null;
-    if(this.props.mappings) {
-      markup = (<div className="mappingWrapper">
-          {this.selectedView(method)}
-        </div>);
+    let method = this.state.view;
+    switch(method) {
+      case 'default':
+        if(this.props.mappings) {
+          markup = (
+            <div className="mappingWrapper">
+              <Types 
+                key = {0}
+                mappings={this.props.mappings}
+                setField={this.props.setField}
+                typeSelection={this.typeSelection}>
+              </Types>      
+              <Fields 
+                key = {1}
+                setField={this.props.setField}
+                mappings={this.props.mappings} 
+                selectedType={this.state.selectedType} >
+              </Fields>
+            </div>
+          );
+        }
+      break;
+      case 'mapping':
+          markup = (
+            <div className="mappingWrapper">
+              <ImportModal 
+                key={1}
+                selectedType={this.state.selectedType}
+                mappings={this.props.mappings} 
+                getMapping={this.props.getMapping}
+                changeView = {this.changeView}
+                >
+              </ImportModal>
+            </div>
+          );
+      break;
     }
     return markup;
   }
+  changeViewBtn() {
+    let markup = null;
+    markup = (
+      <button type="button" className={"btn btn-operational "+(this.state.view === 'default' ? 'btn-yellow' : 'btn-primary')} onClick={() => this.changeView()}>
+        Change view
+      </button> 
+    );
+    return markup;
+  }
   render() {
-    let view, importModal, importSettings;
-    if(this.props.mappings) {
-      view = this.viewFor('default');
-      importModal = (
-        <ImportModal 
-        key={1}
-        selectedType={this.state.selectedType}
-        mappings={this.props.mappings} 
-        getMapping={this.props.getMapping}
-        ></ImportModal>
-      );
-      importSettings = (
-        <ImportSettings 
-        key={2}
-        selectedType={this.state.selectedType}
-        mappings={this.props.mappings} 
-        getMapping={this.props.getMapping}
-        ></ImportSettings>
-      );
-    }
+    let view;
     return (
       <div className={"mappingContainer " + this.state.view+"View"}>
-      {view}
-      <span className="importBtn">
-        {importModal}
-        {importSettings}
-      </span>
+      {this.viewFor()}
+      {this.changeViewBtn()}
+      {
+      // <span className="importBtn">
+      //   <div className="btn-group">
+      //     <button type="button" className="btn btn-yellow">
+      //       {importModal}
+      //     </button>
+      //     <button type="button" className="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      //       <span className="caret"></span>
+      //     </button>
+      //     <ul className="dropdown-menu">
+      //       <li>
+      //         {importSettings}
+      //       </li>
+      //     </ul>
+      //   </div>
+      // </span>
+    }
       <ErrorModal {...this.state.error} closeError={this.closeError} />
     </div>
     );

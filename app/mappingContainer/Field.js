@@ -104,6 +104,7 @@ export class Field extends Component {
         singleType={this.props.singleType} 
         setModifiedField = {this.setModifiedField}
         removeField = {this.removeField}
+        view = {this.props.view}
         key={index} ></SingleField>);
       generateFields.push(fieldMarkup);
     }
@@ -130,6 +131,7 @@ export class Field extends Component {
         singleType={this.props.singleType}
         setModifiedField = {this.setModifiedField}
         removeField = {this.removeField}
+        view = {this.props.view}
         key={index} ></SingleField>);
     });
     if(generateFields.length) {
@@ -199,6 +201,7 @@ export class Field extends Component {
         editable = {this.props.editable}
         subfieldUpdate = {this.props.subfieldUpdate}
         operationalBtn = {this.props.operationalBtn}
+        view = {this.props.view}
         key = {index} >
       </Field>);
     })

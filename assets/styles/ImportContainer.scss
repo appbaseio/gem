@@ -13,15 +13,6 @@
 				}
 				#ImportContainer {
 					overflow: inherit;
-					.import-bottom {
-						position: absolute;
-					    bottom: -78px;
-					}
-					.ImportResult {
-						.import-bottom {
-							right: 0;
-						}
-					}
 					.JsonImport {
 						.import-bottom {
 							left: 0;
@@ -43,20 +34,20 @@
 		}
 	}
 }
-.importBtn {
-	position: fixed;
-	left: 30px;
-    bottom: 65px;
-    width: 220px;
-    @media screen and (max-width: 768px) {
-    	bottom: 45px;
-    }
-}
 #ImportContainer {
 	margin: 0;
 	height: 100%;
 	overflow: auto;
 	padding: 15px;
+	.import-bottom {
+		position: absolute;
+	    bottom: -42px;
+	}
+	.ImportResult {
+		.import-bottom {
+			right: 0;
+		}
+	}
 	.JsonImport, .ImportResult {
 		height: 100%;
 		padding-top: 67px;

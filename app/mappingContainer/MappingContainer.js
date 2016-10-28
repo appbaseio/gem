@@ -125,10 +125,29 @@ export class MappingContainer extends Component {
       if(this.state.view !== 'default') {
         changeViewText = (<span><i className="fa fa-table"></i> View Current Mappings</span>);
       }
+      let btnClass = this.state.view === 'default' ? 'btn-yellow' : 'btn-primary';
       markup = (
-        <button type="button" className={"btn btn-operational "+(this.state.view === 'default' ? 'btn-yellow' : 'btn-primary')} onClick={() => this.changeView()}>
-          {changeViewText}
-        </button> 
+        <div className="btn-group btn-operational">
+          <button type="button" className={"btn viewBtn "+btnClass} onClick={() => this.changeView()}>
+            {changeViewText}
+          </button> 
+          <button type="button" className={"btn dropdown-toggle "+btnClass} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span className="caret"></span>
+            <span className="sr-only">Toggle Dropdown</span>
+          </button>
+          <ul className="dropdown-menu pull-right">
+            <li>
+              <ImportSettings 
+                key={2}
+                selectedType={this.state.selectedType}
+                mappings={this.props.mappings} 
+                getMapping={this.props.getMapping}
+                btnClass={btnClass}
+              />
+            </li>
+          </ul>
+        </div>
+        
       );
     }
     return markup;

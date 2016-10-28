@@ -1,7 +1,6 @@
 @import "variables.scss";
 #importModal {
 	.modal-dialog {
-		width: 90%;
 		height: calc(90% - 40px);
 		.modal-content {
 			height: 100%;
@@ -16,11 +15,11 @@
 					.JsonImport {
 						.import-bottom {
 							left: 0;
-							bottom: -66px;
+							bottom: -52px;
 							&.btn-submit {
 								right: 0;
 								left: inherit;
-								bottom: -80px;
+								bottom: -58px;
 							}
 						}
 					}
@@ -31,6 +30,12 @@
 	&.importSettingModal {
 		.JsonImport {
 			padding-top: 0;
+		}
+		.modal-header {
+			padding-top: 15px;
+		}
+		#ImportContainer {
+			padding: 0;
 		}
 	}
 }

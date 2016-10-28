@@ -83,7 +83,7 @@ class UrlShare {
 			} catch (e) {
 				ciphertext = ''
 			}
-			let final_url = 'http://appbaseio.github.io/mirage/#?input_mapping=' + ciphertext;
+			let final_url = 'http://appbaseio.github.io/gem/#?input_mapping=' + ciphertext;
 			resolve(final_url);
 		});	
 	}

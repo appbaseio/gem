@@ -24,7 +24,9 @@
 	    bottom: 65px;
 	    width: 220px;
 	    padding-right: 26px;
-	    z-index: 999999999;
+	    &.open {
+	    	z-index: 999999999;
+	    }
 	    @media screen and (max-width: 768px) {
 	    	bottom: 45px;
 	    }

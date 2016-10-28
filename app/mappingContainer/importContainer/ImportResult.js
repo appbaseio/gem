@@ -206,11 +206,11 @@ export class ImportResult extends Component {
     return (
       <div className="ImportResult col-xs-12 col-sm-6 ">
         <div className="json-header">
-          <h3 className="title">
+          <h4 className="title">
             <span className="pull-left">
               Auto Mapping Inference
             </span>
-          </h3>
+          </h4>
         </div>
         <div className="FieldContainer">
           {fieldList}

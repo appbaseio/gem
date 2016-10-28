@@ -120,11 +120,17 @@ export class MappingContainer extends Component {
   }
   changeViewBtn() {
     let markup = null;
-    markup = (
-      <button type="button" className={"btn btn-operational "+(this.state.view === 'default' ? 'btn-yellow' : 'btn-primary')} onClick={() => this.changeView()}>
-        Change view
-      </button> 
-    );
+    if(this.props.mappings) {
+      let changeViewText = (<span><i className="fa fa-plus"></i> Create New Mappings</span>);
+      if(this.state.view !== 'default') {
+        changeViewText = (<span><i className="fa fa-table"></i> View Current Mappings</span>);
+      }
+      markup = (
+        <button type="button" className={"btn btn-operational "+(this.state.view === 'default' ? 'btn-yellow' : 'btn-primary')} onClick={() => this.changeView()}>
+          {changeViewText}
+        </button> 
+      );
+    }
     return markup;
   }
   render() {

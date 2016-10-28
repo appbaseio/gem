@@ -23,8 +23,20 @@
 		left: 30px;
 	    bottom: 65px;
 	    width: 220px;
+	    padding-right: 26px;
+	    z-index: 999999999;
 	    @media screen and (max-width: 768px) {
 	    	bottom: 45px;
+	    }
+	    ul {
+	    	padding: 0;
+	    }
+	    .viewBtn {
+	    	width: 100%;
+	    }
+	    .dropdown-toggle {
+	    	position: absolute;
+	    	right: 0;
 	    }
 	}
 }

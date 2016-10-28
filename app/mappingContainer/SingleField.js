@@ -108,7 +108,7 @@ export class SingleField extends Component {
             editCb={this.editCb}
             editValue={this.props.fieldName} 
             defaultEdit={this.props.defaultEdit} 
-            placeholder="fieldname"/>
+            placeholder="Enter fieldname"/>
         </span>
         <span className="datatype col-xs-12 col-sm-4">
           <Editable

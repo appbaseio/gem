@@ -104,7 +104,8 @@ export class ImportContainer extends Component {
         mappings={this.props.mappings} 
         detectMapping={this.detectMapping}
         updateSuccess={this.updateSuccess}
-        successMessage={this.state.successMessage} />
+        successMessage={this.state.successMessage} 
+        input_mapping={this.props.input_mapping}/>
       <ImportResult 
         selectedType={this.state.selectedType} 
         mappings={this.state.finalMapping} 

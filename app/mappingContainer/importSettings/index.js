@@ -2,6 +2,7 @@ import { default as React, Component } from 'react';
 import { render } from 'react-dom';
 import { Modal } from 'react-bootstrap';
 import { ImportContainer } from './ImportContainer';
+import { ReadMore } from '../../others/ReadMore';
 
 export class ImportSettings extends Component {
   constructor(props) {
@@ -27,15 +28,15 @@ export class ImportSettings extends Component {
   render() {
     return (
       <div>
-        <a title="Add new import" className="btn btn-yellow col-xs-12 importSettingsBtn" href="javascript:void;" onClick={() => this.open()}>
-          Import settings
+        <a title="Add new import" className={"btn col-xs-12 importSettingsBtn "+this.props.btnClass} href="javascript:void;" onClick={() => this.open()}>
+          Import Analyzer
         </a>
         <Modal backdrop="static" className="modal-yellow importSettingModal" id="importModal" 
           enforceFocus={false}
           show={this.state.showModal}
           onHide={() => this.close()}>
           <Modal.Header closeButton>
-            <Modal.Title>Import sattings</Modal.Title>
+            <Modal.Title>Import Analyzer <ReadMore link="importAnalyzer" /></Modal.Title>
           </Modal.Header>
           <Modal.Body>
              <ImportContainer
@@ -44,7 +45,7 @@ export class ImportSettings extends Component {
                 mappings={this.props.mappings}
                 getMapping={this.props.getMapping}
                 close={this.close}
-                ></ImportContainer>
+              />
           </Modal.Body>
           <Modal.Footer>
           </Modal.Footer>

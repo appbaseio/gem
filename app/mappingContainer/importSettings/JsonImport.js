@@ -45,6 +45,26 @@ export class JsonImport extends Component {
       foldGutter: true,
       gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
     };
+    this.sampleObj = {
+      "analyzer": {
+        "standard_analyzer": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase",
+            "asciifolding"
+          ]
+        },
+        "whitespace_analyzer": {
+          "type": "whitespace",
+          "tokenizer": "whitespace",
+          "filter": [
+            "lowercase",
+            "asciifolding"
+          ]
+        }
+      }
+    };
     this.onTypeSelection = this.onTypeSelection.bind(this);
   	this.updateCode = this.updateCode.bind(this);
     this.closeError = this.closeError.bind(this);
@@ -59,6 +79,9 @@ export class JsonImport extends Component {
   	this.setState({
   	    code: newCode
   	}, this.submit.bind(this));
+  }
+  loadSample() {
+    this.updateCode(JSON.stringify(this.sampleObj, null, 4));
   }
   submit() {
     let isJson = this.isJson(this.state.code);
@@ -114,28 +137,6 @@ export class JsonImport extends Component {
       importType: type
     }, this.submit.bind(this));
   }
-  radioOptions() {
-    return (
-      <div className="row">
-        <div className="col-xs-12 single-option">
-          <label className="radio-inline">
-            <input type="radio"
-              checked={this.state.importType === 'data'}
-              onChange={() => this.importTypeChange('data')}
-              name="importType" id="importType" value="data" /> Data as JSON
-          </label>
-        </div>
-        <div className="col-xs-12 single-option">
-          <label className="radio-inline">
-            <input type="radio"
-              checked={this.state.importType === 'mapping'}
-              onChange={() => this.importTypeChange('mapping')}
-              name="importType1" id="importType1" value="mapping" /> Mappings as JSON
-          </label>
-        </div>
-      </div>
-    );
-  }
   render() {
     this.types = Object.keys(this.props.mappings);
     this.types.unshift('');
@@ -148,6 +149,11 @@ export class JsonImport extends Component {
           onClick={() => this.applySettings()}
           className="btn btn-yellow import-bottom btn-submit">
           Apply settings
+        </button>
+        <button
+          onClick={() => this.loadSample()}
+          className="btn btn-yellow load-sample btn-submit">
+          Load sample
         </button>
     		<Codemirror ref="editor" value={this.state.code} onChange={this.updateCode}
         placeholder='Add json here' options={this.codemirrorOptions} />

@@ -6,6 +6,7 @@ import { dataOperation } from '../service/DataOperation';
 import { SingleField } from './SingleField';
 import { Editable } from './Editable';
 import { ErrorModal } from '../others/ErrorModal';
+import { ReadMore } from '../others/ReadMore';
 import { SingleOption } from './SingleOption';
 
 export class Field extends Component {
@@ -92,7 +93,7 @@ export class Field extends Component {
     this.setState(options); 
   }
   fieldContent(fields) {
-    let title = (<h4 className="sub-title col-xs-12" key="subtitle">Sub Fields</h4>);
+    let title = (<h4 className="sub-title col-xs-12" key="subtitle">Sub Fields <ReadMore link="subfield" /></h4>);
     let generateFields = [];
     let index = 0;
     for(let singleField in fields) {
@@ -114,7 +115,7 @@ export class Field extends Component {
     return generateFields;
   }
   addRows() {
-    let title = (<h4 className="sub-title col-xs-12" key="subtitle">Sub Fields</h4>);
+    let title = (<h4 className="sub-title col-xs-12" key="subtitle">Sub Fields<ReadMore link="subfield" /></h4>);
     let generateFields = [];
     let index = 0;
     let existingRows = this.state.rows;
@@ -234,7 +235,7 @@ export class Field extends Component {
     let additionalOptionsContainer, additionalOptions = [];
     let fieldRecord = this.state.fieldRecord;
     let fieldName = this.props.field;
-    let title = (<h4 className="sub-title col-xs-12" key="subtitle">Additional Options</h4>);
+    let title = (<h4 className="sub-title col-xs-12" key="subtitle">Add extra properties <ReadMore link="extraPoperties" /></h4>);
     if(this.props.editable && this.state.options.length) {
       additionalOptions = this.state.options.map((option, index) => {
         return (<SingleOption defaultEdit={true} optionEdit={this.optionEdit} key={index} index={index} option={option} />)
@@ -274,7 +275,7 @@ export class Field extends Component {
       }
       if(fieldRecord.type && !this.state.rows.length && this.props.editable) {
         addOptions = (<a key="add-options" className="btn btn-xs btn-primary pull-right add-option-btn" onClick={() => this.addOptions()} >
-          Add optional
+          Add extra properties
         </a>);
       }
     }
@@ -286,7 +287,7 @@ export class Field extends Component {
       }
       if(this.props.editable && !this.state.options.length) {
         addOptions = (<MenuItem eventKey="2" onClick={() => this.addOptions()}>
-          Add optional
+          Add extra properties
         </MenuItem>);
       }
       operationalBtn = (

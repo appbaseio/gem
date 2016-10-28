@@ -70,7 +70,7 @@ export class SingleOption extends Component {
             className="col-xs-12"
             name="description"
             value={this.state.value}
-            placeholder="add json here"
+            placeholder="Enter a valid JSON object"
             onChange={this.handleChange}
           />
         </span>

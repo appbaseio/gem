@@ -20,13 +20,22 @@ export class MappingContainer extends Component {
       view: 'default',
       key: 1
     };
+    this.input_mapping = null;
     this.typeSelection = this.typeSelection.bind(this);
     this.submitField = this.submitField.bind(this);
     this.closeError = this.closeError.bind(this);
     this.changeView = this.changeView.bind(this);
   }
   componentWillMount() {
-
+    let queryParams = dataOperation.queryParams;
+    if(queryParams && queryParams.input_mapping) {
+      try {
+        this.input_mapping = JSON.parse(atob(queryParams.input_mapping));
+        this.setState({
+          view: 'mapping'
+        });
+      } catch(e) {}
+    }
   }
   typeSelection(selectedType) {
     let inputState = dataOperation.inputState;
@@ -110,6 +119,7 @@ export class MappingContainer extends Component {
                 mappings={this.props.mappings} 
                 getMapping={this.props.getMapping}
                 changeView = {this.changeView}
+                input_mapping = {this.input_mapping}
                 >
               </ImportModal>
             </div>
@@ -120,11 +130,36 @@ export class MappingContainer extends Component {
   }
   changeViewBtn() {
     let markup = null;
-    markup = (
-      <button type="button" className={"btn btn-operational "+(this.state.view === 'default' ? 'btn-yellow' : 'btn-primary')} onClick={() => this.changeView()}>
-        Change view
-      </button> 
-    );
+    if(this.props.mappings) {
+      let changeViewText = (<span><i className="fa fa-plus"></i> Create New Mappings</span>);
+      if(this.state.view !== 'default') {
+        changeViewText = (<span><i className="fa fa-table"></i> View Current Mappings</span>);
+      }
+      let btnClass = this.state.view === 'default' ? 'btn-yellow' : 'btn-primary';
+      markup = (
+        <div className="btn-group btn-operational">
+          <button type="button" className={"btn viewBtn "+btnClass} onClick={() => this.changeView()}>
+            {changeViewText}
+          </button> 
+          <button type="button" className={"btn dropdown-toggle "+btnClass} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span className="caret"></span>
+            <span className="sr-only">Toggle Dropdown</span>
+          </button>
+          <ul className="dropdown-menu pull-right">
+            <li>
+              <ImportSettings 
+                key={2}
+                selectedType={this.state.selectedType}
+                mappings={this.props.mappings} 
+                getMapping={this.props.getMapping}
+                btnClass={btnClass}
+              />
+            </li>
+          </ul>
+        </div>
+        
+      );
+    }
     return markup;
   }
   render() {
@@ -133,23 +168,6 @@ export class MappingContainer extends Component {
       <div className={"mappingContainer " + this.state.view+"View"}>
       {this.viewFor()}
       {this.changeViewBtn()}
-      {
-      // <span className="importBtn">
-      //   <div className="btn-group">
-      //     <button type="button" className="btn btn-yellow">
-      //       {importModal}
-      //     </button>
-      //     <button type="button" className="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      //       <span className="caret"></span>
-      //     </button>
-      //     <ul className="dropdown-menu">
-      //       <li>
-      //         {importSettings}
-      //       </li>
-      //     </ul>
-      //   </div>
-      // </span>
-    }
       <ErrorModal {...this.state.error} closeError={this.closeError} />
     </div>
     );

@@ -7,6 +7,7 @@
 		    margin: 0;
 		    width: 100%;
 		    padding: 15px;
+		    z-index: 2;
 		}
 		#ImportContainer {
 			margin: 0;
@@ -19,6 +20,13 @@
 		}
 		#importModal {
 			height: 100%;
+		}
+		.title {
+			padding-left: 50px;
+			.share-btn {
+				position: absolute;
+				left: 15px;
+			}
 		}
 	}
 	.btn-operational {

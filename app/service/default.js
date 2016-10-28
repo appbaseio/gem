@@ -1,5 +1,5 @@
 export const defaultTypes = [
-  'string', 
+  'string',
   'long',
   'integer',
   'short',
@@ -23,3 +23,9 @@ export const defaultIndexType = [
   'analyzed',
   'not_analyzed'
 ];
+export const readLinks = {
+  subfield: 'https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html',
+  extraPoperties: 'https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html',
+  importMapping: 'https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html',
+  importAnalyzer: 'https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html'
+};

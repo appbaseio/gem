@@ -27,11 +27,10 @@ class UrlShare {
 			window.location.href = '#?input_state=' + ciphertext;
 		}
 	}
-	decryptUrl(cb) {
+	decryptUrl(queryParams) {
 		return new Promise((resolve, reject) => {
-			var url = window.location.href.split('#?input_state=');
-			if (url.length > 1) {
-				this.decompress(url[1], function(error, data) {
+			if (queryParams && queryParams.input_state) {
+				this.decompress(queryParams.input_state, function(error, data) {
 					resolve({ error: error, data: data });
 				});
 			} else {
@@ -75,6 +74,18 @@ class UrlShare {
 				}
 			}
 		});
+	}
+	mappingUrl(obj) {		
+		return new Promise((resolve, reject) => {
+			let ciphertext;
+			try {
+				ciphertext = btoa(JSON.stringify(obj));
+			} catch (e) {
+				ciphertext = ''
+			}
+			let final_url = 'http://appbaseio.github.io/mirage/#?input_mapping=' + ciphertext;
+			resolve(final_url);
+		});	
 	}
 	compress(jsonInput, cb) {
 		if (!jsonInput) {

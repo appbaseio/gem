@@ -9,7 +9,7 @@ export class ReadMore extends Component {
   render() {
     return (
       <a href={readLinks[this.props.link]} className={"read-more "+this.props.extraClass} target="_blank"> 
-        <i className="fa fa-info"></i> Read more
+      &nbsp; Read more
       </a>
     );
   }

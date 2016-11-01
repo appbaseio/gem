@@ -82,7 +82,13 @@ export class ImportContainer extends Component {
         }
       }
       else if(type === 'string') {
-        
+        let version = dataOperation.inputState.version && dataOperation.inputState.version.charAt(0) === '5' ? '5.x' : '2.x';
+        if(version === '2.x') {
+          type = 'string';
+        }
+        if(version === '5.x') {
+          type = 'text';
+        }
       }
       return type;
     }

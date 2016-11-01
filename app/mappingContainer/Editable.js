@@ -17,7 +17,7 @@ export class Editable extends Component {
       editValue: this.props.editValue
     });
     this.props.editCb(this.props.editKey, this.props.editValue);
-    this.version = dataOperation.inputState.version.charAt(0) === '5' ? '5.x' : '2.x';
+    this.version = dataOperation.inputState.version && dataOperation.inputState.version.charAt(0) === '5' ? '5.x' : '2.x';
     this.types = defaultTypes[this.version];
   }
   inputHandle() {

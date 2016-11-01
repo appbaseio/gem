@@ -8,6 +8,7 @@ module.exports = {
     publicPath: '/dist/js', // instead of publicPath: '/build/' 
     filename: 'app.js'
   },
+  inline: true,
   module: {
     preLoaders: [
         { test: /\.json$/, exclude: /node_modules/, loader: 'json'},

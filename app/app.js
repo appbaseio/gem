@@ -70,8 +70,10 @@ class Main extends Component {
     function getVersion() {
       dataOperation.getVersion().done((data) => {
           let inputState = dataOperation.inputState;
-          inputState.version = data.version.number;
-          dataOperation.updateInputState(inputState);
+          if(data && data.version && data.version.number) {
+            inputState.version = data.version.number;
+            dataOperation.updateInputState(inputState);
+          }
           getMapping.call(this);
         }).fail((res) => {
       });

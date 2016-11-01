@@ -42,7 +42,7 @@ class UrlShare {
 	}
 	convertToUrl() {
 		var ciphertext = this.url;
-		let	final_url = 'appbaseio.github.io/gem/#?input_state=' + ciphertext;
+		let	final_url = 'https://appbaseio.github.io/gem/#?input_state=' + ciphertext;
 		return final_url;
 	}
 	dejavuLink() {
@@ -52,7 +52,7 @@ class UrlShare {
 			selectedType: this.inputs.selectedType
 		};
 		let ciphertext = CryptoJS.AES.encrypt(JSON.stringify(obj), 'dejvu').toString();
-		let final_url = 'http://appbaseio.github.io/dejaVu/live/#?input_state=' + ciphertext;
+		let final_url = 'https://appbaseio.github.io/dejaVu/live/#?input_state=' + ciphertext;
 		return final_url;
 	}
 	mirageLink() {
@@ -71,7 +71,7 @@ class UrlShare {
 					return;
 				}
 				else {
-					let final_url = 'http://appbaseio.github.io/mirage/#?input_state=' + ciphertext;
+					let final_url = 'https://appbaseio.github.io/mirage/#?input_state=' + ciphertext;
 					resolve(final_url);
 				}
 			}
@@ -85,7 +85,7 @@ class UrlShare {
 				if(error) {
 					reject(error);
 				} else {
-					let final_url = 'http://appbaseio.github.io/gem/#?input_state=' + ciphertext;
+					let final_url = 'https://appbaseio.github.io/gem/#?input_state=' + ciphertext;
 					resolve(final_url);
 				}
 			}

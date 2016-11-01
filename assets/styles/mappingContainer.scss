@@ -262,19 +262,3 @@
 		}
 	}
 }
-
-.jsonPopover {
-	max-width: 250px;
-	min-width: 250px;
-	pre {
-		padding: 0;
-		margin: 0;
-    	border: 0;
-	}
-	.popover-content {
-		padding: 0;
-	}
-	.arrow:after {
-		border-left-color: #f0f0f0 !important;
-	}
-}

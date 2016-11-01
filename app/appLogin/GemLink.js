@@ -82,8 +82,23 @@ export class GemLink extends Component {
           { 
             <Popover id="share_pop" className = "nestedJson" >
               <div className="share_content">
-                <input type="text" className="form-control" value={this.state.url} id="for-share" />
-                <p className="mt-10">{this.state.copied}</p> 
+                <section className="share_part">
+                  <h3 className="title">
+                    Link
+                  </h3>
+                  <div className="description">
+                    <input type="text" className="form-control" value={this.state.url} id="for-share" readOnly />
+                    <p className="mt-10">{this.state.copied}</p> 
+                  </div>
+                </section>
+                <section className="share_part">
+                  <h3 className="title">
+                    Embed
+                  </h3>
+                  <div className="description">
+                    <input type="text" readOnly className="form-control" value={`<iframe src="${this.state.url}" width="1024" height="768" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`} id="for-share" />
+                  </div>
+                </section>
               </div>
             </Popover>
           } >

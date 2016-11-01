@@ -235,7 +235,7 @@ export class Field extends Component {
     let additionalOptionsContainer, additionalOptions = [];
     let fieldRecord = this.state.fieldRecord;
     let fieldName = this.props.field;
-    let title = (<h4 className="sub-title col-xs-12" key="subtitle">Add extra properties <ReadMore link="extraPoperties" /></h4>);
+    let title = (<h4 className="sub-title col-xs-12" key="subtitle">Add extra properties <ReadMore link="extraProperties" /></h4>);
     if(this.props.editable && this.state.options.length) {
       additionalOptions = this.state.options.map((option, index) => {
         return (<SingleOption defaultEdit={true} optionEdit={this.optionEdit} key={index} index={index} option={option} />)

@@ -27,15 +27,22 @@ export class MappingContainer extends Component {
     this.changeView = this.changeView.bind(this);
   }
   componentWillMount() {
-    let queryParams = dataOperation.queryParams;
-    if(queryParams && queryParams.input_mapping) {
-      try {
-        this.input_mapping = JSON.parse(atob(queryParams.input_mapping));
-        this.setState({
-          view: 'mapping'
-        });
-      } catch(e) {}
-    }
+    // get mapping object from the input state and delete it from url once applying it.
+    dataOperation.getInputState().then((data) => {
+      if(data && data.mappingObj) {
+        try {
+          this.input_mapping = data.mappingObj;
+          this.setState({
+            view: 'mapping'
+          });
+          let inputObj = dataOperation.inputState;
+          delete inputObj.mappingObj;
+          dataOperation.updateInputState(inputObj);
+        } catch(e) {}
+      }
+    }).catch(() => {
+
+    });
   }
   typeSelection(selectedType) {
     let inputState = dataOperation.inputState;

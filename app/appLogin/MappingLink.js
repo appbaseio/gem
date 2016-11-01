@@ -2,6 +2,7 @@ import { default as React, Component } from 'react';
 import { render } from 'react-dom';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 import { urlShare } from '../service/UrlShare';
+import { dataOperation } from '../service/DataOperation';
 
 export class MappingLink extends Component {
   constructor(props) {
@@ -12,7 +13,10 @@ export class MappingLink extends Component {
     };
   }
   selectText() {
-    urlShare.mappingUrl(this.props.mappingObj).then((url) => {
+    let inputObj = dataOperation.inputState;
+    inputObj.mappingObj = this.props.mappingObj;
+    dataOperation.updateInputState(inputObj, false);
+    urlShare.mappingUrl('gem').then((url) => {
       this.applyUrl(url);
     }).catch((error) => console.log(error));
   }

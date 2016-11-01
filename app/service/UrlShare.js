@@ -8,9 +8,11 @@ class UrlShare {
 	getInputs() {
 		return this.inputs;
 	}
-	setInputs(inputs) {
+	setInputs(inputs, changeUrl=true) {
 		this.inputs = inputs;
-		this.createUrl();
+		if(changeUrl) {
+			this.createUrl();
+		}
 	}
 	createUrl() {
 		var inputs = JSON.parse(JSON.stringify(this.inputs));
@@ -75,16 +77,18 @@ class UrlShare {
 			}
 		});
 	}
-	mappingUrl(obj) {		
+	mappingUrl(obj) {	
 		return new Promise((resolve, reject) => {
-			let ciphertext;
-			try {
-				ciphertext = btoa(JSON.stringify(obj));
-			} catch (e) {
-				ciphertext = ''
+			var inputs = JSON.parse(JSON.stringify(this.inputs));
+			this.compress(inputs, compressCb.bind(this));
+			function compressCb(error, ciphertext) {
+				if(error) {
+					reject(error);
+				} else {
+					let final_url = 'http://appbaseio.github.io/gem/#?input_state=' + ciphertext;
+					resolve(final_url);
+				}
 			}
-			let final_url = 'http://appbaseio.github.io/gem/#?input_mapping=' + ciphertext;
-			resolve(final_url);
 		});	
 	}
 	compress(jsonInput, cb) {

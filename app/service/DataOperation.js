@@ -80,13 +80,13 @@ class DataOperation {
     return appsList;
   }
   // updateInputState
-  updateInputState(inputState) {
+  updateInputState(inputState, changeUrl=true) {
     this.inputState = inputState;
     // update everything only after successful mapping
     if(this.mappingData) {
       storageService.set('gem-appname', inputState.appname);
       storageService.set('gem-url', inputState.url);
-      urlShare.setInputs(inputState);
+      urlShare.setInputs(inputState, changeUrl);
     }
   }
   // update mapping state

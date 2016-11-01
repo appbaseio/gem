@@ -6,6 +6,7 @@ import { GemLink } from './GemLink';
 
 export class AppLogin extends Component {
   constructor(props) {
+    
     super(props);
     this.state = {
       inputState: null,

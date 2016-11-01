@@ -25,7 +25,7 @@ export const defaultIndexType = [
 ];
 export const readLinks = {
   subfield: 'https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html',
-  extraPoperties: 'https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html',
+  extraProperties: 'https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html',
   importMapping: 'https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html',
   importAnalyzer: 'https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html'
 };

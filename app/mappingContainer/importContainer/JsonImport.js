@@ -160,7 +160,7 @@ export class JsonImport extends Component {
     }
     return (
     	<div className="JsonImport col-xs-12 col-sm-6">
-        <div className={"json-header "+(this.state.validFlag ? 'success' : 'error')}>
+        <div className={"json-header alert "+(this.state.validFlag ? 'success alert-success' : 'error alert-danger')}>
           <h3 className="title">
             <MappingLink mappingObj={this.state.mappingObj} />
             <span className="pull-left col-xs-12 col-sm-6 importType">
@@ -180,7 +180,7 @@ export class JsonImport extends Component {
             </span>
           </h3>
         </div>
-        <span className={"json-valid-message import-bottom "+(this.state.validFlag ? 'text-success' : 'text-danger')}>
+        <span className={"json-valid-message import-bottom alert "+(this.state.validFlag ? 'alert-success' : 'alert-danger')}>
           {this.getValidMessage()}
         </span>
     		<Codemirror ref="editor" value={this.state.code} onChange={this.updateCode}

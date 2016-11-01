@@ -197,6 +197,10 @@
 				.fieldAnalyzer {
 					padding: 0;
 				}
+				.fieldName .editableContainer .frontEditable,
+				.fieldIndex .editableContainer .frontEditable {
+					line-height: 32px;
+				}
 				.fieldIndex {
 					padding-left: 0;
 				}

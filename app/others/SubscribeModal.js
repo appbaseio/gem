@@ -61,7 +61,7 @@ export class SubscribeModal extends Component {
   showIcon() {
     let icon = (<i className="fa fa-envelope-o"></i>);
     if(this.state.profile) {
-      icon = (<img src={this.state.profile.picture} alt={this.state.profile.name} className="avatar img-responsive"></img>);
+      icon = (<i className="fa fa-check"></i>);
     }
     return icon;
   }

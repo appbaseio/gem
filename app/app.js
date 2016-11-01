@@ -50,7 +50,7 @@ class Main extends Component {
     dataOperation.updateMappingState(null);
     dataOperation.getSettings().done((settings) => {
       dataOperation.updateSettingState(settings);  
-      getMapping.call(this);
+      getVersion.call(this);
     }).fail((res) => {
       getMapping.call(this);
     });
@@ -65,6 +65,15 @@ class Main extends Component {
         this.setState({
           connecting: false
         });
+      });
+    }
+    function getVersion() {
+      dataOperation.getVersion().done((data) => {
+          let inputState = dataOperation.inputState;
+          inputState.version = data.version.number;
+          dataOperation.updateInputState(inputState);
+          getMapping.call(this);
+        }).fail((res) => {
       });
     }
   }

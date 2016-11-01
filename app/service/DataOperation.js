@@ -6,6 +6,7 @@ class DataOperation {
     this.inputState = {
       url: '',
       appname: '',
+      version: '2.4.0',
       selectedType: []
     };
     this.mappingData = null;
@@ -97,6 +98,21 @@ class DataOperation {
   // update settings state
   updateSettingState(settingsData) {
     this.settings = settingsData;
+  }
+  // get version
+  getVersion() {
+    let requestConfig = this.requestConfig = this.filterurl(this.inputState.url); 
+    let url = this.requestConfig.url;
+    return $.ajax({
+      type: 'GET',
+      beforeSend: function(request) {
+        request.setRequestHeader('Authorization', 'Basic ' + btoa(requestConfig.username + ':' + requestConfig.password));
+      },
+      url: url,
+      xhrFields: {
+        withCredentials: true
+      }
+    });
   }
   // get mapping
   getMapping() {

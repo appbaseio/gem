@@ -59,3 +59,16 @@
 		}
 	}
 }
+
+/*Without header footer*/
+#gem-container {
+	.appContainer.without-hf {
+		.app-container {
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+		.mappingContainer {
+			padding-top: 0;
+		}
+	}
+}

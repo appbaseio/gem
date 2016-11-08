@@ -32,6 +32,9 @@ class Main extends Component {
         };
         dataOperation.updateInputState(inputState);
       }
+      if(dataOperation.queryParams.hasOwnProperty('hf')) {
+        this.getMapping();
+      }
       this.setState({
         inputState: inputState,
         appsList: localConfig.appsList
@@ -114,21 +117,40 @@ class Main extends Component {
       mappings: null
     });
   }
+  includePart(part) {
+    let res;
+    if(!dataOperation.queryParams.hasOwnProperty('hf')) {
+      switch(part) {
+        case 'header':
+          res = (<Header></Header>);
+        break;
+        case 'footer':
+          res = (<Footer></Footer>);
+        break;
+        case 'appLogin': 
+          res = (
+            <AppLogin 
+              appsList = {this.state.appsList} 
+              inputState = {this.state.inputState} 
+              getMapping = {this.getMapping}
+              mappings = {this.state.mappings}
+              disconnect = {this.disconnect} >
+            </AppLogin>
+            );
+        break;
+      }
+    }
+    return res;
+  }
   render() {
   	let appContainer, mappingMarkup;
   	if(this.state.inputState) {
   		appContainer = (
         <div className="container-fluid app-container">
-  	      <Header />
+  	      {this.includePart('header')}
           <div className="app-with-sidebar-container container-fluid">
             <div className="app-main-container">
-              <AppLogin 
-                appsList = {this.state.appsList} 
-                inputState = {this.state.inputState} 
-                getMapping = {this.getMapping}
-                mappings = {this.state.mappings}
-                disconnect = {this.disconnect} 
-              />
+              {this.includePart('appLogin')}
               <MappingContainer 
                 setField= {this.setField} 
                 mappings = {this.state.mappings} 
@@ -139,7 +161,7 @@ class Main extends Component {
       );
   	}
     return (
-      <div className="appContainer">
+      <div className={"appContainer "+ (dataOperation.queryParams.hasOwnProperty('hf') ? 'without-hf' : '')}>
         <section className={(this.state.connecting ? 'loading' : 'hide')}>
           <div className="is-loadingApp">
             <div className="loadingBar"></div>
@@ -151,7 +173,7 @@ class Main extends Component {
     			</div>
   		  </section>
       	{appContainer}
-        <Footer />
+        {this.includePart('footer')}
       </div>
     );
   }

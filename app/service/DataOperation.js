@@ -24,6 +24,7 @@ class DataOperation {
   // Get input stats from url
   getInputState() {
     this.queryParams = this.getQueryParameters();
+    urlShare.queryParams = this.queryParams;
     return new Promise((resolve, reject) => {
       let config = null;
       let isDefault = window.location.href.indexOf('#?default=true') > -1 ? true : false;

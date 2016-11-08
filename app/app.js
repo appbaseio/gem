@@ -119,7 +119,7 @@ class Main extends Component {
   }
   includePart(part) {
     let res;
-    if(!dataOperation.queryParams.hasOwnProperty('hf')) {
+    if(!(dataOperation.queryParams && dataOperation.queryParams.hasOwnProperty('hf'))) {
       switch(part) {
         case 'header':
           res = (<Header></Header>);
@@ -161,7 +161,7 @@ class Main extends Component {
       );
   	}
     return (
-      <div className={"appContainer "+ (dataOperation.queryParams.hasOwnProperty('hf') ? 'without-hf' : '')}>
+      <div className={"appContainer "+ (dataOperation.queryParams && dataOperation.queryParams.hasOwnProperty('hf') ? 'without-hf' : '')}>
         <section className={(this.state.connecting ? 'loading' : 'hide')}>
           <div className="is-loadingApp">
             <div className="loadingBar"></div>

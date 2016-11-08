@@ -27,7 +27,7 @@ class UrlShare {
 				window.location.href = window.location.href.split('?default=true')[0];
 			}
 			let finalUrl = '#?input_state=' + ciphertext;
-			if(this.queryParams.hf) {
+			if(this.queryParams && this.queryParams.hf) {
 				finalUrl += '&hf='+this.queryParams.hf
 			}
 			window.location.href = finalUrl;

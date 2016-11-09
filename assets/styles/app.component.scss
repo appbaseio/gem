@@ -69,6 +69,17 @@
 		}
 		.mappingContainer {
 			padding-top: 0;
+			.btn-operational {
+				bottom: 15px;
+			}
+			&.mappingView { 
+				.btn-operational {
+					bottom: 30px;
+				}
+			}
+		}
+		.typesContainer .typesContainerWrapper {
+			padding: 15px;
 		}
 	}
 }

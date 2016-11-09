@@ -1,0 +1,119 @@
+#importModal .modal-dialog {
+  height: calc(90% - 40px); }
+  #importModal .modal-dialog .modal-content {
+    height: 100%; }
+    #importModal .modal-dialog .modal-content .modal-body {
+      height: calc(100% - 90px);
+      padding-bottom: 15px; }
+      @media screen and (max-width: 768px) {
+        #importModal .modal-dialog .modal-content .modal-body {
+          overflow: auto; } }
+      #importModal .modal-dialog .modal-content .modal-body #ImportContainer {
+        overflow: inherit; }
+        #importModal .modal-dialog .modal-content .modal-body #ImportContainer .JsonImport .import-bottom {
+          left: 0;
+          bottom: -52px; }
+          #importModal .modal-dialog .modal-content .modal-body #ImportContainer .JsonImport .import-bottom.btn-submit {
+            right: 0;
+            left: inherit;
+            bottom: -58px; }
+        #importModal .modal-dialog .modal-content .modal-body #ImportContainer .JsonImport .load-sample {
+          position: absolute;
+          top: -46px;
+          left: 0px; }
+
+#importModal.importSettingModal .JsonImport {
+  padding-top: 0; }
+
+#importModal.importSettingModal .modal-header {
+  padding-top: 15px; }
+
+#importModal.importSettingModal #ImportContainer {
+  padding: 0; }
+
+#ImportContainer {
+  margin: 0;
+  height: 100%;
+  overflow: auto;
+  padding: 15px; }
+  #ImportContainer .import-bottom {
+    position: absolute;
+    bottom: -42px; }
+    #ImportContainer .import-bottom.alert {
+      margin: 0;
+      padding: 5px; }
+  #ImportContainer .ImportResult .import-bottom {
+    right: 0; }
+  #ImportContainer .JsonImport, #ImportContainer .ImportResult {
+    height: 100%;
+    padding-top: 67px;
+    position: relative;
+    padding-left: 0;
+    padding-right: 0;
+    border: 1px solid #eaeaea; }
+    @media screen and (max-width: 768px) {
+      #ImportContainer .JsonImport, #ImportContainer .ImportResult {
+        padding-top: 97px; } }
+    #ImportContainer .JsonImport .ReactCodeMirror, #ImportContainer .ImportResult .ReactCodeMirror {
+      height: 100%; }
+      #ImportContainer .JsonImport .ReactCodeMirror .CodeMirror, #ImportContainer .ImportResult .ReactCodeMirror .CodeMirror {
+        height: 100%; }
+    #ImportContainer .JsonImport .json-header, #ImportContainer .ImportResult .json-header {
+      position: absolute;
+      padding: 15px;
+      width: 100%;
+      top: 0;
+      left: 0;
+      border-bottom: 1px solid #eaeaea;
+      background: #f7f7f7;
+      border-radius: 0; }
+      #ImportContainer .JsonImport .json-header .title, #ImportContainer .ImportResult .json-header .title {
+        margin: 0;
+        padding-bottom: 10px;
+        float: left;
+        width: 100%;
+        height: 36px; }
+        #ImportContainer .JsonImport .json-header .title .extra-options, #ImportContainer .ImportResult .json-header .title .extra-options {
+          font-size: 14px;
+          padding-right: 0; }
+          #ImportContainer .JsonImport .json-header .title .extra-options .select2-container, #ImportContainer .ImportResult .json-header .title .extra-options .select2-container {
+            min-width: 200px;
+            float: right; }
+        @media screen and (max-width: 768px) {
+          #ImportContainer .JsonImport .json-header .title, #ImportContainer .ImportResult .json-header .title {
+            font-size: 18px;
+            height: 66px; }
+            #ImportContainer .JsonImport .json-header .title .extra-options, #ImportContainer .ImportResult .json-header .title .extra-options {
+              padding: 5px 0; }
+              #ImportContainer .JsonImport .json-header .title .extra-options .select2-container, #ImportContainer .ImportResult .json-header .title .extra-options .select2-container {
+                min-width: 150px !important;
+                width: 100% !important;
+                float: left; } }
+      #ImportContainer .JsonImport .json-header.success, #ImportContainer .ImportResult .json-header.success {
+        background-color: #dff0d8;
+        border-color: #d6e9c6; }
+      #ImportContainer .JsonImport .json-header.error, #ImportContainer .ImportResult .json-header.error {
+        background-color: #f2dede;
+        border-color: #ebccd1; }
+  #ImportContainer .JsonImport {
+    border-right: 0; }
+    #ImportContainer .JsonImport .CodeMirror-empty {
+      outline: 1px solid #c22; }
+    #ImportContainer .JsonImport .CodeMirror-empty.CodeMirror-focused {
+      outline: none; }
+    #ImportContainer .JsonImport .CodeMirror pre.CodeMirror-placeholder {
+      color: #999; }
+    #ImportContainer .JsonImport .importType {
+      font-size: 14px;
+      padding-left: 0; }
+      #ImportContainer .JsonImport .importType .single-option {
+        padding-bottom: 5px; }
+        #ImportContainer .JsonImport .importType .single-option input[type=radio] {
+          margin-top: 2px; }
+    #ImportContainer .JsonImport .extra-options {
+      padding-right: 0; }
+  @media screen and (max-width: 768px) {
+    #ImportContainer .ImportResult {
+      margin-top: 15px; }
+    #ImportContainer .JsonImport {
+      border-right: 1px solid #eaeaea; } }

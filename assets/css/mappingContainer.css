@@ -1,0 +1,202 @@
+.mappingContainer {
+  position: relative;
+  height: 100%;
+  padding: 15px;
+  padding-top: 63px; }
+  .mappingContainer .mappingWrapper {
+    height: 100%;
+    position: relative;
+    padding-left: 250px;
+    background: #fff; }
+    @media screen and (max-width: 768px) {
+      .mappingContainer .mappingWrapper {
+        padding-left: 0; } }
+  .mappingContainer.importView .mappingWrapper {
+    padding: 0; }
+  .mappingContainer .btn-operational {
+    position: fixed;
+    left: 30px;
+    bottom: 65px;
+    width: 220px;
+    padding-right: 26px; }
+    .mappingContainer .btn-operational.open {
+      z-index: 999999999; }
+    @media screen and (max-width: 768px) {
+      .mappingContainer .btn-operational {
+        bottom: 45px; } }
+    .mappingContainer .btn-operational ul {
+      padding: 0; }
+    .mappingContainer .btn-operational .viewBtn {
+      width: 100%; }
+    .mappingContainer .btn-operational .dropdown-toggle {
+      position: absolute;
+      right: 0; }
+
+.btn-add-field-container {
+  position: absolute;
+  left: 265px;
+  border: 15px;
+  bottom: 15px; }
+  @media screen and (max-width: 768px) {
+    .btn-add-field-container {
+      position: fixed;
+      left: 15px;
+      bottom: 50px; } }
+
+.import-btn {
+  position: absolute;
+  left: 395px;
+  border: 15px;
+  bottom: 15px; }
+
+.back-btn {
+  position: absolute;
+  left: 340px;
+  border: 15px;
+  bottom: 15px; }
+
+.typesContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 15px;
+  width: 250px;
+  height: 100%; }
+  .typesContainer .typesContainerWrapper {
+    position: relative;
+    height: 100%;
+    overflow: auto;
+    padding: 15px 15px 60px 15px;
+    background: #f7f7f7;
+    border: 1px solid #eaeaea; }
+    .typesContainer .typesContainerWrapper .title {
+      margin: 0;
+      padding-bottom: 10px; }
+    .typesContainer .typesContainerWrapper ul {
+      list-style: none;
+      padding: 0; }
+      .typesContainer .typesContainerWrapper ul li {
+        display: block; }
+  @media screen and (max-width: 768px) {
+    .typesContainer {
+      position: relative;
+      width: 100%;
+      padding: 15px;
+      height: auto; } }
+
+.FieldContainer {
+  padding: 15px;
+  position: relative;
+  overflow: auto;
+  height: 100%;
+  background: #fff; }
+  @media screen and (max-width: 768px) {
+    .FieldContainer {
+      padding-bottom: 80px; } }
+  .FieldContainer .singleProperty {
+    margin-bottom: 15px;
+    border: 1px solid #eaeaea;
+    padding: 0; }
+    .FieldContainer .singleProperty .title {
+      background: #f7f7f7;
+      border-bottom: 1px solid #eaeaea;
+      font-size: 16px;
+      margin: 0;
+      padding: 15px 15px 15px 55px;
+      position: relative;
+      padding-right: 80px; }
+      .FieldContainer .singleProperty .title .edit-btn {
+        position: absolute;
+        right: 15px;
+        top: 15px; }
+      .FieldContainer .singleProperty .title .add-option-btn {
+        position: absolute;
+        right: 40px;
+        top: 15px; }
+      .FieldContainer .singleProperty .title .operational-btn .btn {
+        background: #FCC829;
+        color: #fff; }
+      .FieldContainer .singleProperty .title .operational-btn .caret {
+        display: none; }
+      .FieldContainer .singleProperty .title .fieldName,
+      .FieldContainer .singleProperty .title .fieldAnalyzer {
+        padding: 0; }
+      .FieldContainer .singleProperty .title .fieldIndex {
+        padding-left: 0; }
+      .FieldContainer .singleProperty .title .datatype {
+        color: #828282;
+        margin-left: 15px;
+        padding: 5px;
+        border: 1px solid #dedede; }
+        @media screen and (max-width: 768px) {
+          .FieldContainer .singleProperty .title .datatype {
+            margin: 15px 0 0 0;
+            float: left; } }
+      .FieldContainer .singleProperty .title .typeName {
+        font-weight: bold; }
+      .FieldContainer .singleProperty .title .jsonPopoverBtn {
+        background: transparent;
+        border: 1px solid #00D3FF;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        left: 15px;
+        top: 8px;
+        font-size: 12px; }
+        .FieldContainer .singleProperty .title .jsonPopoverBtn:before {
+          content: "{...}"; }
+      @media screen and (max-width: 768px) {
+        .FieldContainer .singleProperty .title .fieldDataType {
+          padding: 0; } }
+    .FieldContainer .singleProperty .sub-title {
+      font-size: 16px;
+      padding-left: 55px;
+      font-weight: bold; }
+    .FieldContainer .singleProperty .fieldContent {
+      margin: 0; }
+      .FieldContainer .singleProperty .fieldContent .internalField {
+        padding: 0 70px 10px 55px; }
+        .FieldContainer .singleProperty .fieldContent .internalField .fieldName,
+        .FieldContainer .singleProperty .fieldContent .internalField .fieldAnalyzer {
+          padding: 0; }
+        .FieldContainer .singleProperty .fieldContent .internalField .fieldName .editableContainer .frontEditable,
+        .FieldContainer .singleProperty .fieldContent .internalField .fieldIndex .editableContainer .frontEditable {
+          line-height: 32px; }
+        .FieldContainer .singleProperty .fieldContent .internalField .fieldIndex {
+          padding-left: 0; }
+        .FieldContainer .singleProperty .fieldContent .internalField .datatype .editableContainer.off .frontEditable {
+          color: #828282;
+          padding: 5px;
+          width: auto;
+          display: inline-block;
+          border: 1px solid #dedede; }
+        @media screen and (max-width: 768px) {
+          .FieldContainer .singleProperty .fieldContent .internalField .datatype {
+            padding: 0; } }
+        .FieldContainer .singleProperty .fieldContent .internalField .operationalBtns {
+          position: absolute;
+          right: 0; }
+          .FieldContainer .singleProperty .fieldContent .internalField .operationalBtns a {
+            margin-right: 5px; }
+      .FieldContainer .singleProperty .fieldContent .nestedField {
+        padding: 0;
+        padding-left: 15px; }
+        .FieldContainer .singleProperty .fieldContent .nestedField .singleProperty:first-child {
+          margin-top: 15px; }
+    .FieldContainer .singleProperty .fieldAdditionalRow-container .fieldAdditionalRow {
+      padding: 0 0 15px 0;
+      margin: 0; }
+      .FieldContainer .singleProperty .fieldAdditionalRow-container .fieldAdditionalRow:first-child {
+        padding-top: 15px; }
+      .FieldContainer .singleProperty .fieldAdditionalRow-container .fieldAdditionalRow.fieldEdit {
+        padding-right: 35px;
+        padding-left: 55px; }
+        .FieldContainer .singleProperty .fieldAdditionalRow-container .fieldAdditionalRow.fieldEdit .operationalBtns {
+          position: absolute;
+          right: 15px;
+          top: 0px; }
+        .FieldContainer .singleProperty .fieldAdditionalRow-container .fieldAdditionalRow.fieldEdit:first-child .operationalBtns {
+          top: 15px; }
+  .FieldContainer > .singleProperty:last-child {
+    padding-bottom: 15px; }

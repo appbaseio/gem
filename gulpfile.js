@@ -9,7 +9,12 @@ var files = {
     css: {
         vendor: [
             'bower_components/bootstrap/dist/css/bootstrap.min.css',
-            'bower_components/font-awesome/css/font-awesome.min.css'
+            'bower_components/font-awesome/css/font-awesome.min.css',
+            'assets/vendor/hljs.css',
+            'node_modules/codemirror/lib/codemirror.css',
+            'node_modules/codemirror/addon/fold/foldgutter.css',
+            'node_modules/codemirror/addon/dialog/dialog.css',
+            'node_modules/react-select2-wrapper/css/select2.css'
         ],
         custom: ['assets/css/*.css'],
         sassFile: ['assets/styles/*.scss']
@@ -21,7 +26,8 @@ var files = {
             'bower_components/lodash/dist/lodash.min.js',
             'bower_components/crypto-js/crypto-js.js',
             'bower_components/lzma/src/lzma.js',
-            'bower_components/urlsafe-base64/app.js'
+            'bower_components/urlsafe-base64/app.js',
+            'bower_components/auth0.js/build/auth0.min.js'
         ],
         custom: [
         ]
@@ -70,6 +76,25 @@ gulp.task('move_js_depends', function() {
     return gulp.src(['bower_components/lzma/src/lzma_worker.js',
         'assets/vendor/JSONURL.js'])
         .pipe(gulp.dest('dist/vendor'));
+});
+
+// Prepare files for es plugin
+gulp.task('build_es_plugin', ['app_dir', 'assets_dir', 'dist_dir'], function() {
+    return gulp.src(['index.html'])
+        .pipe(gulp.dest('_site'));
+});
+
+// copy app dir
+gulp.task('app_dir', function() {
+    return gulp.src(['app/**/*']).pipe(gulp.dest('_site/app'));
+});
+// copy assets dir
+gulp.task('assets_dir', function() {
+    return gulp.src(['assets/**/*']).pipe(gulp.dest('_site/assets'));
+});
+// copy dist dir
+gulp.task('dist_dir', function() {
+    return gulp.src(['dist/**/*']).pipe(gulp.dest('_site/dist'));
 });
 
 gulp.task('compact', [

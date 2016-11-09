@@ -1,0 +1,68 @@
+.loading {
+  height: 100%;
+  width: 100%;
+  display: table;
+  background: rgba(247, 247, 247, 0.9);
+  position: fixed;
+  z-index: 4; }
+  .loading .vertical-cell {
+    height: 100%;
+    width: 100%;
+    display: table-cell;
+    vertical-align: middle; }
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9;
+  background: #f7f7f7;
+  border-bottom: 0;
+  padding: 6px;
+  max-height: 40px;
+  margin: 0 auto; }
+  .header .header-container {
+    display: inline-block; }
+    .header .header-container .header-title {
+      color: #00D3FF;
+      font-size: 22px;
+      padding: 5px;
+      left: 10px;
+      letter-spacing: 2px; }
+    .header .header-container .tag-line {
+      padding-left: 15px;
+      line-height: 30px;
+      font-size: 20px; }
+
+#gem-container {
+  position: relative;
+  height: 100%; }
+  #gem-container .appContainer {
+    position: relative;
+    height: 100%; }
+  #gem-container .app-container {
+    position: relative;
+    padding: 0;
+    padding-top: 91px;
+    padding-bottom: 35px;
+    height: 100%;
+    overflow: auto; }
+    @media screen and (max-width: 768px) {
+      #gem-container .app-container {
+        padding-top: 86px; } }
+
+/*Without header footer*/
+#gem-container .appContainer.without-hf .app-container {
+  padding-top: 0;
+  padding-bottom: 0; }
+
+#gem-container .appContainer.without-hf .mappingContainer {
+  padding-top: 0; }
+  #gem-container .appContainer.without-hf .mappingContainer .btn-operational {
+    bottom: 15px; }
+  #gem-container .appContainer.without-hf .mappingContainer.mappingView .btn-operational {
+    bottom: 30px; }
+
+#gem-container .appContainer.without-hf .typesContainer .typesContainerWrapper {
+  padding: 15px; }

@@ -1,0 +1,47 @@
+@import "variables.scss";
+.app-with-sidebar-container {
+	position: relative;
+    height: 100%;
+    overflow: auto;
+    padding: 0;
+	.app-sidebar {
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 100%;
+		width: 50px;
+		position: fixed;
+		z-index: 9;
+		background: $dark-bg;
+		ul {
+			list-style: none;
+			padding: 0;
+			li {
+				a {
+					display: block;
+				    padding: 5px;
+				    margin: 10px 0;
+				    font-size: 20px;
+				    line-height: 30px;
+				    text-align: center;
+    				text-decoration: none;
+    				color: $primary-font-color;
+    				&:hover, &.active {
+    					color: $primary-color;
+    				}
+				}
+				&.subscribe {
+				    position: absolute;
+    				bottom: 25px;
+    				width: 100%;
+				}
+			}
+		}
+	}
+	.app-main-container {
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+		position: relative;
+	}
+}

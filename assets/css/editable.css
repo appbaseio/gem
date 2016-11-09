@@ -1,0 +1,13 @@
+.editableContainer {
+  padding: 0 0 5px 0; }
+  .editableContainer .frontEditable {
+    display: block; }
+  .editableContainer .backEditable {
+    display: none; }
+  .editableContainer.on .frontEditable {
+    display: none; }
+  .editableContainer.on .backEditable {
+    display: block; }
+    @media screen and (min-width: 768px) {
+      .editableContainer.on .backEditable .form-group {
+        margin-bottom: 0; } }

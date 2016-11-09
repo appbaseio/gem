@@ -1,9 +1,8 @@
 node_modules
 bower_components
 app/sampleMapping.json
-_site
+temp
 site
-dist
-assets/css
 *.log
+temp
 npm-debug.log.*

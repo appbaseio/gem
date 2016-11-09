@@ -1,0 +1,14 @@
+.jsonPopover {
+  max-width: 250px;
+  min-width: 250px; }
+  .jsonPopover pre {
+    padding: 0;
+    margin: 0;
+    border: 0; }
+  .jsonPopover .popover-content {
+    padding: 0; }
+  .jsonPopover .arrow:after {
+    border-left-color: #f0f0f0 !important; }
+
+.share_content .share_part:first-child .title {
+  margin-top: 0; }

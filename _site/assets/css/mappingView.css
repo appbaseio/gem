@@ -1,0 +1,27 @@
+.mappingContainer.mappingView .mappingWrapper {
+  padding-left: 0; }
+  .mappingContainer.mappingView .mappingWrapper .view-title {
+    position: absolute;
+    margin: 0;
+    width: 100%;
+    padding: 15px;
+    z-index: 2; }
+  .mappingContainer.mappingView .mappingWrapper #ImportContainer {
+    margin: 0;
+    height: 100%;
+    overflow: auto;
+    padding: 15px;
+    position: relative;
+    padding-top: 56px;
+    padding-bottom: 56px; }
+  .mappingContainer.mappingView .mappingWrapper #importModal {
+    height: 100%; }
+  .mappingContainer.mappingView .mappingWrapper .title {
+    padding-left: 50px; }
+    .mappingContainer.mappingView .mappingWrapper .title .share-btn {
+      position: absolute;
+      left: 15px; }
+
+.mappingContainer.mappingView .btn-operational {
+  left: inherit;
+  right: 160px; }

@@ -47,6 +47,7 @@ export class MappingContainer extends Component {
   typeSelection(selectedType) {
     let inputState = dataOperation.inputState;
     inputState.selectedType = selectedType;
+    inputState.selectedTypes = selectedType;
     dataOperation.updateInputState(inputState);
     this.setState({
       selectedType: selectedType

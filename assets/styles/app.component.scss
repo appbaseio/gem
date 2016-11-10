@@ -69,13 +69,12 @@
 		}
 		.mappingContainer {
 			padding-top: 0;
-			padding-bottom: 40px;
 			.btn-operational {
-				bottom: 40px;
+				bottom: 15px;
 			}
 			&.mappingView { 
 				.btn-operational {
-					bottom: 50px;
+					bottom: 30px;
 				}
 			}
 		}

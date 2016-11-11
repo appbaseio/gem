@@ -57,7 +57,7 @@ class AuthOperation {
     var url = this.serverAddress+'/api/getUserProfile';
     let subscribeOption = storageService.get('subscribeOption') && storageService.get('subscribeOption') !== 'null' ? storageService.get('subscribeOption') : null;
     var request = {
-      token: storageService.get('id_token'),
+      token: storageService.get('gem_id_token'),
       origin_app: 'GEM',
       email_preference: subscribeOption
     };
@@ -77,13 +77,13 @@ class AuthOperation {
     });
   }
   parseHash() {
-    var token = storageService.get('id_token');
+    var token = storageService.get('gem_id_token');
     if (token !== null && !this.isTokenExpired(token)) {
       this.show_logged_in(token);
     } else {
       var result = this.auth0.parseHash(window.location.hash);
       if (result && result.idToken) {
-        storageService.set('id_token', result.idToken);
+        storageService.set('gem_id_token', result.idToken);
         this.show_logged_in(result.idToken);
       } else if (result && result.error) {
         console.log('error: ' + result.error);

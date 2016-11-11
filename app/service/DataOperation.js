@@ -165,6 +165,23 @@ class DataOperation {
       }
     });
   }
+  // get indices
+  getIndices(url) {
+    let requestConfig  = this.filterurl(url);
+    let finalurl = requestConfig.url + '/_stats/indices';
+    return $.ajax({
+      type: 'GET',
+      beforeSend: function(request) {
+        request.setRequestHeader('Authorization', 'Basic ' + btoa(requestConfig.username + ':' + requestConfig.password));
+      },
+      url: finalurl,
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      xhrFields: {
+        withCredentials: true
+      }
+    });
+  }
   // update settings
   updateSettings(request) {
     let requestConfig  = this.filterurl(this.inputState.url);

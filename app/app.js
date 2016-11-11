@@ -6,13 +6,14 @@ import { Header } from './header/Header';
 import { Footer } from './footer/Footer';
 import { MappingContainer } from './mappingContainer/MappingContainer';
 import { AppLogin } from './appLogin/AppLogin';
+import { config } from './config';
 
 class Main extends Component {
   constructor(props) {
       super(props);
       this.state = {
-      	inputState: null,
-      	mapping: null,
+        inputState: null,
+        mapping: null,
         connecting: false
       };
       this.getMapping = this.getMapping.bind(this);
@@ -20,7 +21,7 @@ class Main extends Component {
       this.disconnect = this.disconnect.bind(this);
   }
   componentWillMount() {
-  	this.getInputState();
+    this.getInputState();
   }
   getInputState() {
     let localConfig = dataOperation.getLocalConfig();
@@ -38,13 +39,60 @@ class Main extends Component {
       this.setState({
         inputState: inputState,
         appsList: localConfig.appsList
-      });
+      }, this.getIndices.bind(this));
     }).catch(() => {
       this.setState({
         inputState: dataOperation.inputState,
         appsList: localConfig.appsList
-      });
+      }, this.getIndices.bind(this));
     });
+  }
+  getIndices() {
+    if(config.BRANCH === 'master') {
+      let es_host = document.URL.split('/_plugin/')[0];
+      dataOperation.getIndices(es_host).done((res) => {
+        this.getIndicesCb(es_host, res);
+      }).fail((res) => {
+      });
+    }
+  }
+  getIndicesCb(es_host, data) {
+    var indices = [];
+    var historicApps = this.state.appsList;
+    for (let indice in data.indices) {
+      if (historicApps && historicApps.length) {
+        historicApps.forEach(function(old_app, index) {
+          if (old_app.appname === indice) {
+            historicApps.splice(index, 1);
+          }
+        })
+      }
+      var obj = {
+        appname: indice,
+        url: es_host
+      };
+      indices.push(indice);
+      historicApps.push(obj);
+    }
+    // if no app found
+    if(!historicApps.length) {
+      var obj = {
+        appname: 'sampleapp',
+        url: es_host
+      };
+      historicApps.push(obj);
+    }
+    let updateState = {
+      appsList: historicApps
+    };
+    if(dataOperation.inputState.url == '') {
+      let inputState = JSON.parse(JSON.stringify(dataOperation.inputState));
+      inputState.url = es_host;
+      dataOperation.updateInputState(inputState)
+      updateState.inputState = inputState;
+    }
+    this.setState(updateState);
+    storageService.set('gem-appsList', JSON.stringify(historicApps)); 
   }
   getMapping() {
     this.setState({
@@ -116,6 +164,7 @@ class Main extends Component {
     this.setState({
       mappings: null
     });
+    dataOperation.updateMappingState(null);
   }
   includePart(part) {
     let res;
@@ -143,11 +192,11 @@ class Main extends Component {
     return res;
   }
   render() {
-  	let appContainer, mappingMarkup;
-  	if(this.state.inputState) {
-  		appContainer = (
+    let appContainer, mappingMarkup;
+    if(this.state.inputState) {
+      appContainer = (
         <div className="container-fluid app-container">
-  	      {this.includePart('header')}
+          {this.includePart('header')}
           <div className="app-with-sidebar-container container-fluid">
             <div className="app-main-container">
               {this.includePart('appLogin')}
@@ -157,9 +206,9 @@ class Main extends Component {
                 getMapping = {this.getMapping}/>
             </div>
           </div>
-	     </div>
+       </div>
       );
-  	}
+    }
     return (
       <div className={"appContainer "+ (dataOperation.queryParams && dataOperation.queryParams.hasOwnProperty('hf') ? 'without-hf' : '')}>
         <section className={(this.state.connecting ? 'loading' : 'hide')}>
@@ -167,12 +216,12 @@ class Main extends Component {
             <div className="loadingBar"></div>
           </div>
         </section>
-      	<section className={(this.state.inputState ? "hide" : "loading")}>
-    			<div className="is-loadingApp">
-    				<div className="loadingBar"></div>
-    			</div>
-  		  </section>
-      	{appContainer}
+        <section className={(this.state.inputState ? "hide" : "loading")}>
+          <div className="is-loadingApp">
+            <div className="loadingBar"></div>
+          </div>
+        </section>
+        {appContainer}
         {this.includePart('footer')}
       </div>
     );

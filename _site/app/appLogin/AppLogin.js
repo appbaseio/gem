@@ -17,6 +17,14 @@ export class AppLogin extends Component {
     this.setConfig = this.setConfig.bind(this);
   }
   componentWillMount() {
+    this.init();
+  }
+  componentDidUpdate() {
+    if((this.props.inputState && this.props.inputState.url !== '') && (this.state.inputState && this.state.inputState.url === '')) {
+      this.init();
+    }
+  }
+  init() {
     this.setState({
       inputState: this.props.inputState
     }, function() {

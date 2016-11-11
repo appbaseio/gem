@@ -1,6 +1,7 @@
 var {EventEmitter} = require('fbemitter');
 import { storageService } from './StorageService';
 import { authConfig } from './authConfig';
+import { config } from '../config';
 
 export var authEmitter = new EventEmitter();
 
@@ -13,7 +14,9 @@ class AuthOperation {
     this.show_logged_in = this.show_logged_in.bind(this);
     this.login = this.login.bind(this);
     // check if already logged in
-    this.parseHash.call(this);
+    if(config.BRANCH !== 'master') {
+      this.parseHash.call(this);
+    }
   }
   isTokenExpired(token) {
     var decoded = this.auth0.decodeJwt(token);

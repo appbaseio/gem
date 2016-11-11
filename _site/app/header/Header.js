@@ -2,12 +2,17 @@ import { default as React, Component } from 'react';
 import { render } from 'react-dom';
 import { dataOperation } from '../service/DataOperation';
 import { SubscribeModal } from '../others/SubscribeModal';
+import { config } from '../config';
 
 export class Header extends Component {
   constructor(props) {
     super(props);
   }
   render() {
+    var subscribeModal;
+    if(config.BRANCH !== 'master') {
+      subscribeModal = (<SubscribeModal></SubscribeModal>);
+    }
     return (
     <header className="header text-center">
       <div className="img-container">
@@ -16,7 +21,7 @@ export class Header extends Component {
       <div className="tag-line">
         GUI for Elasticsearch Mappings
       </div>
-      <SubscribeModal />
+      {subscribeModal}
     </header> 
     );
   }

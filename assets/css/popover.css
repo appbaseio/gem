@@ -6,7 +6,11 @@
     margin: 0;
     border: 0; }
   .jsonPopover .popover-content {
-    padding: 0; }
+    padding: 0;
+    -webkit-user-select: all;
+    -moz-user-select: all;
+    -ms-user-select: all;
+    user-select: all; }
   .jsonPopover .arrow:after {
     border-left-color: #f0f0f0 !important; }
 

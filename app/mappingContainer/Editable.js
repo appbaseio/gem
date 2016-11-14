@@ -38,7 +38,7 @@ export class Editable extends Component {
     let indexes = this.indexes.map((index, i) => {
       return (<option key={i} value={index}>{index}</option>)
     });
-    indexes.unshift(<option key={-1} value=''>select index</option>);
+    indexes.unshift(<option key={-1} value=''>select index type</option>);
     return indexes;
   }
   getanalyzers() {

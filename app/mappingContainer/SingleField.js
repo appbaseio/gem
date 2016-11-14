@@ -77,7 +77,7 @@ export class SingleField extends Component {
             editCb={this.editCb}
             editValue={this.props.fieldInfo.index} 
             defaultEdit={this.props.defaultEdit} 
-            placeholder="index"/>
+            placeholder="index type"/>
         </span>
       );
     }

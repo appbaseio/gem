@@ -26,7 +26,7 @@ export class Field extends Component {
     this.defaultRow = {
       name: '',
       type: '',
-      index: '',
+      index: 'analyzed',
       analyzer: ''
     };
     this.defaultOption = {

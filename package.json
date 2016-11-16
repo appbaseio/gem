@@ -8,7 +8,8 @@
     "webpack-server": "webpack-dev-server --hot --inline --progress --colors --port 8000",
     "web-server": "http-server -p 3000 .",
     "start": "concurrently \"npm run webpack-server\" \"gulp watch\"",
-    "build": "set NODE_ENV=production&& webpack -p && gulp", 
+    "build": "set NODE_ENV=production&& webpack -p && gulp",
+    "build_es_plugin": "npm run build && gulp build_es_plugin",
     "build_chrome_extension": "bower update && npm run build && gulp chromeBuild"
   },
   "author": "Farhan Chauhan",

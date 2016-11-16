@@ -78,6 +78,41 @@ gulp.task('move_js_depends', function() {
         .pipe(gulp.dest('dist/vendor'));
 });
 
+
+gulp.task('chromePreBuild', ['compact', 'chrome-specific_dir'], function() {
+});
+
+gulp.task('chromeBuild', ['chromePreBuild'], function() {
+    var dirs = [
+        'app',
+        'assets',
+        'dist'
+    ];
+    dirs.forEach(function(dir) {
+        gulp.src([dir+'/**/*']).pipe(gulp.dest('./gem-unpacked/site/'+dir+'/'));
+    });
+    return gulp.src(['index.html']).pipe(gulp.dest('./gem-unpacked/site/'));
+});
+
+// Move app director
+gulp.task('chrome_app', function() {
+    return gulp.src(['app/**/*']).pipe(gulp.dest('./gem-unpacked/site/app/'));
+});
+// Move assets directory
+gulp.task('chrome_assets', function() {
+    return gulp.src(['assets/**/*']).pipe(gulp.dest('./gem-unpacked/site/assets/'));
+});
+// Move assets directory
+gulp.task('chrome_dist', function() {
+    return gulp.src(['dist/**/*']).pipe(gulp.dest('./gem-unpacked/site/dist/'));
+});
+
+
+// copy chrome-specific dir
+gulp.task('chrome-specific_dir', function() {
+    return gulp.src(['chrome-specific/**/*']).pipe(gulp.dest('./gem-unpacked/'));
+});
+
 gulp.task('compact', [
     'customcss', 
     'vendorcss', 

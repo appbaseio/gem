@@ -10,13 +10,28 @@ class AuthOperation {
     this.serverAddress = 'https://ossauth.appbase.io';
     // this.serverAddress = 'http://127.0.0.1:3000';
     this.auth0 = new Auth0(authConfig);
+    this.access_token_applied = false;
     this.isTokenExpired = this.isTokenExpired.bind(this);
     this.show_logged_in = this.show_logged_in.bind(this);
     this.login = this.login.bind(this);
     // check if already logged in
     if(config.BRANCH !== 'master') {
-      this.parseHash.call(this);
+      this.init();
     }
+  }
+  init() {
+    var self = this;
+    this.parseHash.call(this);
+    var parseHash = this.parseHash.bind(this);
+    setTimeout(function() {
+      console.log('hash watching Activated!');
+      window.onhashchange = function() {
+        if(!self.access_token_applied && location.hash.indexOf('access_token') > -1) {
+          console.log('access_token found!');
+          parseHash();
+        }
+      }
+    }, 300);
   }
   isTokenExpired(token) {
     var decoded = this.auth0.decodeJwt(token);
@@ -38,6 +53,7 @@ class AuthOperation {
   show_logged_in(token) {
     this.token = token;
     if (window.location.hash.indexOf('access_token') > -1) {
+      this.access_token_applied = true;
       this.restoreStates();
     } else {
       this.getUserProfile();

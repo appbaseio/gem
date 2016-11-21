@@ -14,7 +14,8 @@ class Main extends Component {
       this.state = {
         inputState: null,
         mapping: null,
-        connecting: false
+        connecting: false,
+        queryParams: null
       };
       this.getMapping = this.getMapping.bind(this);
       this.setField = this.setField.bind(this);
@@ -38,7 +39,8 @@ class Main extends Component {
       }
       this.setState({
         inputState: inputState,
-        appsList: localConfig.appsList
+        appsList: localConfig.appsList,
+        queryParams: dataOperation.queryParams
       }, this.getIndices.bind(this));
     }).catch(() => {
       this.setState({
@@ -171,7 +173,7 @@ class Main extends Component {
     if(!(dataOperation.queryParams && dataOperation.queryParams.hasOwnProperty('hf'))) {
       switch(part) {
         case 'header':
-          res = (<Header></Header>);
+          res = (<Header queryParams={this.state.queryParams}></Header>);
         break;
         case 'footer':
           res = (<Footer></Footer>);

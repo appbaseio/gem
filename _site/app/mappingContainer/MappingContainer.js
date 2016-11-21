@@ -112,6 +112,7 @@ export class MappingContainer extends Component {
                 key = {1}
                 setField={this.props.setField}
                 mappings={this.props.mappings} 
+                getMapping = {this.props.getMapping}
                 selectedType={this.state.selectedType} >
               </Fields>
             </div>

@@ -79,22 +79,37 @@ gulp.task('move_js_depends', function() {
 });
 
 // Prepare files for es plugin
-gulp.task('build_es_plugin', ['app_dir', 'assets_dir', 'dist_dir'], function() {
-    return gulp.src(['index.html'])
-        .pipe(gulp.dest('_site'));
+gulp.task('build_es_plugin', ['compact'], function() {
+    var dirs = [
+        'app',
+        'assets',
+        'dist'
+    ];
+    dirs.forEach(function(dir) {
+        gulp.src([dir+'/**/*']).pipe(gulp.dest('./_site/'+dir+'/'));
+    });
+    return gulp.src(['index.html']).pipe(gulp.dest('./_site/'));
 });
 
-// copy app dir
-gulp.task('app_dir', function() {
-    return gulp.src(['app/**/*']).pipe(gulp.dest('_site/app'));
+// chrome build
+gulp.task('chromePreBuild', ['compact', 'chrome-specific_dir'], function() {
 });
-// copy assets dir
-gulp.task('assets_dir', function() {
-    return gulp.src(['assets/**/*']).pipe(gulp.dest('_site/assets'));
+
+gulp.task('chromeBuild', ['chromePreBuild'], function() {
+    var dirs = [
+        'app',
+        'assets',
+        'dist'
+    ];
+    dirs.forEach(function(dir) {
+        gulp.src([dir+'/**/*']).pipe(gulp.dest('./gem-unpacked/site/'+dir+'/'));
+    });
+    return gulp.src(['index.html']).pipe(gulp.dest('./gem-unpacked/site/'));
 });
-// copy dist dir
-gulp.task('dist_dir', function() {
-    return gulp.src(['dist/**/*']).pipe(gulp.dest('_site/dist'));
+
+// copy chrome-specific dir
+gulp.task('chrome-specific_dir', function() {
+    return gulp.src(['chrome-specific/**/*']).pipe(gulp.dest('./gem-unpacked/'));
 });
 
 gulp.task('compact', [

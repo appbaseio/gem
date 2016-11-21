@@ -10,7 +10,7 @@ export class Header extends Component {
   }
   render() {
     var subscribeModal;
-    if(config.BRANCH !== 'master') {
+    if(config.BRANCH !== 'master' && (this.props.queryParams && !this.props.queryParams.subscribe)) {
       subscribeModal = (<SubscribeModal></SubscribeModal>);
     }
     return (

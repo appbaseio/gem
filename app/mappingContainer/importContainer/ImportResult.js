@@ -83,6 +83,7 @@ export class ImportResult extends Component {
           singleType = {item.singleType}
           className="singleProperty col-xs-12"
           fieldList = {this.fieldList}
+          getMapping={this.props.getMapping}
           id = {item.id}
           parent = {item.parent}
           editable = {!item.isExists}

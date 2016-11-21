@@ -27,8 +27,9 @@ class UrlShare {
 				window.location.href = window.location.href.split('?default=true')[0];
 			}
 			let finalUrl = '#?input_state=' + ciphertext;
-			if(this.queryParams && this.queryParams.hf) {
-				finalUrl += '&hf='+this.queryParams.hf
+			if(this.queryParams && this.queryParams.hf && this.queryParams.subscribe) {
+				finalUrl += '&hf='+this.queryParams.hf;
+				finalUrl += '&subscribe='+this.queryParams.subscribe;
 			}
 			window.location.href = finalUrl;
 		}

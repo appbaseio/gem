@@ -157,6 +157,7 @@ export class Field extends Component {
       console.log(request);
       dataOperation.updateMapping(request, this.props.singleType).done((res) => {
         this.updateAfterSubmit();
+        this.props.getMapping();
       }).fail((res) => {
         let error = this.state.error;
         error.title = 'Error';
@@ -199,6 +200,7 @@ export class Field extends Component {
         singleType = {item.singleType}
         className="singleProperty col-xs-12" 
         fieldList = {this.props.fieldList}
+        getMapping = {this.props.getMapping}
         id = {item.id}
         parent = {item.parent}
         editable = {this.props.editable}

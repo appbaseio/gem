@@ -16,7 +16,9 @@ export class Field extends Component {
       rows: [],
       options: [],
       modifiedField: [],
-      fieldRecord: {},
+      fieldRecord: {
+        index: 'analyzed'
+      },
       defaultEdit: false,
       error: {
         title: null,
@@ -323,7 +325,7 @@ export class Field extends Component {
               editValue={fieldRecord.analyzer} 
               defaultEdit={true}
               registeredAnalyzers={registeredAnalyzers}
-              placeholder="analyzer"/>
+              placeholder="analyzer" />
           </span>
         );
       } 
@@ -362,8 +364,9 @@ export class Field extends Component {
             <Editable 
               editKey='index'
               editCb={this.editCb}
-              editValue={fieldRecord.index} 
-              defaultEdit={true} />
+              editValue={fieldRecord.index || 'analyzed'} 
+              defaultEdit={true}
+              placeholder="index type" />
           </span>);
         }
       }

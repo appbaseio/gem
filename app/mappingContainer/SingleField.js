@@ -69,7 +69,7 @@ export class SingleField extends Component {
   render() {
     let indexRow, analyzerRow, analyzer, registeredAnalyzers = null;
     let operationalBtn = this.operationalBtn();
-    if(this.modified.type === 'string') {
+    if(this.modified.type === 'string' && !(!this.props.defaultEdit && this.props.fieldInfo.index === 'analyzed')) {
       indexRow = (
         <span className="fieldIndex col-xs-12 col-sm-4">
           <Editable 

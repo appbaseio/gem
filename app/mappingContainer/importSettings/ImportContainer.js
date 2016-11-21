@@ -75,7 +75,8 @@ export class ImportContainer extends Component {
         handleSubmit={this.handleSubmit} 
         updateSuccess={this.updateSuccess}
         successMessage={this.state.successMessage}
-        />
+        getMapping={this.props.getMapping}
+      />
       <ErrorModal {...this.state.error} closeError={this.closeError} />
     </div>);
   }

@@ -8,7 +8,8 @@ export class GemLink extends Component {
     super(props);
     this.state = {
       url: '',
-      copied: ''
+      copied: '',
+      iframeurl: ''
     };
   }
   selectText() {
@@ -17,7 +18,11 @@ export class GemLink extends Component {
     }).catch((error) => console.log(error));
   }
   applyUrl(url) {
-    this.setState({url: url, copied: ''});
+    this.setState({
+      url: url, 
+      iframeurl: url+'&subscribe=true',
+      copied: ''
+    });
     setTimeout(function() {
       var ele = document.getElementById('for-share');
       var succeed = this.copyToClipboard(ele);
@@ -96,7 +101,7 @@ export class GemLink extends Component {
                     Embed
                   </h3>
                   <div className="description">
-                    <input type="text" readOnly className="form-control" value={`<iframe src="${this.state.url}" width="1024" height="768" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`} id="for-share" />
+                    <input type="text" readOnly className="form-control" value={`<iframe src="${this.state.iframeurl}" width="1024" height="768" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`} id="for-share" />
                   </div>
                 </section>
               </div>

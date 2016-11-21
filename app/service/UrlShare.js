@@ -27,8 +27,9 @@ class UrlShare {
 				window.location.href = window.location.href.split('?default=true')[0];
 			}
 			let finalUrl = '#?input_state=' + ciphertext;
-			if(this.queryParams && this.queryParams.hf) {
-				finalUrl += '&hf='+this.queryParams.hf
+			if(this.queryParams && this.queryParams.hf && this.queryParams.subscribe) {
+				finalUrl += '&hf='+this.queryParams.hf;
+				finalUrl += '&subscribe='+this.queryParams.subscribe;
 			}
 			window.location.href = finalUrl;
 		}
@@ -46,7 +47,7 @@ class UrlShare {
 	}
 	convertToUrl() {
 		var ciphertext = this.url;
-		let	final_url = 'https://appbaseio.github.io/gem/#?input_state=' + ciphertext;
+		let	final_url = 'https://opensource.appbase.io/gem/#?input_state=' + ciphertext;
 		return final_url;
 	}
 	dejavuLink() {
@@ -56,7 +57,7 @@ class UrlShare {
 			selectedType: this.inputs.selectedType
 		};
 		let ciphertext = CryptoJS.AES.encrypt(JSON.stringify(obj), 'dejvu').toString();
-		let final_url = 'https://appbaseio.github.io/dejaVu/live/#?input_state=' + ciphertext;
+		let final_url = 'https://opensource.appbase.io/dejaVu/live/#?input_state=' + ciphertext;
 		return final_url;
 	}
 	mirageLink() {
@@ -75,7 +76,7 @@ class UrlShare {
 					return;
 				}
 				else {
-					let final_url = 'https://appbaseio.github.io/mirage/#?input_state=' + ciphertext;
+					let final_url = 'https://opensource.appbase.io/mirage/#?input_state=' + ciphertext;
 					resolve(final_url);
 				}
 			}
@@ -89,7 +90,7 @@ class UrlShare {
 				if(error) {
 					reject(error);
 				} else {
-					let final_url = 'https://appbaseio.github.io/gem/#?input_state=' + ciphertext;
+					let final_url = 'https://opensource.appbase.io/gem/#?input_state=' + ciphertext;
 					resolve(final_url);
 				}
 			}

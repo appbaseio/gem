@@ -78,6 +78,41 @@ gulp.task('move_js_depends', function() {
         .pipe(gulp.dest('dist/vendor'));
 });
 
+
+// Prepare files for es plugin
+gulp.task('build_es_plugin', ['compact'], function() {
+    var dirs = [
+        'app',
+        'assets',
+        'dist'
+    ];
+    dirs.forEach(function(dir) {
+        gulp.src([dir+'/**/*']).pipe(gulp.dest('./_site/'+dir+'/'));
+    });
+    return gulp.src(['index.html']).pipe(gulp.dest('./_site/'));
+});
+
+// chrome build
+gulp.task('chromePreBuild', ['compact', 'chrome-specific_dir'], function() {
+});
+
+gulp.task('chromeBuild', ['chromePreBuild'], function() {
+    var dirs = [
+        'app',
+        'assets',
+        'dist'
+    ];
+    dirs.forEach(function(dir) {
+        gulp.src([dir+'/**/*']).pipe(gulp.dest('./gem-unpacked/site/'+dir+'/'));
+    });
+    return gulp.src(['index.html']).pipe(gulp.dest('./gem-unpacked/site/'));
+});
+
+// copy chrome-specific dir
+gulp.task('chrome-specific_dir', function() {
+    return gulp.src(['chrome-specific/**/*']).pipe(gulp.dest('./gem-unpacked/'));
+});
+
 gulp.task('compact', [
     'customcss', 
     'vendorcss', 

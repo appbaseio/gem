@@ -8,3 +8,4 @@ assets/css
 *.log
 temp
 npm-debug.log.*
+gem-unpacked

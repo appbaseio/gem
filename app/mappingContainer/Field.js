@@ -16,7 +16,9 @@ export class Field extends Component {
       rows: [],
       options: [],
       modifiedField: [],
-      fieldRecord: {},
+      fieldRecord: {
+        index: 'analyzed'
+      },
       defaultEdit: false,
       error: {
         title: null,
@@ -155,6 +157,7 @@ export class Field extends Component {
       console.log(request);
       dataOperation.updateMapping(request, this.props.singleType).done((res) => {
         this.updateAfterSubmit();
+        this.props.getMapping();
       }).fail((res) => {
         let error = this.state.error;
         error.title = 'Error';
@@ -197,6 +200,7 @@ export class Field extends Component {
         singleType = {item.singleType}
         className="singleProperty col-xs-12" 
         fieldList = {this.props.fieldList}
+        getMapping = {this.props.getMapping}
         id = {item.id}
         parent = {item.parent}
         editable = {this.props.editable}
@@ -323,7 +327,7 @@ export class Field extends Component {
               editValue={fieldRecord.analyzer} 
               defaultEdit={true}
               registeredAnalyzers={registeredAnalyzers}
-              placeholder="analyzer"/>
+              placeholder="analyzer" />
           </span>
         );
       } 
@@ -362,8 +366,9 @@ export class Field extends Component {
             <Editable 
               editKey='index'
               editCb={this.editCb}
-              editValue={fieldRecord.index} 
-              defaultEdit={true} />
+              editValue={fieldRecord.index || 'analyzed'} 
+              defaultEdit={true}
+              placeholder="index type" />
           </span>);
         }
       }

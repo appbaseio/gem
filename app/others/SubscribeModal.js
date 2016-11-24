@@ -47,7 +47,13 @@ export class SubscribeModal extends Component {
   }
   open() {
     if(!this.state.profile) {
-      this.setState({ showModal: true });
+      if(!$('.fade.in.modal').length) {
+        this.setState({ showModal: true });
+      } else {
+        setTimeout(() => {
+          this.open();
+        }, 1000*10);
+      }
     }
   }
   subscribe() {

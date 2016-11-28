@@ -134,12 +134,3 @@ export class SubscribeModal extends Component {
 		)
 	}
 }
-me="fa fa-github"></i> Subscribe with Github
-              </button>
-            </div>
-          </Modal.Body>
-        </Modal>
-      </div>
-    )
-  }
-}

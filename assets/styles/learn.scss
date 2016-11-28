@@ -1,5 +1,9 @@
 @import "variables.scss";
 #learnModal {
+	.introBottom {
+		display: table;
+		width: 100%;
+	}
 	.modal-title {
 		font-size: 20px;
 		text-align: left;

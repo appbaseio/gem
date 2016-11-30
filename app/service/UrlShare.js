@@ -98,6 +98,20 @@ class UrlShare {
 			}
 		});	
 	}
+	mappingUrlWithoutApp(obj) {	
+		return new Promise((resolve, reject) => {
+			var inputs = JSON.parse(JSON.stringify(obj));
+			this.compress(inputs, compressCb.bind(this));
+			function compressCb(error, ciphertext) {
+				if(error) {
+					reject(error);
+				} else {
+					let final_url = 'https://opensource.appbase.io/gem/#?input_state=' + ciphertext;
+					resolve(final_url);
+				}
+			}
+		});	
+	}
 	compress(jsonInput, cb) {
 		if (!jsonInput) {
 			return cb('Input should not be empty');

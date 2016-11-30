@@ -86,7 +86,8 @@ export class JsonImport extends Component {
         this.props.detectMapping(parsedJson, this.state.selectedType, this.state.importType);
         updateObj.mappingObj = {
           inputFormat: this.state.importType,
-          input: parsedJson
+          input: parsedJson,
+          selectedType: this.state.selectedType
         };
       }
       this.setState(updateObj);
@@ -173,6 +174,8 @@ export class JsonImport extends Component {
         this.types.push(this.props.input_mapping.selectedType);
       }
       this.types.unshift('');
+    } else if(this.props.input_mapping.selectedType) {
+      this.types.push(this.props.input_mapping.selectedType);
     }
     return (
     	<div className="JsonImport col-xs-12 col-sm-6">

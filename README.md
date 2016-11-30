@@ -7,7 +7,15 @@
 
 1. **[GEM: Intro](#gem-intro)**   
 2. **[Features](#features)**  
-3. **[Mapping FAQs](#mapping-faqs)**  
+3. **[Mapping and GEM FAQs](#mapping-and-gem-faqs)**  
+   1. [What is a Mapping?](#what-is-a-mapping)  
+   1. [How to create a new mapping?](#how-to-create-a-new-mapping)  
+   1. [What are the available mapping types?](#what-are-the-available-mapping-types)
+   1. [Can a mapping be modified once it is applied?](#can-a-mapping-be-modified-once-it-is-applied)
+   1. [How to map a sub field?](#how-to-map-a-sub-field)
+   1. [What is an analyzer?](#what-is-an-analyzer)
+   1. [How to create a custom analyzer?](#how-to-create-a-custom-analyzer)
+   1. [How to share a GEM view?](#how-to-share-a-gem-view-externally)
 4. **[Build Locally](#build-locally)**   
 5. **[Get GEM](#get-gem)**  
   a. [Hosted](#use-hosted-app)  
@@ -32,18 +40,34 @@ Mappings allow deciding things like:
 
 ### Features
 
-GEM provides three key mapping relaed options today:  
+GEM supports three key mapping related options today:  
 
 1. **Create data mappings** with an on-the-fly auto inferencing capability.  
 2. **Managing all the current data mappings** with an option to see the raw JSON data.  
 ![GEM View Mappings](https://i.imgur.com/GdrCWvq.png)
 
 3. **Importing new data analyzers** to be later associated with field mappings.  
+![GEM Analyzer View](https://i.imgur.com/QtCMxXE.png)
 
-![](https://i.imgur.com/JmgmvcE.png)
+GEM keeps the entire app state in the URL which makes for easy sharing of views.   And most importantly, GEM is entirely built on the client side and is available as a github hosted app.
 
+### Mapping and GEM FAQs
 
-### Mapping FAQs
+#### What is a mapping?
+
+#### How to create a new mapping?
+
+#### What are the available mapping types?
+
+#### Can a mapping be modified once it is applied?
+
+#### How to map a sub field?
+
+#### What is an analyzer?
+
+#### How to create a custom analyzer?
+
+#### How to share a GEM view externally?
 
 
 ### Build Locally

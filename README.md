@@ -1,39 +1,52 @@
-# GEM 
+# GEM 💎
 
 ### GUI for Elasticsearch Mappings
 
 ![GEM banner image](http://i.imgur.com/OjNdc5p.png)
 
-A GUI for creating Elasticsearch data type mappings.
 
-### Elasticsearch plugin - Installation
+1. **[GEM: Intro](#gem-intro)**   
+2. **[Features](#features)**  
+3. **[Mapping FAQs](#mapping-faqs)**  
+4. **[Build Locally](#build-locally)**   
+5. **[Get GEM](#get-gem)**  
+  a. [Hosted](#use-hosted-app)  
+  b. [Chrome Extension](#get-the-chrome-extension)  
+  c. [Elasticsearch Plugin](#install-as-elasticsearch-plugin)
 
-``bin/plugin install appbaseio/gem``
 
-``Note``: To make sure you enable CORS settings for your ElasticSearch instance, add the following lines in the ES configuration file.
+### GEM: Intro
 
-```sh
- http.port: 9200
- http.cors.allow-origin: "http://127.0.0.1:9200"
- http.cors.enabled: true
- http.cors.allow-headers : X-Requested-With,X-Auth-Token,Content-Type, Content-Length, Authorization
- http.cors.allow-credentials: true
-```
+GEM is a GUI for creating and managing an Elasticsearch index's datastrcuture mappings. ES Mappings provide an immutable interface to control how data is stored internally within Elasticsearch and how queries can be applied to it.  
 
-After installing the plugin, 
-start elasticsearch service 
-```sh
-elasticsearch
-```
-and visit the following URL to access it.
+Mappings allow deciding things like:
 
-```sh 
-http://127.0.0.1:9200/_plugin/gem 
-```
+* Should a field with value '2016-12-01' be treated as a `date` or as a `text` field?  
+* Should 'San Francisco' be stored as an **analyzed** text field to then run full-text search queries against it, or should it be kept non-analyzed for an aggregations use-case?  
+* Should 'loc': ['40.73', '-73.9'] be stored as `Object` or should it have a `geopoint` datatype.  
 
-``Note:`` If you use Elasticsearch from a different port, the URL to access and the `http.cors.allow-origin` value in the configuration file would change accordingly.
+**GEM** takes this a step further by providing an on-the-fly mapping inference based on user provided input data.
 
-### Developing
+![GEM Create Mappings](http://i.imgur.com/Q6fEKUi.gif)  
+
+
+### Features
+
+GEM provides three key mapping relaed options today:  
+
+1. **Create data mappings** with an on-the-fly auto inferencing capability.  
+2. **Managing all the current data mappings** with an option to see the raw JSON data.  
+![GEM View Mappings](https://i.imgur.com/GdrCWvq.png)
+
+3. **Importing new data analyzers** to be later associated with field mappings.  
+
+![](https://i.imgur.com/JmgmvcE.png)
+
+
+### Mapping FAQs
+
+
+### Build Locally
 
 ``dev`` branch is the bleeding edge version of gem, all new changes go here.
 
@@ -74,6 +87,46 @@ $ npm run build_chrome_extension
 ```sh
 $ npm run build
 ```
+
+### Get GEM
+
+GEM is available as a hosted app and as a chrome extension.
+
+#### [Use hosted app](http://appbaseio.github.io/gem)  
+
+or  
+
+#### [Get the Chrome extension](https://chrome.google.com/webstore/detail/gem/enmjddbghmojhlldblbblolfljndkkjn)
+
+or
+
+#### Install As Elasticsearch Plugin
+
+``bin/plugin install appbaseio/gem``
+
+``Note``: To make sure you enable CORS settings for your ElasticSearch instance, add the following lines in the ES configuration file.
+
+```sh
+ http.port: 9200
+ http.cors.allow-origin: "http://127.0.0.1:9200"
+ http.cors.enabled: true
+ http.cors.allow-headers : X-Requested-With,X-Auth-Token,Content-Type, Content-Length, Authorization
+ http.cors.allow-credentials: true
+```
+
+After installing the plugin, 
+start elasticsearch service 
+```sh
+elasticsearch
+```
+and visit the following URL to access it.
+
+```sh 
+http://127.0.0.1:9200/_plugin/gem 
+```
+
+``Note:`` If you use Elasticsearch from a different port, the URL to access and the `http.cors.allow-origin` value in the configuration file would change accordingly.
+
 
 #### Contributing
 

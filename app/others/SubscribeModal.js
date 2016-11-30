@@ -25,6 +25,7 @@ export class SubscribeModal extends Component {
 		this.timer = 1;
 		this.activetab = true;
 		this.holdSubscribe = false;
+		this.internalClose = false;
 		this.init();
 	}
 	init() {
@@ -33,8 +34,9 @@ export class SubscribeModal extends Component {
 				profile: data
 			});
 		});
-		if (storageService.get('popuptimer')) {
-			this.timer = parseInt(storageService.get('popuptimer'));
+		let subPopuptimer = storageService.get('subPopuptimer');
+		if (subPopuptimer && subPopuptimer !== 'NaN') {
+			this.timer = parseInt(storageService.get('subPopuptimer'));
 		}
 		setTimeout(() => {
 			if (!this.state.profile) {
@@ -45,7 +47,7 @@ export class SubscribeModal extends Component {
 		$(window).focus(function() {
 			this.activetab = true;
 			setTimeout(() => {
-				if (!this.state.profile && this.holdSubscribe) {
+				if (!this.state.profile && this.holdSubscribe && !this.internalClose) {
 					this.open();
 				}
 			}, 1000 * 10 * this.timer);
@@ -57,7 +59,7 @@ export class SubscribeModal extends Component {
 	}
 	close() {
 		this.internalClose = true;
-		storageService.set('popuptimer', this.timer + 5);
+		storageService.set('subPopuptimer', this.timer + 5);
 		this.setState({ showModal: false });
 	}
 	open() {

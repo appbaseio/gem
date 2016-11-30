@@ -6,7 +6,7 @@ import { ErrorModal } from '../../others/ErrorModal';
 import { MappingLink } from '../../appLogin/MappingLink';
 
 var Codemirror = require('react-codemirror');
-require('codemirror/mode/javascript/javascript');
+require('codemirror/mode/markdown/markdown');
 require('codemirror/addon/search/searchcursor.js');
 require('codemirror/addon/search/search.js');
 require('codemirror/addon/dialog/dialog.js');
@@ -20,8 +20,6 @@ require('codemirror/addon/fold/brace-fold.js');
 require('codemirror/addon/fold/xml-fold.js');
 require('codemirror/addon/fold/markdown-fold.js');
 require('codemirror/addon/fold/comment-fold.js');
-require('codemirror/mode/javascript/javascript.js');
-require('codemirror/keymap/sublime.js');
 
 export class JsonImport extends Component {
   constructor(props) {
@@ -42,7 +40,7 @@ export class JsonImport extends Component {
   	};
     this.codemirrorOptions = {
       lineNumbers: false,
-      mode: "javascript",
+      mode: "markdown",
       autoCloseBrackets: true,
       matchBrackets: true,
       showCursorWhenSelecting: true,

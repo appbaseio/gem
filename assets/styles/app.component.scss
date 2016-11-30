@@ -62,24 +62,43 @@
 
 /*Without header footer*/
 #gem-container {
-	.appContainer.without-hf {
+	.appContainer.without-h, .appContainer.without-hf {
 		.app-container {
-			padding-top: 0;
-			padding-bottom: 0;
+		    padding-top: 0;
 		}
 		.mappingContainer {
 			padding-top: 0;
+			padding-left: 0;
+			padding-right: 0;
 			.btn-operational {
-				bottom: 15px;
+				left: 15px;
 			}
 			&.mappingView { 
 				.btn-operational {
-					bottom: 30px;
+					left: inherit;
 				}
 			}
 		}
-		.typesContainer .typesContainerWrapper {
-			padding: 15px;
+	}
+	.appContainer.without-f, .appContainer.without-hf {
+		.app-container {
+		    padding-bottom: 0;
+		}
+		.mappingContainer {
+			padding-bottom: 0;
+		}
+	}
+	.appContainer.without-h.without-f, .appContainer.without-hf {
+		.mappingContainer {
+			.btn-operational {
+				bottom: 45px;
+			}
+			&.mappingView { 
+				.btn-operational {
+					left: inherit;
+					bottom: 14px;
+				}
+			}
 		}
 	}
 }

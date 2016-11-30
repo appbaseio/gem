@@ -27,9 +27,11 @@ class UrlShare {
 				window.location.href = window.location.href.split('?default=true')[0];
 			}
 			let finalUrl = '#?input_state=' + ciphertext;
-			if(this.queryParams && this.queryParams.hf && this.queryParams.subscribe) {
-				finalUrl += '&hf='+this.queryParams.hf;
-				finalUrl += '&subscribe='+this.queryParams.subscribe;
+			for(let params in this.queryParams) {
+				if(params !== 'input_state') {
+					console.log(params, this.queryParams[params]);
+					finalUrl += '&'+params+'='+this.queryParams[params];
+				}
 			}
 			window.location.href = finalUrl;
 		}
@@ -85,6 +87,20 @@ class UrlShare {
 	mappingUrl(obj) {	
 		return new Promise((resolve, reject) => {
 			var inputs = JSON.parse(JSON.stringify(this.inputs));
+			this.compress(inputs, compressCb.bind(this));
+			function compressCb(error, ciphertext) {
+				if(error) {
+					reject(error);
+				} else {
+					let final_url = 'https://opensource.appbase.io/gem/#?input_state=' + ciphertext;
+					resolve(final_url);
+				}
+			}
+		});	
+	}
+	mappingUrlWithoutApp(obj) {	
+		return new Promise((resolve, reject) => {
+			var inputs = JSON.parse(JSON.stringify(obj));
 			this.compress(inputs, compressCb.bind(this));
 			function compressCb(error, ciphertext) {
 				if(error) {

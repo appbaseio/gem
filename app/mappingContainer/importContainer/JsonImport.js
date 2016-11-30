@@ -6,7 +6,7 @@ import { ErrorModal } from '../../others/ErrorModal';
 import { MappingLink } from '../../appLogin/MappingLink';
 
 var Codemirror = require('react-codemirror');
-require('codemirror/mode/javascript/javascript');
+require('codemirror/mode/markdown/markdown');
 require('codemirror/addon/search/searchcursor.js');
 require('codemirror/addon/search/search.js');
 require('codemirror/addon/dialog/dialog.js');
@@ -20,8 +20,6 @@ require('codemirror/addon/fold/brace-fold.js');
 require('codemirror/addon/fold/xml-fold.js');
 require('codemirror/addon/fold/markdown-fold.js');
 require('codemirror/addon/fold/comment-fold.js');
-require('codemirror/mode/javascript/javascript.js');
-require('codemirror/keymap/sublime.js');
 
 export class JsonImport extends Component {
   constructor(props) {
@@ -36,13 +34,13 @@ export class JsonImport extends Component {
       validFlag: false,
       importType: "data",
       mappingObj: {
-        type: 'data',
+        inputFormat: 'data',
         input: {}
       }
   	};
     this.codemirrorOptions = {
       lineNumbers: false,
-      mode: "javascript",
+      mode: "markdown",
       autoCloseBrackets: true,
       matchBrackets: true,
       showCursorWhenSelecting: true,
@@ -58,12 +56,14 @@ export class JsonImport extends Component {
     this.importTypeChange = this.importTypeChange.bind(this);
   }
   componentWillMount() {
-    if(this.props.input_mapping && this.props.input_mapping.type && this.props.input_mapping.input) {
-      this.setState({
+    if(this.props.input_mapping && this.props.input_mapping.inputFormat && this.props.input_mapping.input) {
+      let stateObj = {
         mappingObj: this.props.input_mapping,
-        importType: this.props.input_mapping.type,
-        code: JSON.stringify(this.props.input_mapping.input, null, 4)
-      }, this.submit.bind(this));
+        importType: this.props.input_mapping.inputFormat,
+        code: JSON.stringify(this.props.input_mapping.input, null, 4),
+        selectedType: this.props.input_mapping.selectedType ? this.props.input_mapping.selectedType : ''
+      };
+      this.setState(stateObj, this.submit.bind(this));
     } else {
       this.submit.call(this);
     }
@@ -83,8 +83,9 @@ export class JsonImport extends Component {
         let parsedJson = isJson.jsonInput;
         this.props.detectMapping(parsedJson, this.state.selectedType, this.state.importType);
         updateObj.mappingObj = {
-          type: this.state.importType,
-          input: parsedJson
+          inputFormat: this.state.importType,
+          input: parsedJson,
+          selectedType: this.state.selectedType
         };
       }
       this.setState(updateObj);
@@ -152,11 +153,27 @@ export class JsonImport extends Component {
       </div>
     );
   }
+  renderComponent(method) {
+    let element;
+    switch(method) {
+      case 'label':
+      if(this.state.selectedType && this.state.selectedType != '') {
+        element = (<label className="col-xs-12 p-0 pd-0">Selected Type:</label>);
+      }
+      break;
+    }
+    return element;
+  }
   render() {
     this.types = [];
     if(this.props.mappings) {
       this.types = Object.keys(this.props.mappings);
+      if(this.props.input_mapping && this.props.input_mapping.selectedType && this.types.indexOf(this.props.input_mapping.selectedType) < 0) {
+        this.types.push(this.props.input_mapping.selectedType);
+      }
       this.types.unshift('');
+    } else if(this.props.input_mapping.selectedType) {
+      this.types.push(this.props.input_mapping.selectedType);
     }
     return (
     	<div className="JsonImport col-xs-12 col-sm-6">
@@ -166,17 +183,20 @@ export class JsonImport extends Component {
             <span className="pull-left col-xs-12 col-sm-6 importType">
               {this.radioOptions()}
             </span>
-            <span className="pull-right extra-options col-xs-12 col-sm-6">
-              <Select2
-                multiple={false}
-                data={ this.types }
-                value={this.state.selectedType}
-                options={{
-                  placeholder: 'Choose or create a Type',
-                  tags: {true}
-                }}
-                onChange={this.onTypeSelection}
-              />
+            <span className={"pull-right extra-options col-xs-12 col-sm-6 "+ (this.state.selectedType && this.state.selectedType != '' ? 'selected' : '')}>
+              {this.renderComponent('label')}
+              <div className="col-xs-12 pd-0">
+                <Select2
+                  multiple={false}
+                  data={ this.types }
+                  value={this.state.selectedType}
+                  options={{
+                    placeholder: 'Choose or create a Type',
+                    tags: {true}
+                  }}
+                  onChange={this.onTypeSelection}
+                />
+              </div>
             </span>
           </h3>
         </div>

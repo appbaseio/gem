@@ -48,8 +48,8 @@ export const defaultIndexType = [
   'not_analyzed'
 ];
 export const readLinks = {
-  subfield: 'https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html',
-  extraProperties: 'https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html',
-  importMapping: 'https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html',
-  importAnalyzer: 'https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html'
+  subfield: 'https://github.com/appbaseio/gem/blob/dev/README.md#how-to-map-a-sub-field',
+  extraProperties: 'https://github.com/appbaseio/gem/blob/dev/README.md#what-other-mapping-parameters-are-available',
+  importMapping: 'https://github.com/appbaseio/gem/blob/dev/README.md#how-to-create-a-new-mapping',
+  importAnalyzer: 'https://github.com/appbaseio/gem/blob/dev/README.md#how-to-create-a-custom-analyzer'
 };

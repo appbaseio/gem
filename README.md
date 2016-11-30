@@ -20,7 +20,8 @@
 5. **[Get GEM](#get-gem)**  
   a. [Hosted](#use-hosted-app)  
   b. [Chrome Extension](#get-the-chrome-extension)  
-  c. [Elasticsearch Plugin](#install-as-elasticsearch-plugin)
+  c. [Elasticsearch Plugin](#install-as-elasticsearch-plugin)  
+6. **[Other Apps](#other-apps)**
 
 
 ### GEM: Intro
@@ -74,9 +75,11 @@ GEM keeps the entire app state in the URL which makes for easy sharing of views.
 
 ``dev`` branch is the bleeding edge version of gem, all new changes go here.
 
+``gh-pages`` branch is for the Github Pages hosted version of the app, it is just the stable version of the `dev` branch.
+
 ``master`` branch is more suitable for installing gem locally. The Elasticsearch site plugin for gem uses ``master`` branch.
 
-``chrome-extension`` branch is where we make chrome extension related changes.
+``chrome-extension`` branch is for publishing the chrome extension.  
 
 #### Local Installation
 
@@ -86,31 +89,16 @@ GEM keeps the entire app state in the URL which makes for easy sharing of views.
 4. bower install
 5. npm start (runs gem on http://localhost:8000)
 
-#### Local Build
-
-#### `dev` branch: Elasticsearch Plugin
+And build with  
 
 ```sh
 $ npm run build
 ```
 
-#### `master` branch: Elasticsearch Plugin
+#### Contributing
 
-```sh
-$ npm run build_es_plugin
-```
+The source code is in the `app` directory. Pull requests should be created against the ``dev`` branch.
 
-#### `chrome-extension` branch: Chrome extension
-
-```sh
-$ npm run build_chrome_extension
-```
-
-#### `gh-pages` branch: Github hosted pages
-
-```sh
-$ npm run build
-```
 
 ### Get GEM
 
@@ -151,82 +139,32 @@ http://127.0.0.1:9200/_plugin/gem
 
 ``Note:`` If you use Elasticsearch from a different port, the URL to access and the `http.cors.allow-origin` value in the configuration file would change accordingly.
 
-
-#### Contributing
-
-The source code is under the ``_site/app`` directory.
-You can make pull requests against the ``dev`` branch.
-
 ---
+
+### Other Apps
+
+Just like GEM is purpose built for the mapping needs of an Elasticsearch indexes,  
+**[dejavu](http://opensource.appbase.io/dejavu/)** is purpose built for viewing your Elasticsearch index's data and perform CRUD operations, 
+**[mirage](http://opensource.appbase.io/mirage/)** is purpose built for composing queries with a GUI.
+
+Together, these three apps form a good base for building a great search experience.
 
 
 ### Import data sample
 ```json
 {
-  "name": "Foo",
-  "id": 1234,
-  "flag": true,
-  "location": {
-    "lat": 1234,
-    "lon": 1234
-  },
+  "name": "geolocation data",
   "place": {
-    "country": "india",
-    "city": "ahmedabad",
-    "pincode": 380055
-  }
+    "city": "New York",
+    "country": "United States"
+  },
+  "location": [40.3,-74]
 }
 ```
 
 ### Import mapping sample
 ```json
-{
-	"properties": {
-		"age": {
-			"type": "long"
-		},
-		"flag": {
-			"type": "boolean"
-		},
-		"id": {
-			"type": "integer"
-		},
-		"location": {
-			"type": "geo_point"
-		},
-		"location1": {
-			"type": "geo_point",
-			"fields": {
-				"sample": {
-					"type": "integer"
-				},
-				"sample2": {
-					"type": "string",
-					"index": "not_analyzed"
-				}
-			},
-			"geohash": true,
-			"geohash_prefix": true,
-			"geohash_precision": 10
-		},
-		"name": {
-			"type": "string"
-		},
-		"place": {
-			"properties": {
-				"city": {
-					"type": "string"
-				},
-				"country": {
-					"type": "string"
-				},
-				"pincode": {
-					"type": "integer"
-				}
-			}
-		}
-	}
-}
+
 ```
 
 ### Import Settings sample

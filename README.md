@@ -10,7 +10,8 @@
 3. **[Mapping and GEM FAQs](#mapping-and-gem-faqs)**  
    1. [What is a Mapping?](#what-is-a-mapping)  
    1. [How to create a new mapping?](#how-to-create-a-new-mapping)  
-   1. [What are the available mapping types?](#what-are-the-available-mapping-types)
+   1. [What are the available mapping types?](#what-are-the-available-mapping-types)  
+   1. [What other mapping parameters are available?](#what-other-mapping-parameters-are-available)  
    1. [Can a mapping be modified once it is applied?](#can-a-mapping-be-modified-once-it-is-applied)
    1. [How to map a sub field?](#how-to-map-a-sub-field)
    1. [What is an analyzer?](#what-is-an-analyzer)
@@ -59,6 +60,8 @@ GEM keeps the entire app state in the URL which makes for easy sharing of views.
 #### How to create a new mapping?
 
 #### What are the available mapping types?
+
+#### What other mapping parameters are available?
 
 #### Can a mapping be modified once it is applied?
 

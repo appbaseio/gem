@@ -42,7 +42,7 @@ export class SubscribeModal extends Component {
 			if (!this.state.profile) {
 				this.open();
 			}
-		}, 1000 * 5 * this.timer);
+		}, 1000 * 60 * this.timer);
 
 		$(window).focus(function() {
 			this.activetab = true;

@@ -16,6 +16,9 @@ export class MappingLink extends Component {
     let inputObj = dataOperation.inputState;
     inputObj.mappingObj = this.props.mappingObj;
     dataOperation.updateInputState(inputObj, false);
+    urlShare.mappingUrlWithoutApp({mappingObj: this.props.mappingObj}).then((url) => {
+      this.setState({url_without_credential: url});
+    }).catch((error) => console.log(error));
     urlShare.mappingUrl('gem').then((url) => {
       this.applyUrl(url);
     }).catch((error) => console.log(error));
@@ -86,13 +89,28 @@ export class MappingLink extends Component {
           { 
             <Popover id="share_pop" className = "nestedJson" >
               <div className="share_content">
-                <input type="text" className="form-control" value={this.state.url} id="for-share" />
-                <p className="mt-10">{this.state.copied}</p> 
+                <section className="share_part">
+                  <h3 className="title">
+                    With credentials
+                  </h3>
+                  <div className="description">
+                    <input type="text" className="form-control" value={this.state.url} id="for-share" readOnly />
+                    <p className="mt-10">{this.state.copied}</p> 
+                  </div>
+                </section>
+                <section className="share_part">
+                  <h3 className="title">
+                    Without credentials
+                  </h3>
+                  <div className="description">
+                    <input type="text" readOnly className="form-control" value={this.state.url_without_credential} id="for-share" />
+                  </div>
+                </section>
               </div>
             </Popover>
           } >
         <a href = "javascript:void(0);" className = "btn btn-default" >
-          <i className = "fa fa-share-alt"> </i> 
+          <i className = "fa fa-share-alt"> </i>
         </a> 
         </OverlayTrigger> 
       </span>

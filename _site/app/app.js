@@ -34,7 +34,7 @@ class Main extends Component {
         };
         dataOperation.updateInputState(inputState);
       }
-      if(dataOperation.queryParams.hasOwnProperty('hf')) {
+      if(dataOperation.queryParams.hasOwnProperty('hf') || dataOperation.queryParams.hasOwnProperty('h') || dataOperation.queryParams.hasOwnProperty('f')) {
         this.getMapping();
       }
       this.setState({
@@ -170,15 +170,19 @@ class Main extends Component {
   }
   includePart(part) {
     let res;
-    if(!(dataOperation.queryParams && dataOperation.queryParams.hasOwnProperty('hf'))) {
-      switch(part) {
-        case 'header':
+    switch(part) {
+      case 'header':
+        if(!(dataOperation.queryParams && (dataOperation.queryParams.hasOwnProperty('hf') || dataOperation.queryParams.hasOwnProperty('h')) )) {
           res = (<Header queryParams={this.state.queryParams}></Header>);
-        break;
-        case 'footer':
+        }
+      break;
+      case 'footer':
+        if(!(dataOperation.queryParams && (dataOperation.queryParams.hasOwnProperty('hf') || dataOperation.queryParams.hasOwnProperty('f')) )) {
           res = (<Footer></Footer>);
-        break;
-        case 'appLogin': 
+        }
+      break;
+      case 'appLogin':
+        if(!(dataOperation.queryParams && (dataOperation.queryParams.hasOwnProperty('hf') || dataOperation.queryParams.hasOwnProperty('h')) )) {
           res = (
             <AppLogin 
               appsList = {this.state.appsList} 
@@ -188,10 +192,20 @@ class Main extends Component {
               disconnect = {this.disconnect} >
             </AppLogin>
             );
-        break;
-      }
+        }
+      break;
     }
     return res;
+  }
+  setClass() {
+    let appClass ='appContainer ';
+      if(dataOperation.queryParams && (dataOperation.queryParams.hasOwnProperty('hf') || dataOperation.queryParams.hasOwnProperty('h'))) {
+        appClass += ' without-h '
+      }
+      if(dataOperation.queryParams && (dataOperation.queryParams.hasOwnProperty('hf') || dataOperation.queryParams.hasOwnProperty('f'))) {
+        appClass += ' without-f '
+      }
+    return appClass;
   }
   render() {
     let appContainer, mappingMarkup;
@@ -212,7 +226,7 @@ class Main extends Component {
       );
     }
     return (
-      <div className={"appContainer "+ (dataOperation.queryParams && dataOperation.queryParams.hasOwnProperty('hf') ? 'without-hf' : '')}>
+      <div className={this.setClass()}>
         <section className={(this.state.connecting ? 'loading' : 'hide')}>
           <div className="is-loadingApp">
             <div className="loadingBar"></div>

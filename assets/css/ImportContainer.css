@@ -77,8 +77,16 @@
           font-size: 14px;
           padding-right: 0; }
           #ImportContainer .JsonImport .json-header .title .extra-options .select2-container, #ImportContainer .ImportResult .json-header .title .extra-options .select2-container {
-            min-width: 200px;
+            width: 100% !important;
+            min-width: 100px;
             float: right; }
+          #ImportContainer .JsonImport .json-header .title .extra-options.selected .select2-container .select2-selection--single, #ImportContainer .ImportResult .json-header .title .extra-options.selected .select2-container .select2-selection--single {
+            border: 0;
+            background: transparent;
+            border-bottom: 1px dotted;
+            border-radius: 0; }
+          #ImportContainer .JsonImport .json-header .title .extra-options.selected .select2-container .select2-selection__arrow, #ImportContainer .ImportResult .json-header .title .extra-options.selected .select2-container .select2-selection__arrow {
+            display: none; }
         @media screen and (max-width: 768px) {
           #ImportContainer .JsonImport .json-header .title, #ImportContainer .ImportResult .json-header .title {
             font-size: 18px;

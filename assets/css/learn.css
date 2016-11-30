@@ -1,5 +1,13 @@
+#learnModal .introBottom {
+  display: table;
+  width: 100%; }
+
 #learnModal .modal-title {
-  font-size: 20px; }
+  font-size: 20px;
+  text-align: left; }
+
+#learnModal .modal-body {
+  padding-bottom: 15px; }
 
 #learnModal .learn-list-contianer {
   padding: 15px 0; }

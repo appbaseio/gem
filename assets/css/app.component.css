@@ -53,16 +53,27 @@
         padding-top: 86px; } }
 
 /*Without header footer*/
-#gem-container .appContainer.without-hf .app-container {
+#gem-container .appContainer.without-h .app-container, #gem-container .appContainer.without-hf .app-container {
+  padding-top: 0; }
+
+#gem-container .appContainer.without-h .mappingContainer, #gem-container .appContainer.without-hf .mappingContainer {
   padding-top: 0;
+  padding-left: 0;
+  padding-right: 0; }
+  #gem-container .appContainer.without-h .mappingContainer .btn-operational, #gem-container .appContainer.without-hf .mappingContainer .btn-operational {
+    left: 15px; }
+  #gem-container .appContainer.without-h .mappingContainer.mappingView .btn-operational, #gem-container .appContainer.without-hf .mappingContainer.mappingView .btn-operational {
+    left: inherit; }
+
+#gem-container .appContainer.without-f .app-container, #gem-container .appContainer.without-hf .app-container {
   padding-bottom: 0; }
 
-#gem-container .appContainer.without-hf .mappingContainer {
-  padding-top: 0; }
-  #gem-container .appContainer.without-hf .mappingContainer .btn-operational {
-    bottom: 15px; }
-  #gem-container .appContainer.without-hf .mappingContainer.mappingView .btn-operational {
-    bottom: 30px; }
+#gem-container .appContainer.without-f .mappingContainer, #gem-container .appContainer.without-hf .mappingContainer {
+  padding-bottom: 0; }
 
-#gem-container .appContainer.without-hf .typesContainer .typesContainerWrapper {
-  padding: 15px; }
+#gem-container .appContainer.without-h.without-f .mappingContainer .btn-operational, #gem-container .appContainer.without-hf .mappingContainer .btn-operational {
+  bottom: 45px; }
+
+#gem-container .appContainer.without-h.without-f .mappingContainer.mappingView .btn-operational, #gem-container .appContainer.without-hf .mappingContainer.mappingView .btn-operational {
+  left: inherit;
+  bottom: 14px; }

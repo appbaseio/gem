@@ -71,7 +71,7 @@ export class Editable extends Component {
 			case 'type':
 			case 'index':
 			case 'analyzer':
-				let getRelated = this.getData(method);
+				let getRelated = this.getData(this.props.editKey);
 				inputSample = (
 					<select className="form-control" value={this.state.editValue} ref="editInput" onChange={()=> this.inputHandle()} >
 						{this.getOptions(getRelated.data, getRelated.placeholder)}

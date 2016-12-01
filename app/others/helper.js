@@ -92,3 +92,20 @@ export const applyUrl = function(url) {
 		}
 	}.bind(this), 500);
 }
+export const updateFailure = function(res) {
+	let error = this.state.error;
+	error.title = 'Error';
+	error.message = res.responseText;
+	this.setState({
+		error: error
+	});
+}
+export const findRegisteredAnalyzer = function(dataOperation) {
+	let registeredAnalyzers = null;
+	try {
+		registeredAnalyzers = dataOperation.settings[dataOperation.inputState.appname].settings.index.analysis.analyzer;
+	} catch (e) {
+		console.log(e);
+	}
+	return registeredAnalyzers;
+}

@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { dataOperation } from '../../service/DataOperation';
 import { Field } from '../Field';
 import { ErrorModal } from '../../others/ErrorModal';
-import { closeError } from '../../others/helper';
+import { closeError, updateFailure } from '../../others/helper';
 
 export class ImportResult extends Component {
 	constructor(props) {
@@ -17,6 +17,7 @@ export class ImportResult extends Component {
 		this.handleUpdate = this.handleUpdate.bind(this);
 		this.subfieldUpdate = this.subfieldUpdate.bind(this);
 		this.closeError = closeError.bind(this);
+		this.updateFailure = updateFailure.bind(this);
 	}
 	componentWillMount() {
 
@@ -168,14 +169,7 @@ export class ImportResult extends Component {
 			console.log(JSON.stringify(request, null, 4));
 			dataOperation.updateMapping(request, this.props.selectedType).done((res) => {
 				this.props.updateSuccess();
-			}).fail((res) => {
-				let error = this.state.error;
-				error.title = 'Error';
-				error.message = res.responseText;
-				this.setState({
-					error: error
-				});
-			});
+			}).fail(this.updateFailure);
 		} else {
 			let error = this.state.error;
 			error.title = 'Type is not selected';

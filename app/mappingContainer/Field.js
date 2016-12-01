@@ -8,6 +8,7 @@ import { Editable } from './Editable';
 import { ErrorModal } from '../others/ErrorModal';
 import { ReadMore } from '../others/ReadMore';
 import { SingleOption } from './SingleOption';
+import {updateFailure, closeError, findRegisteredAnalyzer} from '../others/helper';
 
 export class Field extends Component {
 	constructor(props) {
@@ -38,9 +39,10 @@ export class Field extends Component {
 		this.excludeProperties = ['type', 'properties', 'index', 'fields'];
 		this.setModifiedField = this.setModifiedField.bind(this);
 		this.removeField = this.removeField.bind(this);
-		this.closeError = this.closeError.bind(this);
+		this.closeError = closeError.bind(this);
 		this.editCb = this.editCb.bind(this);
 		this.optionEdit = this.optionEdit.bind(this);
+		this.updateFailure = updateFailure.bind(this);
 	}
 	componentWillMount() {
 		if (this.props.fieldRecord) {
@@ -94,8 +96,11 @@ export class Field extends Component {
 		options.push(defaultOption);
 		this.setState(options);
 	}
+	setTitle(placeholder, readValue) {
+		return (<h4 className="sub-title col-xs-12" key="subtitle">{placeholder} <ReadMore link={readValue} /></h4>);
+	}
 	fieldContent(fields) {
-		let title = (<h4 className="sub-title col-xs-12" key="subtitle">Sub Fields <ReadMore link="subfield" /></h4>);
+		let title = this.setTitle('Sub Fields', 'subfield');
 		let generateFields = [];
 		let index = 0;
 		for (let singleField in fields) {
@@ -121,7 +126,7 @@ export class Field extends Component {
 		return generateFields;
 	}
 	addRows() {
-		let title = (<h4 className="sub-title col-xs-12" key="subtitle">Sub Fields<ReadMore link="subfield" /></h4>);
+		let title = this.setTitle('Sub Fields', 'subfield');
 		let generateFields = [];
 		let index = 0;
 		let existingRows = this.state.rows;
@@ -166,14 +171,7 @@ export class Field extends Component {
 				dataOperation.updateMapping(request, this.props.singleType).done((res) => {
 					this.updateAfterSubmit();
 					this.props.getMapping();
-				}).fail((res) => {
-					let error = this.state.error;
-					error.title = 'Error';
-					error.message = res.responseText;
-					this.setState({
-						error: error
-					});
-				});
+				}).fail(this.updateFailure);
 			} else {
 				this.updateAfterSubmit();
 			}
@@ -189,14 +187,6 @@ export class Field extends Component {
 					this.props.subfieldUpdate(this.state.fieldRecord.fields, this.props.id);
 				}
 			}.bind(this));
-		}
-		closeError() {
-			let error = this.state.error;
-			error.title = null;
-			error.message = null;
-			this.setState({
-				error: error
-			});
 		}
 		multipleField() {
 			let fieldList = this.props.fieldList.filter((item, index) => this.props.id === item.parent);
@@ -249,7 +239,7 @@ export class Field extends Component {
 			let additionalOptionsContainer, additionalOptions = [];
 			let fieldRecord = this.state.fieldRecord;
 			let fieldName = this.props.field;
-			let title = (<h4 className="sub-title col-xs-12" key="subtitle">Add extra properties <ReadMore link="extraProperties" /></h4>);
+			let title = this.setTitle('Add extra properties', 'extraProperties');
 			if (this.props.editable && this.state.options.length) {
 				additionalOptions = this.state.options.map((option, index) => {
 					return (<SingleOption defaultEdit={true} optionEdit={this.optionEdit} key={index} index={index} option={option} />)
@@ -281,8 +271,9 @@ export class Field extends Component {
 		operationalBtn() {
 			let addRow, addOptions, operationalBtn;
 			let fieldRecord = this.state.fieldRecord;
+			let allowSubField = (fieldRecord.type && !this.state.rows.length  && (fieldRecord.type === 'string' || fieldRecord.type === 'text' || fieldRecord.type === 'keyword') && fieldRecord.index !== 'not_analyzed') ? true : false;
 			if (!this.props.operationalBtn) {
-				if (fieldRecord.type && !this.state.rows.length  && (fieldRecord.type === 'string' || fieldRecord.type === 'text' || fieldRecord.type === 'keyword') && fieldRecord.index !== 'not_analyzed') {
+				if (allowSubField) {
 					addRow = (
 						<a key="add-subfield" className="btn btn-xs btn-primary pull-right edit-btn" onClick={() => this.addField()} >
 							Add subfield
@@ -298,7 +289,7 @@ export class Field extends Component {
 				}
 			}
 			if (fieldRecord.type && this.props.operationalBtn) {
-				if (fieldRecord.type && !this.state.rows.length && (fieldRecord.type === 'string' || fieldRecord.type === 'text' || fieldRecord.type === 'keyword') && fieldRecord.index !== 'not_analyzed') {
+				if (allowSubField) {
 					addRow = (
 						<MenuItem eventKey="1" onClick={() => this.addField()}>
 							Add subfield
@@ -332,11 +323,7 @@ export class Field extends Component {
 			let fieldRecord = this.state.fieldRecord;
 			let analyzer, analyzerRow, registeredAnalyzers = null;
 			if (dataOperation.settings && fieldRecord.type) {
-				try {
-					registeredAnalyzers = dataOperation.settings[dataOperation.inputState.appname].settings.index.analysis.analyzer;
-				} catch (e) {
-					console.log(e);
-				}
+				registeredAnalyzers = findRegisteredAnalyzer(dataOperation);
 				registeredAnalyzers = registeredAnalyzers ? Object.keys(registeredAnalyzers) : [];
 				if (registeredAnalyzers.length) {
 					analyzerRow = (

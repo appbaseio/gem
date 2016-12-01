@@ -6,7 +6,7 @@ import { Fields } from './Fields';
 import { ErrorModal } from '../others/ErrorModal';
 import { ImportModal } from './importContainer';
 import { ImportSettings } from './importSettings/';
-import { closeError } from '../others/helper';
+import { closeError, updateFailure } from '../others/helper';
 
 export class MappingContainer extends Component {
 	constructor(props) {
@@ -25,6 +25,7 @@ export class MappingContainer extends Component {
 		this.submitField = this.submitField.bind(this);
 		this.closeError = closeError.bind(this);
 		this.changeView = this.changeView.bind(this);
+		this.updateFailure = updateFailure.bind(this);
 	}
 	componentWillMount() {
 		// get mapping object from the input state and delete it from url once applying it.
@@ -71,14 +72,7 @@ export class MappingContainer extends Component {
 		};
 		dataOperation.updateMapping(request, formObj.type).done((res) => {
 			this.props.setField(mappings);
-		}).fail((res) => {
-			let error = this.state.error;
-			error.title = 'Error';
-			error.message = res.responseText;
-			this.setState({
-				error: error
-			});
-		});
+		}).fail(this.updateFailure);
 	}
 	changeView() {
 		let view = this.state.view === 'default' ? 'mapping' : 'default';

@@ -39,6 +39,18 @@ class DataOperation {
         urlShare.decryptUrl(this.queryParams).then((data) => {
           var decryptedData = data.data;
           if(decryptedData) {
+            let localConfig = this.getLocalConfig();
+            if (localConfig.url && !decryptedData.url) {
+              try {
+                decryptedData['url'] = localConfig.url;
+                decryptedData['appname'] = localConfig.appname;
+              } catch (e) {
+                decryptedData = {
+                  url: localConfig.url,
+                  appname: localConfig.appname
+                };
+              }
+            }
             this.updateInputState(decryptedData);
             resolve(decryptedData);
           } else {

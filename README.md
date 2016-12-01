@@ -1,4 +1,4 @@
-# GEM 💎
+# [GEM](https://opensource.appbase.io/gem) 💎
 
 ### GUI for Elasticsearch Mappings
 

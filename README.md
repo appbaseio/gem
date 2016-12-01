@@ -17,12 +17,13 @@
    1. [What is an analyzer?](#what-is-an-analyzer)
    1. [How to create a custom analyzer?](#how-to-create-a-custom-analyzer)
    1. [How to share a GEM view?](#how-to-share-a-gem-view-externally)
-4. **[Build Locally](#build-locally)**   
-5. **[Get GEM](#get-gem)**  
+4. **[GEM Usage Examples](#gem-usage-examples)**  
+5. **[Build Locally](#build-locally)**   
+6. **[Get GEM](#get-gem)**  
   a. [Hosted](#use-hosted-app)  
   b. [Chrome Extension](#get-the-chrome-extension)  
   c. [Elasticsearch Plugin](#install-as-elasticsearch-plugin)  
-6. **[Other Apps](#other-apps)**
+7. **[Other Apps](#other-apps)**
 
 
 ### GEM: Intro
@@ -82,8 +83,8 @@ Sub fields allow indexing the same field in two different ways, the idea is slig
 #### What is an analyzer?
 
 An analyzer is a pre-processor that is applied to data before indexing it. It does three things:  
-1. Sanitizing the string input, 
-2. Tokenizing the input into words, 
+1. Sanitizing the string input,  
+2. Tokenizing the input into words,  
 3. and Filtering the tokens.
 
 Because of the focus on searching, Elasticsearch comes with a good number of standard analyzers that can be applied at mapping time to a data field. However, since there is so much room for customization, it supports an interface to add custom analyzers.
@@ -97,6 +98,94 @@ The specs for creating a custom analyzer can be found [here](https://www.elastic
 #### How to share a GEM view externally?
 
 A GEM view can be shared externally (both embeddable and as a hyperlink) via the share icon at the top left screen ![](https://i.imgur.com/Qgum6wv.png).
+
+---
+
+### GEM Usage Examples
+
+#### Creating a Mapping from Data
+
+Let's say your JSON data looks like this: 
+
+```json
+{
+  "name": "geolocation data",
+  "place": {
+    "city": "New York",
+    "country": "United States"
+  },
+  "location": [40.3,-74]
+}
+```
+
+Use this magic link to view this data directly in [GEM](https://opensource.appbase.io/gem/#?input_state=XQAAAAKrAAAAAAAAAAA9iImmVFabo7XsB6A419CICVNEnslh5QMbF3MIxKBLbnZNCf8XVBQ_fk66Q5WeoQou8VkZNq5ye8BQl694_faoiqtLVcAPLosQf7njKrKrBTA0gEWaUB5MzP3HMsZ64wmtVjou6Ik43s7r1xwdvmdq1Wpgh23ow2w9OTOfjDJmdtiSQlpTjHyDz21n_wKMAAA). You will need to set the `app name` and `cluster URL` fields before being able to apply these.  
+
+Alternatively, you can write the exact mapping object in GEM's editor view to use the Elasticsearch APIs.
+
+#### Import Analyzer Settings
+
+For importing analyzer settings, select the Import Analyzer button from the button group in the bottom left screen.
+
+![](https://i.imgur.com/721NHwW.png)
+
+You can now add one ore more analyzers in the editor view to make them available at mapping creation time.
+
+```json
+{
+	"filter": {
+	  "nGram_filter": {
+	    "type": "edge_ngram",
+	    "min_gram": 1,
+	    "max_gram": 20,
+	    "token_chars": [
+	      "letter",
+	      "digit",
+	      "punctuation",
+	      "symbol"
+	    ]
+	  }
+	},
+	"analyzer": {
+	  "nGram_analyzer": {
+	    "type": "custom",
+	    "tokenizer": "whitespace",
+	    "filter": [
+	      "lowercase",
+	      "asciifolding",
+	      "nGram_filter"
+	    ]
+	  },
+	  "body_analyzer": {
+	    "type": "custom",
+	    "tokenizer": "standard",
+	    "filter": [
+	      "lowercase",
+	      "asciifolding",
+	      "stop",
+	      "snowball",
+	      "word_delimiter"
+	    ]
+	  },
+	  "standard_analyzer": {
+	    "type": "custom",
+	    "tokenizer": "standard",
+	    "filter": [
+	      "lowercase",
+	      "asciifolding"
+	    ]
+	  },
+	  "whitespace_analyzer": {
+	    "type": "whitespace",
+	    "tokenizer": "whitespace",
+	    "filter": [
+	      "lowercase",
+	      "asciifolding"
+	    ]
+	  }
+	}
+}
+```
+
 
 ### Build Locally
 
@@ -175,78 +264,3 @@ Just like GEM is purpose built for the mapping needs of an Elasticsearch indexes
 **[mirage](http://opensource.appbase.io/mirage/)** is purpose built for composing queries with a GUI.
 
 Together, these three apps form a good base for building a great search experience.
-
-
-### Import data sample
-```json
-{
-  "name": "geolocation data",
-  "place": {
-    "city": "New York",
-    "country": "United States"
-  },
-  "location": [40.3,-74]
-}
-```
-
-### Import mapping sample
-```json
-
-```
-
-### Import Settings sample
-```json
-{
-	"filter": {
-	  "nGram_filter": {
-	    "type": "edge_ngram",
-	    "min_gram": 1,
-	    "max_gram": 20,
-	    "token_chars": [
-	      "letter",
-	      "digit",
-	      "punctuation",
-	      "symbol"
-	    ]
-	  }
-	},
-	"analyzer": {
-	  "nGram_analyzer": {
-	    "type": "custom",
-	    "tokenizer": "whitespace",
-	    "filter": [
-	      "lowercase",
-	      "asciifolding",
-	      "nGram_filter"
-	    ]
-	  },
-	  "body_analyzer": {
-	    "type": "custom",
-	    "tokenizer": "standard",
-	    "filter": [
-	      "lowercase",
-	      "asciifolding",
-	      "stop",
-	      "snowball",
-	      "word_delimiter"
-	    ]
-	  },
-	  "standard_analyzer": {
-	    "type": "custom",
-	    "tokenizer": "standard",
-	    "filter": [
-	      "lowercase",
-	      "asciifolding"
-	    ]
-	  },
-	  "whitespace_analyzer": {
-	    "type": "whitespace",
-	    "tokenizer": "whitespace",
-	    "filter": [
-	      "lowercase",
-	      "asciifolding"
-	    ]
-	  }
-	}
-}
-```

@@ -83,6 +83,12 @@ export class MappingLink extends Component {
     return succeed;
   }
   render() {
+    let disable;
+    if(!this.props.shareAllowed) {
+      disable = {
+        disabled: true
+      };
+    }
     return (
       <span className = 'share-btn action-btn' >
         <OverlayTrigger rootClose trigger = "click" onClick = {() => this.selectText()} placement = "right" overlay = 
@@ -109,9 +115,9 @@ export class MappingLink extends Component {
               </div>
             </Popover>
           } >
-        <a href = "javascript:void(0);" className = "btn btn-default" >
+        <button {...disable} className = "btn btn-default" >
           <i className = "fa fa-share-alt"> </i>
-        </a> 
+        </button> 
         </OverlayTrigger> 
       </span>
     );

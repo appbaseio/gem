@@ -1,9 +1,9 @@
 {
-  "name": "Gem",
-  "description": "",
+  "name": "GEM",
+  "description": "💎 GUI for Elasticsearch Mappings",
   "main": "main.js",
   "authors": [
-    "Farhan Chauhan <farhan687@gmail.com>"
+    "Farhan Chauhan <farhan@appbase.io>"
   ],
   "private": true,
   "dependencies": {

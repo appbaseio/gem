@@ -34,13 +34,6 @@ export class Editable extends Component {
 		types.unshift(<option key={-1} value=''>{placeholder}</option>);
 		return types;
 	}
-	getanalyzers() {
-		let analyzer = this.props.registeredAnalyzers.map((index, i) => {
-			return (<option key={i} value={index}>{index}</option>)
-		});
-		analyzer.unshift(<option key={-1} value=''>select analyzer</option>);
-		return analyzer;
-	}
 	getData(method) {
 		let obj = {
 			data: [],
@@ -65,12 +58,9 @@ export class Editable extends Component {
 	inputOptions() {
 		let inputSample;
 		switch (this.props.editKey) {
-			case 'fieldName':
-				inputSample = (<input className="form-control" type="text" value={this.state.editValue} ref="editInput" onChange={()=> this.inputHandle()} placeholder={this.props.placeholder} ></input>);
-				break;
 			case 'type':
 			case 'index':
-			case 'analyzer':
+			case 'analyzer': {
 				let getRelated = this.getData(this.props.editKey);
 				inputSample = (
 					<select className="form-control" value={this.state.editValue} ref="editInput" onChange={()=> this.inputHandle()} >
@@ -78,9 +68,12 @@ export class Editable extends Component {
 					</select>
 				);
 				break;
-			default:
+			}
+			case 'fieldName':
+			default: {
 				inputSample = (<input className="form-control" type="text" value={this.state.editValue} ref="editInput" onChange={()=> this.inputHandle()} placeholder={this.props.placeholder} ></input>);
 				break;
+			}
 		}
 		return inputSample;
 	}

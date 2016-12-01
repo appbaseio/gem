@@ -8,7 +8,7 @@
 1. **[GEM: Intro](#gem-intro)**   
 2. **[Features](#features)**  
 3. **[Mapping and GEM FAQs](#mapping-and-gem-faqs)**  
-   1. [What is a Mapping?](#what-is-a-mapping)  
+   1. [What is a mapping?](#what-is-a-mapping)  
    1. [How to create a new mapping?](#how-to-create-a-new-mapping)  
    1. [What are the available mapping types?](#what-are-the-available-mapping-types)  
    1. [What other mapping parameters are available?](#what-other-mapping-parameters-are-available)  

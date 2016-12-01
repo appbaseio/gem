@@ -57,22 +57,46 @@ GEM keeps the entire app state in the URL which makes for easy sharing of views.
 
 #### What is a mapping?
 
+A mapping in Elasticsearch is like a schema in SQL. It's an API for defining how data should be internally stored within Elasticsearch indexes.
+
 #### How to create a new mapping?
+
+A mapping can be created at the time of an Elasticsearch index creation or afterwards in an explicit definition. If no mapping is specified, it is dynamically created when data is inserted into the index.
 
 #### What are the available mapping types?
 
+`string` (starting v5.0 is called `text`), `date`, `long`, `integer`, `short`, `byte`, `double`, `float`, `boolean` are the common data types. `nested`, `object`, `binary`, `geo_point`, `geo_shape`, `ip`, `completion` are some of the specialized data types. You can read more about the available types on [Elasticsearch docs here](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-types.html).
+
 #### What other mapping parameters are available?
+
+While mapping's main role is in defining data structures, it also allows defining certain indexing and querying related parameters that are commonly used. For example, `analyzer` allows defining which analyzer to use for indexing the text data. `doc_values` parameter makes indexing data available for aggregations functionality by storing it in a column-oriented fashion. Another one, `null_value` parameter allows replacing a `null` value field to be replaced with a specified value. You can read more about it [here](https://www.elastic.co/guide/en/elasticsearch/reference/5.0/mapping-params.html).
 
 #### Can a mapping be modified once it is applied?
 
+Starting v2.0, mappings are immutable. Once applied, they cannot be modified. In the event a mapping needs modification, the suggested alternative is to reindex data in a new index.
+
 #### How to map a sub field?
+
+Sub fields allow indexing the same field in two different ways, the idea is slightly counter intuitive if you come from a structured database background. Since Elasticsearch is a search engine primarily, data is indexed primarily in a search oriented data structure. However, it's necessary to index it in an exact format for exact search queries and aggregations. Not surprisingly, sub fields only apply to a `string` field.
 
 #### What is an analyzer?
 
+An analyzer is a pre-processor that is applied to data before indexing it. It does three things:  
+1. Sanitizing the string input, 
+2. Tokenizing the input into words, 
+3. and Filtering the tokens.
+
+Because of the focus on searching, Elasticsearch comes with a good number of standard analyzers that can be applied at mapping time to a data field. However, since there is so much room for customization, it supports an interface to add custom analyzers.
+
+GEM also provides a GUI interface to import a user defined analyzer and lists available analyzers to pick from at mapping time.
+
 #### How to create a custom analyzer?
+
+The specs for creating a custom analyzer can be found [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-custom-analyzer.html). 
 
 #### How to share a GEM view externally?
 
+A GEM view can be shared externally (both embeddable and as a hyperlink) via the share icon at the top left screen ![](https://i.imgur.com/Qgum6wv.png).
 
 ### Build Locally
 

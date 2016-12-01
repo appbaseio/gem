@@ -1,5 +1,4 @@
-import {
-	default as React, Component } from 'react';
+import {default as React, Component } from 'react';
 var ReactDOM = require('react-dom');
 import { dataOperation } from './service/DataOperation';
 import { storageService } from './service/StorageService';
@@ -54,15 +53,17 @@ class Main extends Component {
 	getIndicesCb(es_host, data) {
 		var indices = [];
 		var historicApps = this.state.appsList;
+		var obj;
+		var checkHistoricApp = function(old_app, index) {
+			if (old_app.appname === indice) {
+				historicApps.splice(index, 1);
+			}
+		}
 		for (let indice in data.indices) {
 			if (historicApps && historicApps.length) {
-				historicApps.forEach(function(old_app, index) {
-					if (old_app.appname === indice) {
-						historicApps.splice(index, 1);
-					}
-				})
+				historicApps.forEach(checkHistoricApp)
 			}
-			var obj = {
+			obj = {
 				appname: indice,
 				url: es_host
 			};
@@ -71,7 +72,7 @@ class Main extends Component {
 		}
 		// if no app found
 		if (!historicApps.length) {
-			var obj = {
+			obj = {
 				appname: 'sampleapp',
 				url: es_host
 			};
@@ -80,7 +81,7 @@ class Main extends Component {
 		let updateState = {
 			appsList: historicApps
 		};
-		if (dataOperation.inputState.url == '') {
+		if (dataOperation.inputState.url === '') {
 			let inputState = JSON.parse(JSON.stringify(dataOperation.inputState));
 			inputState.url = es_host;
 			dataOperation.updateInputState(inputState)
@@ -165,27 +166,28 @@ class Main extends Component {
 	}
 	includePart(part) {
 		let res;
+		let generalCondition = (dataOperation.queryParams && dataOperation.queryParams.hasOwnProperty('hf')) ? true : false;
 		switch (part) {
 			case 'header':
-				if (!(dataOperation.queryParams && (dataOperation.queryParams.hasOwnProperty('hf') || dataOperation.queryParams.hasOwnProperty('h')))) {
+				if (!(generalCondition || dataOperation.queryParams.hasOwnProperty('h'))) {
 					res = (<Header queryParams={this.state.queryParams}></Header>);
 				}
 				break;
 			case 'footer':
-				if (!(dataOperation.queryParams && (dataOperation.queryParams.hasOwnProperty('hf') || dataOperation.queryParams.hasOwnProperty('f')))) {
+				if (!(generalCondition || dataOperation.queryParams.hasOwnProperty('f'))) {
 					res = (<Footer></Footer>);
 				}
 				break;
 			case 'appLogin':
-				if (!(dataOperation.queryParams && (dataOperation.queryParams.hasOwnProperty('hf') || dataOperation.queryParams.hasOwnProperty('h')))) {
+				if (!(generalCondition || dataOperation.queryParams.hasOwnProperty('h'))) {
 					res = (
-						<AppLogin 
-			  appsList = {this.state.appsList} 
-			  inputState = {this.state.inputState} 
-			  getMapping = {this.getMapping}
-			  mappings = {this.state.mappings}
-			  disconnect = {this.disconnect} >
-			</AppLogin>
+						<AppLogin
+							appsList = {this.state.appsList} 
+							inputState = {this.state.inputState} 
+							getMapping = {this.getMapping}
+							mappings = {this.state.mappings}
+							disconnect = {this.disconnect} >
+						</AppLogin>
 					);
 				}
 				break;
@@ -194,47 +196,58 @@ class Main extends Component {
 	}
 	setClass() {
 		let appClass = 'appContainer ';
-		if (dataOperation.queryParams && (dataOperation.queryParams.hasOwnProperty('hf') || dataOperation.queryParams.hasOwnProperty('h'))) {
+		let generalCondition = (dataOperation.queryParams && dataOperation.queryParams.hasOwnProperty('hf')) ? true : false;
+		if (generalCondition || dataOperation.queryParams.hasOwnProperty('h')) {
 			appClass += ' without-h '
 		}
-		if (dataOperation.queryParams && (dataOperation.queryParams.hasOwnProperty('hf') || dataOperation.queryParams.hasOwnProperty('f'))) {
+		if (generalCondition || dataOperation.queryParams.hasOwnProperty('f')) {
 			appClass += ' without-f '
 		}
 		return appClass;
+	}
+	renderSection(method) {
+		return(
+			<section className={(method ? 'loading' : 'hide')}>
+				<div className="is-loadingApp">
+					<div className="loadingBar"></div>
+				</div>
+			</section>
+		);
 	}
 	render() {
 		let appContainer, mappingMarkup;
 		if (this.state.inputState) {
 			appContainer = (
 				<div className="container-fluid app-container">
-		  {this.includePart('header')}
-		  <div className="app-with-sidebar-container container-fluid">
-			<div className="app-main-container">
-			  {this.includePart('appLogin')}
-			  <MappingContainer 
-				setField= {this.setField} 
-				mappings = {this.state.mappings} 
-				getMapping = {this.getMapping}/>
-			</div>
-		  </div>
-	   </div>
+					{this.includePart('header')}
+					<div className="app-with-sidebar-container container-fluid">
+						<div className="app-main-container">
+							{this.includePart('appLogin')}
+							<MappingContainer 
+								setField= {this.setField} 
+								mappings = {this.state.mappings} 
+								getMapping = {this.getMapping}/>
+						</div>
+					</div>
+				</div>
 			);
 		}
+		let loadingBar = (
+			<div className="is-loadingApp">
+				<div className="loadingBar"></div>
+			</div>
+		);
 		return (
 			<div className={this.setClass()}>
-		<section className={(this.state.connecting ? 'loading' : 'hide')}>
-		  <div className="is-loadingApp">
-			<div className="loadingBar"></div>
-		  </div>
-		</section>
-		<section className={(this.state.inputState ? "hide" : "loading")}>
-		  <div className="is-loadingApp">
-			<div className="loadingBar"></div>
-		  </div>
-		</section>
-		{appContainer}
-		{this.includePart('footer')}
-	  </div>
+				<section className={(this.state.connecting ? 'loading' : 'hide')}>
+					{loadingBar}
+				</section>
+				<section className={(this.state.inputState ? "hide" : "loading")}>
+					{loadingBar}
+				</section>
+				{appContainer}
+				{this.includePart('footer')}
+			</div>
 		);
 	}
 }

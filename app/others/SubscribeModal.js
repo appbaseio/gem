@@ -22,6 +22,7 @@ export class SubscribeModal extends Component {
 				text: 'Limited major updates'
 			}
 		}
+		this.countdown = 0;
 		this.timer = 1;
 		this.activetab = true;
 		this.holdSubscribe = false;
@@ -34,15 +35,21 @@ export class SubscribeModal extends Component {
 				profile: data
 			});
 		});
-		let subPopuptimer = storageService.get('subPopuptimer');
-		if (subPopuptimer && subPopuptimer !== 'NaN') {
-			this.timer = parseInt(storageService.get('subPopuptimer'));
-		}
-		setTimeout(() => {
+		storageService.set('subPopuptimerAlreadyOpen', 'no');
+		let popupInterval = setInterval(() => {
+			this.countdown++;
 			if (!this.state.profile) {
-				this.open();
+				let subPopuptimer = storageService.get('subPopuptimer');
+				if (subPopuptimer && subPopuptimer !== 'NaN') {
+					this.timer = parseInt(storageService.get('subPopuptimer'));
+				}
+				if(this.countdown == this.timer) {
+					this.open();
+				}
+			} else {
+				popupInterval();
 			}
-		}, 1000 * 60 * this.timer);
+		}, 1000 * 60);
 
 		$(window).focus(function() {
 			this.activetab = true;
@@ -60,13 +67,17 @@ export class SubscribeModal extends Component {
 	close() {
 		this.internalClose = true;
 		storageService.set('subPopuptimer', this.timer + 5);
+		storageService.set('subPopuptimerAlreadyOpen', 'no');
 		this.setState({ showModal: false });
 	}
 	open() {
 		if (!this.state.profile) {
 			if (!$('.fade.in.modal').length) {
 				if(this.activetab) {
-					this.setState({ showModal: true });
+					if(storageService.get('subPopuptimerAlreadyOpen') == 'no') {
+						this.setState({ showModal: true });
+						storageService.set('subPopuptimerAlreadyOpen', 'yes');
+					}
 				} else {
 					this.holdSubscribe = true;
 				}

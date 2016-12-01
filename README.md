@@ -28,7 +28,7 @@
 
 ### GEM: Intro
 
-GEM is a GUI for creating and managing an Elasticsearch index's datastrcuture mappings. ES Mappings provide an immutable interface to control how data is stored internally within Elasticsearch and how queries can be applied to it.  
+GEM is a GUI for creating and managing an Elasticsearch index's datastructure mappings. ES Mappings provide an immutable interface to control how data is stored internally within Elasticsearch and how queries can be applied to it.  
 
 Mappings allow deciding things like:
 

@@ -20,6 +20,7 @@ class DataOperation {
 			url: 'https://VV3IsiOap:f937dbed-9b5d-4fc2-9ce8-55f2f495d1a5@scalr.api.appbase.io',
 			appname: 'heatmap-sample'
 		};
+		this.queryParams = {};
 	}
 
 	// Get input stats from url
@@ -67,7 +68,7 @@ class DataOperation {
 				return n = n.split("="), this[n[0]] = n[1], this
 			}.bind({}))[0];
 		} else {
-			return null;
+			return {};
 		}
 	}
 

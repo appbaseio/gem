@@ -282,7 +282,7 @@ export class Field extends Component {
 			let addRow, addOptions, operationalBtn;
 			let fieldRecord = this.state.fieldRecord;
 			if (!this.props.operationalBtn) {
-				if (fieldRecord.type && !this.state.rows.length) {
+				if (fieldRecord.type && !this.state.rows.length  && (fieldRecord.type === 'string' || fieldRecord.type === 'text' || fieldRecord.type === 'keyword') && fieldRecord.index !== 'not_analyzed') {
 					addRow = (
 						<a key="add-subfield" className="btn btn-xs btn-primary pull-right edit-btn" onClick={() => this.addField()} >
 							Add subfield
@@ -298,7 +298,7 @@ export class Field extends Component {
 				}
 			}
 			if (fieldRecord.type && this.props.operationalBtn) {
-				if (fieldRecord.type && !this.state.rows.length) {
+				if (fieldRecord.type && !this.state.rows.length && (fieldRecord.type === 'string' || fieldRecord.type === 'text' || fieldRecord.type === 'keyword') && fieldRecord.index !== 'not_analyzed') {
 					addRow = (
 						<MenuItem eventKey="1" onClick={() => this.addField()}>
 							Add subfield
@@ -363,8 +363,13 @@ export class Field extends Component {
 					<h3 className='title row'>
 						{this.setJsonPopover()}
 						<span className="col-xs-12 col-sm-4 pd-l0">{singleType} {fieldName}</span>
-						<span className={'datatype '+ (!fieldRecord.type ? ' hide ' : '')}>
-							{fieldRecord.type}
+						<span className="col-xs-12 col-sm-4">
+							<span className={'datatype '+ (!fieldRecord.type ? ' hide ' : '')}>
+								{fieldRecord.type}
+							</span>
+						</span>
+						<span className={'index '+ (!fieldRecord.index ? ' hide ' : '')}>
+							{fieldRecord.index}
 						</span>
 						{this.operationalBtn()}
 					</h3>

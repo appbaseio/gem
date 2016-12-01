@@ -118,7 +118,7 @@ Let's say your JSON data looks like this:
 }
 ```
 
-Use this magic link to view this data directly in [GEM](https://opensource.appbase.io/gem/#?input_state=XQAAAAKrAAAAAAAAAAA9iImmVFabo7XsB6A419CICVNEnslh5QMbF3MIxKBLbnZNCf8XVBQ_fk66Q5WeoQou8VkZNq5ye8BQl694_faoiqtLVcAPLosQf7njKrKrBTA0gEWaUB5MzP3HMsZ64wmtVjou6Ik43s7r1xwdvmdq1Wpgh23ow2w9OTOfjDJmdtiSQlpTjHyDz21n_wKMAAA). You will need to set the `app name` and `cluster URL` fields before being able to apply these.  
+Use [this magic link](https://opensource.appbase.io/gem/#?input_state=XQAAAAKrAAAAAAAAAAA9iImmVFabo7XsB6A419CICVNEnslh5QMbF3MIxKBLbnZNCf8XVBQ_fk66Q5WeoQou8VkZNq5ye8BQl694_faoiqtLVcAPLosQf7njKrKrBTA0gEWaUB5MzP3HMsZ64wmtVjou6Ik43s7r1xwdvmdq1Wpgh23ow2w9OTOfjDJmdtiSQlpTjHyDz21n_wKMAAA) to view this data directly in GEM. You will need to set the `app name` and `cluster URL` fields before being able to apply these.  
 
 Alternatively, you can write the exact mapping object in GEM's editor view to use the Elasticsearch APIs.
 
@@ -128,7 +128,7 @@ For importing analyzer settings, select the Import Analyzer button from the butt
 
 ![](https://i.imgur.com/721NHwW.png)
 
-You can now add one ore more analyzers in the editor view to make them available at mapping creation time.
+You can now add one ore more analyzers in the editor view to make them available at mapping creation time. The following JSON can be used for some good defaults.
 
 ```json
 {
@@ -260,7 +260,7 @@ http://127.0.0.1:9200/_plugin/gem
 ### Other Apps
 
 Just like GEM is purpose built for the mapping needs of an Elasticsearch indexes,  
-**[dejavu](http://opensource.appbase.io/dejavu/)** is purpose built for viewing your Elasticsearch index's data and perform CRUD operations, 
+**[dejavu](http://opensource.appbase.io/dejavu/)** is purpose built for viewing your Elasticsearch index's data and perform CRUD operations, and  
 **[mirage](http://opensource.appbase.io/mirage/)** is purpose built for composing queries with a GUI.
 
 Together, these three apps form a good base for building a great search experience.

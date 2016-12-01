@@ -27,7 +27,7 @@ class Main extends Component {
 	getInputState() {
 		let localConfig = dataOperation.getLocalConfig();
 		dataOperation.getInputState().then((inputState) => {
-			if (dataOperation.queryParams.hasOwnProperty('hf') || dataOperation.queryParams.hasOwnProperty('h') || dataOperation.queryParams.hasOwnProperty('f')) {
+			if (dataOperation.queryParams &&  dataOperation.queryParams.hasOwnProperty('hf') || dataOperation.queryParams.hasOwnProperty('h') || dataOperation.queryParams.hasOwnProperty('f')) {
 				this.getMapping();
 			}
 			this.setState({
@@ -169,17 +169,17 @@ class Main extends Component {
 		let generalCondition = (dataOperation.queryParams && dataOperation.queryParams.hasOwnProperty('hf')) ? true : false;
 		switch (part) {
 			case 'header':
-				if (!(generalCondition || dataOperation.queryParams.hasOwnProperty('h'))) {
+				if (!(generalCondition || dataOperation.queryParams && dataOperation.queryParams.hasOwnProperty('h'))) {
 					res = (<Header queryParams={this.state.queryParams}></Header>);
 				}
 				break;
 			case 'footer':
-				if (!(generalCondition || dataOperation.queryParams.hasOwnProperty('f'))) {
+				if (!(generalCondition || dataOperation.queryParams && dataOperation.queryParams.hasOwnProperty('f'))) {
 					res = (<Footer></Footer>);
 				}
 				break;
 			case 'appLogin':
-				if (!(generalCondition || dataOperation.queryParams.hasOwnProperty('h'))) {
+				if (!(generalCondition || dataOperation.queryParams && dataOperation.queryParams.hasOwnProperty('h'))) {
 					res = (
 						<AppLogin
 							appsList = {this.state.appsList} 
@@ -197,10 +197,10 @@ class Main extends Component {
 	setClass() {
 		let appClass = 'appContainer ';
 		let generalCondition = (dataOperation.queryParams && dataOperation.queryParams.hasOwnProperty('hf')) ? true : false;
-		if (generalCondition || dataOperation.queryParams.hasOwnProperty('h')) {
+		if (generalCondition || dataOperation.queryParams && dataOperation.queryParams.hasOwnProperty('h')) {
 			appClass += ' without-h '
 		}
-		if (generalCondition || dataOperation.queryParams.hasOwnProperty('f')) {
+		if (generalCondition || dataOperation.queryParams && dataOperation.queryParams.hasOwnProperty('f')) {
 			appClass += ' without-f '
 		}
 		return appClass;

@@ -3,7 +3,6 @@ import { render } from 'react-dom';
 import { dataOperation } from '../service/DataOperation';
 import { Types } from './Types';
 import { Fields } from './Fields';
-import { AddField } from './AddField';
 import { ErrorModal } from '../others/ErrorModal';
 import { ImportModal } from './importContainer';
 import { ImportSettings } from './importSettings/';

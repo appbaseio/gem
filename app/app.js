@@ -28,18 +28,6 @@ class Main extends Component {
 	getInputState() {
 		let localConfig = dataOperation.getLocalConfig();
 		dataOperation.getInputState().then((inputState) => {
-			if (localConfig.url && !inputState.url) {
-				try {
-					inputState['url'] = localConfig.url;
-					inputState['appname'] = localConfig.appname;
-				} catch (e) {
-					inputState = {
-						url: localConfig.url,
-						appname: localConfig.appname
-					};
-				}
-				dataOperation.updateInputState(inputState);
-			}
 			if (dataOperation.queryParams.hasOwnProperty('hf') || dataOperation.queryParams.hasOwnProperty('h') || dataOperation.queryParams.hasOwnProperty('f')) {
 				this.getMapping();
 			}

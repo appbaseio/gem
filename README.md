@@ -259,8 +259,10 @@ http://127.0.0.1:9200/_plugin/gem
 
 ### Other Apps
 
-Just like GEM is purpose built for the mapping needs of an Elasticsearch indexes,  
-**[dejavu](http://opensource.appbase.io/dejavu/)** is purpose built for viewing your Elasticsearch index's data and perform CRUD operations, and  
-**[mirage](http://opensource.appbase.io/mirage/)** is purpose built for composing queries with a GUI.
+GEM is purpose built for the mapping needs of an Elasticsearch index.    
+**[dejavu](http://opensource.appbase.io/dejavu/)** is similarly purpose built for viewing your Elasticsearch index's data and perform CRUD operations, and  
+**[mirage](http://opensource.appbase.io/mirage/)** is a GUI for composing Elasticsearch queries.
 
-Together, these three apps form a good base for building a great search experience.
+![](https://i.imgur.com/Wxh8ceG.png)  
+
+Together, these three apps form the building blocks for powering a great search experience.

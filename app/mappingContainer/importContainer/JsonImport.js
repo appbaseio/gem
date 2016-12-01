@@ -179,7 +179,7 @@ export class JsonImport extends Component {
     	<div className="JsonImport col-xs-12 col-sm-6">
         <div className={"json-header alert "+(this.state.validFlag ? 'success alert-success' : 'error alert-danger')}>
           <h3 className="title">
-            <MappingLink shareAllowed={this.state.validFlag} mappingObj={this.state.mappingObj} />
+            <MappingLink shareAllowed={this.state.validFlag && this.props.mappings} mappingObj={this.state.mappingObj} />
             <span className="pull-left col-xs-12 col-sm-6 importType">
               {this.radioOptions()}
             </span>

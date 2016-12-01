@@ -236,9 +236,9 @@ or
 
 ```sh
  http.port: 9200
- http.cors.allow-origin: "http://127.0.0.1:9200"
+ http.cors.allow-origin: "/.*/"
  http.cors.enabled: true
- http.cors.allow-headers : X-Requested-With,X-Auth-Token,Content-Type, Content-Length, Authorization
+ http.cors.allow-headers: Authorization, X-Requested-With, Content-Type, Content-Length
  http.cors.allow-credentials: true
 ```
 

@@ -3,7 +3,7 @@ import { storageService } from '../service/StorageService';
 import { dataOperation } from '../service/DataOperation';
 import { render } from 'react-dom';
 import { Modal } from 'react-bootstrap';
-import { authOperation, authEmitter } from '../service/authOperation';
+import { authOperation, authEmitter } from '../service/AuthOperation';
 
 export class IntroModal extends Component {
 	constructor(props) {

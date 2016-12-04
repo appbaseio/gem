@@ -62,7 +62,7 @@ A mapping in Elasticsearch is like a schema in SQL. It's an API for defining how
 
 #### How to create a new mapping?
 
-A mapping can be created at the time of an Elasticsearch index creation or afterwards in an explicit definition. If no mapping is specified, it is dynamically created when data is inserted into the index.
+A mapping can be created at the time of an Elasticsearch index creation or afterwards in an explicit definition. If no mapping is specified, it is dynamically created when data is inserted into the index. See an example [here](#creating-a-mapping-from-data).
 
 #### What are the available mapping types?
 
@@ -109,18 +109,49 @@ Let's say your JSON data looks like this:
 
 ```json
 {
-  "name": "geolocation data",
-  "place": {
-    "city": "New York",
-    "country": "United States"
-  },
-  "location": [40.3,-74]
+	"name": "geolocation data",
+	"place": {
+		"city": "New York",
+		"country": "United States"
+	},
+	"location": [40.3,-74]
 }
 ```
 
 Use [this magic link](https://opensource.appbase.io/gem/#?input_state=XQAAAAKrAAAAAAAAAAA9iImmVFabo7XsB6A419CICVNEnslh5QMbF3MIxKBLbnZNCf8XVBQ_fk66Q5WeoQou8VkZNq5ye8BQl694_faoiqtLVcAPLosQf7njKrKrBTA0gEWaUB5MzP3HMsZ64wmtVjou6Ik43s7r1xwdvmdq1Wpgh23ow2w9OTOfjDJmdtiSQlpTjHyDz21n_wKMAAA) to view this data directly in GEM. You will need to set the `app name` and `cluster URL` fields before being able to apply these.  
 
-Alternatively, you can write the exact mapping object in GEM's editor view to use the Elasticsearch APIs.
+
+
+#### Creating a Direct Mapping
+
+GEM also supports defining a type mapping directly for times when you have the exact definition.
+
+The definition for the above data would like this:
+
+```json
+{
+	"properties": {
+		"name": {
+			"type": "string"
+    	},
+		"place": {
+			"properties": {
+				"city": {
+					"type": "string"
+				},
+				"country": {
+					"type": "string"
+				}
+			}
+		},
+		"location": {
+			"type": "geo_point"    	
+		}
+	}
+}
+```
+
+Use [this magic link](https://opensource.appbase.io/gem/#?input_state=XQAAAAIhAQAAAAAAAAA9iImmVFabo7XsB6A419CICVNEnslh5QMbF3MIxK79prp7RmFG-b9yXcUHOikguRelsxWS5TuKjd-eLvVV8Y_SmSuVoLozN6HSnSoD5tHzhF8namejZRrDATpzUre1NlQLYpam68adBzhuHzGgTKEiQJuEo6Pa9AduJh2pKg97Znl8rJYmO6nWgchU-5_96LaA) to view this in the GEM editor. Obviously, you will need to set the `app name` and `cluster URL` fields before being able to apply the mappings.
 
 #### Import Analyzer Settings
 

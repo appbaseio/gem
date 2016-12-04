@@ -151,7 +151,7 @@ The definition for the above data would like this:
 }
 ```
 
-Use [this magic link](https://opensource.appbase.io/gem/#?input_state=XQAAAAIhAQAAAAAAAAA9iImmVFabo7XsB6A419CICVNEnslh5QMbF3MIxK79prp7RmFG-b9yXcUHOikguRelsxWS5TuKjd-eLvVV8Y_SmSuVoLozN6HSnSoD5tHzhF8namejZRrDATpzUre1NlQLYpam68adBzhuHzGgTKEiQJuEo6Pa9AduJh2pKg97Znl8rJYmO6nWgchU-5_96LaA) to view this in the GEM editor. Obviously, you will need to set the `app name` and `cluster URL` fields before being able to apply the mappings.
+Use [this magic link](https://opensource.appbase.io/gem/#?input_state=XQAAAAIXAQAAAAAAAAA9iImmVFabo7XsB6A419CICVNEnslh5QMbF3MIxK79prp7RmFG-b9yXcUHOikguRelsxWS5TuKjd-eLvVV8Y_SmSuVoLozN6HSnSoD5tHzhF8namejZRrDATpzUre1NlQLYpam68adBzhuHzGgTKEiQJuEo6Pa9AduJh2pKg97ZmeLVRzRSu-Af_usigA) to view this in the GEM editor. Obviously, you will need to set the `app name` and `cluster URL` fields before being able to apply the mappings.
 
 #### Import Analyzer Settings
 

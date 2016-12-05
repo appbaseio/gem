@@ -8,7 +8,7 @@ import { urlShare } from '../../service/UrlShare';
 import {codemirrorOptions, closeError, isJson} from '../../others/helper';
 
 var Codemirror = require('react-codemirror');
-require('codemirror/mode/markdown/markdown');
+require('codemirror/mode/javascript/javascript');
 require('codemirror/addon/search/searchcursor.js');
 require('codemirror/addon/search/search.js');
 require('codemirror/addon/dialog/dialog.js');

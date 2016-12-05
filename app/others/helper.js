@@ -1,7 +1,7 @@
 export const codemirrorOptions = {
 	lineNumbers: false,
-	mode: "markdown",
-	autoCloseBrackets: true,
+	mode: "application/ld+json",
+	lineWrapping: true,
 	matchBrackets: true,
 	showCursorWhenSelecting: true,
 	tabSize: 2,

@@ -247,6 +247,7 @@ class Main extends Component {
 				</section>
 				{appContainer}
 				{this.includePart('footer')}
+				<input type="text" className="hide" id="_hiddenCopyText_" />
 			</div>
 		);
 	}

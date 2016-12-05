@@ -4,6 +4,7 @@ import Select2 from 'react-select2-wrapper';
 import { dataOperation } from '../../service/DataOperation';
 import { ErrorModal } from '../../others/ErrorModal';
 import { MappingLink } from '../../appLogin/MappingLink';
+import { urlShare } from '../../service/UrlShare';
 import {codemirrorOptions, closeError, isJson} from '../../others/helper';
 
 var Codemirror = require('react-codemirror');
@@ -85,7 +86,9 @@ export class JsonImport extends Component {
 					selectedType: this.state.selectedType
 				};
 			}
-			this.setState(updateObj);
+			this.setState(updateObj, function() {
+				urlShare.generateMappingUrl({ mappingObj: this.state.mappingObj });
+			}.bind(this));
 		}
 	}
 	isJson(jsonInput) {

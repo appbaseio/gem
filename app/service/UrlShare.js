@@ -4,6 +4,7 @@ class UrlShare {
 		this.decryptedData = {};
 		this.inputs = {};
 		this.url = '';
+		this.generatedMappingUrl = 'https://opensource.appbase.io/gem/#?input_state=';
 	}
 	getInputs() {
 		return this.inputs;
@@ -98,19 +99,15 @@ class UrlShare {
 			}
 		});	
 	}
-	mappingUrlWithoutApp(obj) {	
-		return new Promise((resolve, reject) => {
-			var inputs = JSON.parse(JSON.stringify(obj));
-			this.compress(inputs, compressCb.bind(this));
-			function compressCb(error, ciphertext) {
-				if(error) {
-					reject(error);
-				} else {
-					let final_url = 'https://opensource.appbase.io/gem/#?input_state=' + ciphertext;
-					resolve(final_url);
-				}
+	generateMappingUrl(obj) {
+		var inputs = JSON.parse(JSON.stringify(obj));
+		this.compress(inputs, compressCb.bind(this));
+		function compressCb(error, ciphertext) {
+			if(error) {
+			} else {
+				this.generatedMappingUrl = 'https://opensource.appbase.io/gem/#?input_state=' + ciphertext;
 			}
-		});	
+		}
 	}
 	compress(jsonInput, cb) {
 		if (!jsonInput) {

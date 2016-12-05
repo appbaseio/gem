@@ -153,30 +153,30 @@ export class JsonImport extends Component {
 		return (
 			<div className="JsonImport col-xs-12 col-sm-6">
 				<div className={"json-header alert "+(this.state.validFlag ? 'success alert-success' : 'error alert-danger')}>
-				  <h3 className="title">
-					<MappingLink shareAllowed={this.state.validFlag && this.props.mappings} mappingObj={this.state.mappingObj} />
-					<span className="pull-left col-xs-12 col-sm-6 importType">
-					  {this.radioOptions()}
-					</span>
-					<span className={"pull-right extra-options col-xs-12 col-sm-6 "+ (this.state.selectedType && this.state.selectedType != '' ? 'selected' : '')}>
-					  {this.renderComponent('label')}
-					  <div className="col-xs-12 pd-0">
-						<Select2
-						  multiple={false}
-						  data={ this.types }
-						  value={this.state.selectedType}
-						  options={{
-							placeholder: 'Choose or create a Type',
-							tags: true
-						  }}
-						  onChange={this.onTypeSelection}
-						/>
-					  </div>
-					</span>
-				  </h3>
+					<h3 className="title">
+						<MappingLink shareAllowed={this.state.validFlag && this.props.mappings} mappingObj={this.state.mappingObj} />
+						<span className="pull-left col-xs-12 col-sm-6 importType">
+							{this.radioOptions()}
+						</span>
+						<span className={"pull-right extra-options col-xs-12 col-sm-6 "+ (this.state.selectedType && this.state.selectedType != '' ? 'selected' : '')}>
+							{this.renderComponent('label')}
+							<div className="col-xs-12 pd-0">
+								<Select2
+									multiple={false}
+									data={ this.types }
+									value={this.state.selectedType}
+									options={{
+										placeholder: 'Choose or create a Type',
+										tags: true
+									}}
+									onChange={this.onTypeSelection}
+								/>
+							</div>
+						</span>
+					</h3>
 				</div>
 				<span className={"json-valid-message import-bottom alert "+(this.state.validFlag ? 'alert-success' : 'alert-danger')}>
-				  {this.getValidMessage()}
+					{this.getValidMessage()}
 				</span>
 				<Codemirror ref="editor" value={this.state.code} onChange={this.updateCode} placeholder='Add json here' options={codemirrorOptions} />
 				<ErrorModal {...this.state.error} closeError={this.closeError} />

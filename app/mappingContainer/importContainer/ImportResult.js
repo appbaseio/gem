@@ -18,7 +18,16 @@ export class ImportResult extends Component {
 			'_all',
 			'_field_names',
 			'_timestamp',
-			'_ttl'
+			'_ttl',
+			'_index',
+			'_uid',
+			'_type',
+			'_id',
+			'_source',
+			'_size',
+			'_parent',
+			'_routing',
+			'_meta'
 		];
 		this.handleUpdate = this.handleUpdate.bind(this);
 		this.subfieldUpdate = this.subfieldUpdate.bind(this);

@@ -1,7 +1,7 @@
 export const codemirrorOptions = {
 	lineNumbers: false,
-	mode: "markdown",
-	autoCloseBrackets: true,
+	mode: "application/ld+json",
+	lineWrapping: true,
 	matchBrackets: true,
 	showCursorWhenSelecting: true,
 	tabSize: 2,
@@ -82,10 +82,10 @@ export const copyToClipboard = function(elem) {
 	}
 	return succeed;
 }
-export const applyUrl = function(url) {
+export const applyUrl = function(url, eleId = 'for-share') {
 	this.setState({ url: url, copied: '' });
 	setTimeout(function() {
-		var ele = document.getElementById('for-share');
+		var ele = document.getElementById(eleId);
 		var succeed = this.copyToClipboard(ele);
 		if (succeed) {
 			this.setState({ copied: 'Link is copied to clipboard!' });

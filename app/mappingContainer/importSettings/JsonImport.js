@@ -19,7 +19,6 @@ require('codemirror/addon/fold/brace-fold.js');
 require('codemirror/addon/fold/xml-fold.js');
 require('codemirror/addon/fold/markdown-fold.js');
 require('codemirror/addon/fold/comment-fold.js');
-require('codemirror/mode/markdown/markdown');
 
 export class JsonImport extends Component {
 	constructor(props) {

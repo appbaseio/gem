@@ -72,54 +72,55 @@ export class SingleField extends Component {
 		if (this.modified.type === 'string' && !(!this.props.defaultEdit && this.props.fieldInfo.index === 'analyzed')) {
 			indexRow = (
 				<span className="fieldIndex col-xs-12 col-sm-4">
-		  <Editable 
-			editKey='index'
-			editCb={this.editCb}
-			editValue={this.props.fieldInfo.index} 
-			defaultEdit={this.props.defaultEdit} 
-			placeholder="index type"/>
-		</span>
+					<Editable 
+						editKey='index'
+						editCb={this.editCb}
+						editValue={this.props.fieldInfo.index} 
+						defaultEdit={this.props.defaultEdit} 
+						placeholder="index type"/>
+				</span>
 			);
 		}
 		if (dataOperation.settings) {
 			registeredAnalyzers = findRegisteredAnalyzer(dataOperation);
 			registeredAnalyzers = registeredAnalyzers ? Object.keys(registeredAnalyzers) : [];
-			if (registeredAnalyzers.length) {
+			if (registeredAnalyzers.length && this.modified && this.modified.type === 'string'  && this.modified.index === 'analyzed') {
+				console.log(this.modified);
 				analyzerRow = (
 					<span className="fieldAnalyzer col-xs-12 col-sm-4">
-			<Editable 
-			  editKey='analyzer'
-			  editCb={this.editCb}
-			  editValue={this.props.fieldInfo.analyzer} 
-			  defaultEdit={this.props.defaultEdit} 
-			  registeredAnalyzers={registeredAnalyzers}
-			  placeholder="analyzer"/>
-		  </span>
+						<Editable
+							editKey='analyzer'
+							editCb={this.editCb}
+							editValue={this.props.fieldInfo.analyzer} 
+							defaultEdit={this.props.defaultEdit} 
+							registeredAnalyzers={registeredAnalyzers}
+							placeholder="analyzer"/>
+					</span>
 				);
 			}
 		}
 		return (
 			<div className="internalField col-xs-12">
-		<span className="fieldName col-xs-12 col-sm-4">
-		  <Editable 
-			editKey='fieldName'
-			editCb={this.editCb}
-			editValue={this.props.fieldName} 
-			defaultEdit={this.props.defaultEdit} 
-			placeholder="Enter fieldname"/>
-		</span>
-		<span className="datatype col-xs-12 col-sm-4">
-		  <Editable
-			editKey='type'
-			editCb={this.editCb}
-			editValue={this.props.fieldInfo.type} 
-			defaultEdit={this.props.defaultEdit} 
-			placeholder="datatype"/>
-		</span>
-		{indexRow}
-		{analyzerRow}
-		{operationalBtn}
-	  </div>
+				<span className="fieldName col-xs-12 col-sm-4">
+					<Editable 
+						editKey='fieldName'
+						editCb={this.editCb}
+						editValue={this.props.fieldName} 
+						defaultEdit={this.props.defaultEdit} 
+						placeholder="Enter fieldname"/>
+				</span>
+				<span className="datatype col-xs-12 col-sm-4">
+					<Editable
+						editKey='type'
+						editCb={this.editCb}
+						editValue={this.props.fieldInfo.type} 
+						defaultEdit={this.props.defaultEdit} 
+						placeholder="datatype"/>
+				</span>
+				{indexRow}
+				{analyzerRow}
+				{operationalBtn}
+			</div>
 		);
 	}
 }

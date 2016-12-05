@@ -325,10 +325,10 @@ export class Field extends Component {
 			if (dataOperation.settings && fieldRecord.type) {
 				registeredAnalyzers = findRegisteredAnalyzer(dataOperation);
 				registeredAnalyzers = registeredAnalyzers ? Object.keys(registeredAnalyzers) : [];
-				if (registeredAnalyzers.length) {
+				if (registeredAnalyzers.length && fieldRecord.type === 'string' && fieldRecord.index === 'analyzed') {
 					analyzerRow = (
 						<span className="fieldAnalyzer col-xs-12 col-sm-6 col-md-3">
-							<Editable 
+							<Editable
 								editKey='analyzer'
 								editCb={this.editCb}
 								editValue={fieldRecord.analyzer} 

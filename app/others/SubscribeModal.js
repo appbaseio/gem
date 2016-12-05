@@ -2,7 +2,7 @@ import { default as React, Component } from 'react';
 import { storageService } from '../service/StorageService';
 import { render } from 'react-dom';
 import { Modal } from 'react-bootstrap';
-import { authOperation, authEmitter } from '../service/authOperation';
+import { authOperation, authEmitter } from '../service/AuthOperation';
 
 export class SubscribeModal extends Component {
 	constructor(props) {

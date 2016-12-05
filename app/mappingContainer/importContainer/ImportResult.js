@@ -14,6 +14,12 @@ export class ImportResult extends Component {
 				message: null
 			}
 		};
+		this.validMetaFields = [
+			'_all',
+			'_field_names',
+			'_timestamp',
+			'_ttl'
+		];
 		this.handleUpdate = this.handleUpdate.bind(this);
 		this.subfieldUpdate = this.subfieldUpdate.bind(this);
 		this.closeError = closeError.bind(this);
@@ -126,6 +132,15 @@ export class ImportResult extends Component {
 		});
 		return finalObj;
 	}
+	metaFields() {
+		let metaFields = {};
+		for(let field in this.props.mappings[this.props.selectedType]) {
+			if(this.props.mappings[this.props.selectedType].hasOwnProperty(field) && this.validMetaFields.indexOf(field) > -1) {
+				metaFields[field] = this.props.mappings[this.props.selectedType][field];
+			}
+		}
+		return metaFields;
+	}
 	generateObj(id, selfItem, index) {
 		let obj = {};
 		let isChildExists = this.fieldList.filter((cItem) => {
@@ -166,6 +181,14 @@ export class ImportResult extends Component {
 			let request = {
 				properties: finalMapping
 			};
+			let extraField = this.metaFields();
+			if(Object.keys(extraField).length) {
+				for(let field in extraField) {
+					if(extraField.hasOwnProperty(field)) {
+						request[field] = extraField[field];
+					}
+				}
+			}
 			console.log(JSON.stringify(request, null, 4));
 			dataOperation.updateMapping(request, this.props.selectedType).done((res) => {
 				this.props.updateSuccess();

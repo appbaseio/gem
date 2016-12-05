@@ -19,9 +19,7 @@ export class MappingLink extends Component {
 		let inputObj = dataOperation.inputState;
 		inputObj.mappingObj = this.props.mappingObj;
 		dataOperation.updateInputState(inputObj, false);
-		urlShare.mappingUrlWithoutApp({ mappingObj: this.props.mappingObj }).then((url) => {
-			this.applyUrl(url);
-		}).catch((error) => console.log(error));
+		this.applyUrl(urlShare.generatedMappingUrl, 'for-share1');
 	}
 	render() {
 		let disable;
@@ -36,7 +34,7 @@ export class MappingLink extends Component {
 				{
 					<Popover id="share_pop" className = "nestedJson" >
 						<div className="share_content">
-							<input type="text" className="form-control" value={this.state.url} id="for-share" readOnly />
+							<input type="text" className="form-control" value={this.state.url} id="for-share1" readOnly />
 							<p className="mt-10">{this.state.copied}</p> 
 						</div>
 					</Popover>

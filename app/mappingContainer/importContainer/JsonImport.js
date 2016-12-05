@@ -4,10 +4,11 @@ import Select2 from 'react-select2-wrapper';
 import { dataOperation } from '../../service/DataOperation';
 import { ErrorModal } from '../../others/ErrorModal';
 import { MappingLink } from '../../appLogin/MappingLink';
+import { urlShare } from '../../service/UrlShare';
 import {codemirrorOptions, closeError, isJson} from '../../others/helper';
 
 var Codemirror = require('react-codemirror');
-require('codemirror/mode/markdown/markdown');
+require('codemirror/mode/javascript/javascript');
 require('codemirror/addon/search/searchcursor.js');
 require('codemirror/addon/search/search.js');
 require('codemirror/addon/dialog/dialog.js');
@@ -85,7 +86,9 @@ export class JsonImport extends Component {
 					selectedType: this.state.selectedType
 				};
 			}
-			this.setState(updateObj);
+			this.setState(updateObj, function() {
+				urlShare.generateMappingUrl({ mappingObj: this.state.mappingObj });
+			}.bind(this));
 		}
 	}
 	isJson(jsonInput) {
@@ -153,30 +156,30 @@ export class JsonImport extends Component {
 		return (
 			<div className="JsonImport col-xs-12 col-sm-6">
 				<div className={"json-header alert "+(this.state.validFlag ? 'success alert-success' : 'error alert-danger')}>
-				  <h3 className="title">
-					<MappingLink shareAllowed={this.state.validFlag && this.props.mappings} mappingObj={this.state.mappingObj} />
-					<span className="pull-left col-xs-12 col-sm-6 importType">
-					  {this.radioOptions()}
-					</span>
-					<span className={"pull-right extra-options col-xs-12 col-sm-6 "+ (this.state.selectedType && this.state.selectedType != '' ? 'selected' : '')}>
-					  {this.renderComponent('label')}
-					  <div className="col-xs-12 pd-0">
-						<Select2
-						  multiple={false}
-						  data={ this.types }
-						  value={this.state.selectedType}
-						  options={{
-							placeholder: 'Choose or create a Type',
-							tags: true
-						  }}
-						  onChange={this.onTypeSelection}
-						/>
-					  </div>
-					</span>
-				  </h3>
+					<h3 className="title">
+						<MappingLink shareAllowed={this.state.validFlag && this.props.mappings} mappingObj={this.state.mappingObj} />
+						<span className="pull-left col-xs-12 col-sm-6 importType">
+							{this.radioOptions()}
+						</span>
+						<span className={"pull-right extra-options col-xs-12 col-sm-6 "+ (this.state.selectedType && this.state.selectedType != '' ? 'selected' : '')}>
+							{this.renderComponent('label')}
+							<div className="col-xs-12 pd-0">
+								<Select2
+									multiple={false}
+									data={ this.types }
+									value={this.state.selectedType}
+									options={{
+										placeholder: 'Choose or create a Type',
+										tags: true
+									}}
+									onChange={this.onTypeSelection}
+								/>
+							</div>
+						</span>
+					</h3>
 				</div>
 				<span className={"json-valid-message import-bottom alert "+(this.state.validFlag ? 'alert-success' : 'alert-danger')}>
-				  {this.getValidMessage()}
+					{this.getValidMessage()}
 				</span>
 				<Codemirror ref="editor" value={this.state.code} onChange={this.updateCode} placeholder='Add json here' options={codemirrorOptions} />
 				<ErrorModal {...this.state.error} closeError={this.closeError} />

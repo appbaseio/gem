@@ -1,3 +1,5 @@
+> **Note:** GEM's main functionality has been added to dejavu project - https://github.com/appbaseio/dejavu, which is actively maintained. We recommend using that.
+
 # [GEM](https://opensource.appbase.io/gem) 💎
 
 ### GUI for Elasticsearch Mappings
